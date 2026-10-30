@@ -1,0 +1,628 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@source "../node_modules/streamdown/dist/*.js";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* JAIA brand tokens (see Brand Guidelines) */
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-sky: var(--brand-sky);
+  --color-brand-sky-soft: var(--brand-sky-soft);
+  --color-brand-slate: var(--brand-slate);
+  --color-brand-mist: var(--brand-mist);
+  --color-brand-action: var(--brand-action);
+  --color-brand-action-deep: var(--brand-action-deep);
+  --color-canvas: var(--canvas);
+  --color-canvas-soft: var(--canvas-soft);
+
+  --font-sans:
+    var(--font-lato), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    sans-serif;
+  --font-display:
+    var(--font-montserrat), var(--font-lato), ui-sans-serif, system-ui,
+    sans-serif;
+  --font-serif: var(--font-noto-serif), ui-serif, Georgia, serif;
+
+  /* Fluid type scale — body never below 16px, ~17–19px on desktop */
+  --text-body: clamp(1rem, 0.95rem + 0.25vw, 1.1875rem);
+  --text-body--line-height: 1.65;
+  --text-lead: clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem);
+  --text-lead--line-height: 1.6;
+  --text-h3: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --text-h3--line-height: 1.3;
+  --text-h2: clamp(1.875rem, 1.5rem + 1.7vw, 2.875rem);
+  --text-h2--line-height: 1.15;
+  --text-display: clamp(2.5rem, 1.9rem + 3vw, 4rem);
+  --text-display--line-height: 1.05;
+  /* Hero-only headline: scales well past --text-display on wide canvases */
+  --text-display-xl: clamp(2.5rem, 1.6rem + 4.4vw, 5.5rem);
+  --text-display-xl--line-height: 1.02;
+  --text-eyebrow: 0.8125rem;
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.4);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  --shadow-soft:
+    0 1px 2px rgb(50 47 47 / 0.04), 0 8px 24px rgb(50 47 47 / 0.05);
+  --shadow-lift:
+    0 2px 4px rgb(50 47 47 / 0.05), 0 16px 40px rgb(50 47 47 / 0.08);
+
+  --breakpoint-wide: 120rem;
+}
+
+:root {
+  /* JAIA brand palette */
+  --brand-ink: #322f2f;
+  --brand-sky: #87cdec;
+  --brand-sky-soft: #eaf5fb;
+  --brand-slate: #636366;
+  --brand-mist: #e9e8e9;
+  --brand-action: #276f91;
+  --brand-action-deep: #1d5570;
+  --canvas: #ffffff;
+  --canvas-soft: #f7f8f8;
+  --header-height: 4.5rem;
+  /*
+   * Section band holds. Sky is pre-mixed with canvas so ink/slate type
+   * never sits on raw --brand-sky-soft at the mid-fade; mist is already
+   * a near-white grey with comfortable contrast.
+   */
+  --section-sky-hold: color-mix(
+    in srgb,
+    var(--brand-sky-soft) 62%,
+    var(--canvas)
+  );
+  --section-mist-hold: var(--canvas-soft);
+
+  /* shadcn semantic tokens mapped to brand */
+  --background: var(--canvas);
+  --foreground: var(--brand-ink);
+  --card: var(--canvas);
+  --card-foreground: var(--brand-ink);
+  --popover: var(--canvas);
+  --popover-foreground: var(--brand-ink);
+  --primary: var(--brand-ink);
+  --primary-foreground: #ffffff;
+  --secondary: var(--canvas-soft);
+  --secondary-foreground: var(--brand-ink);
+  --muted: var(--canvas-soft);
+  --muted-foreground: var(--brand-slate);
+  --accent: var(--brand-sky-soft);
+  --accent-foreground: var(--brand-ink);
+  --destructive: #b3261e;
+  --border: var(--brand-mist);
+  --input: #d7d5d6;
+  --ring: var(--brand-action);
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply font-sans;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    scroll-padding-top: calc(var(--header-height) + 2rem);
+    /* Decorative bleeds must not widen the layout viewport — that shoved
+       the fixed mobile header (and burger) past the visible edge. */
+    overflow-x: clip;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    @apply bg-canvas text-foreground;
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+  }
+
+  /* Keep focused content clear of the fixed header */
+  [id] {
+    scroll-margin-top: calc(var(--header-height) + 2rem);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  ::selection {
+    background: var(--brand-sky);
+    color: var(--brand-ink);
+  }
+
+  ::placeholder {
+    color: var(--brand-slate);
+    opacity: 0.7;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  @media (forced-colors: active) {
+    :focus-visible {
+      outline: 2px solid CanvasText;
+    }
+  }
+}
+
+@layer utilities {
+  /* Long-copy measure: keep prose near 60–70 characters */
+  .measure {
+    max-width: 68ch;
+  }
+
+  .measure-narrow {
+    max-width: 56ch;
+  }
+
+  /* Skip link — first focusable element on every page */
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 0.75rem;
+    z-index: 100;
+    transform: translateY(-300%);
+    transition: transform 160ms ease-out;
+  }
+
+  .skip-link:focus-visible {
+    transform: translateY(0);
+  }
+
+  /* Restrained cool tonal treatment for editorial imagery */
+  .img-tone {
+    filter: saturate(0.86) hue-rotate(4deg) brightness(1.01);
+  }
+
+  /* Oversized JAIA symbol line pattern used on quiet surfaces */
+  .symbol-watermark {
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* Faint dot lattice behind diagram and logo panels; fades at the edges */
+  .dot-grid {
+    pointer-events: none;
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      rgb(from var(--brand-action) r g b / 0.16) 1px,
+      transparent 0
+    );
+    background-size: 22px 22px;
+    -webkit-mask-image: radial-gradient(
+      ellipse at center,
+      black 30%,
+      transparent 80%
+    );
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  }
+}
+
+@layer components {
+  /**
+   * Capability Stack: modest sticky overlap on large screens only.
+   * Normal document flow on mobile, at 200%+ zoom (narrower CSS viewport),
+   * and under prefers-reduced-motion.
+   */
+  @media (min-width: 64rem) and (prefers-reduced-motion: no-preference) {
+    .stack-item {
+      position: sticky;
+      top: var(--stack-top, 6rem);
+      padding-bottom: 1.5rem;
+    }
+  }
+
+  /**
+   * Approach sequence: the connecting rail between steps. Drawn with a
+   * pseudo-element so the line never affects layout or reading order, and
+   * only where steps actually sit side by side / stacked.
+   */
+  .approach-step::before {
+    content: "";
+    position: absolute;
+    background: linear-gradient(
+      to var(--rail-direction, right),
+      var(--brand-sky),
+      color-mix(in srgb, var(--brand-sky) 25%, transparent)
+    );
+    pointer-events: none;
+  }
+
+  /* Stacked: vertical rail down the left gutter */
+  .approach-step::before {
+    --rail-direction: bottom;
+    left: 1.5rem;
+    top: 3.25rem;
+    bottom: -1.25rem;
+    width: 2px;
+  }
+
+  .approach-step:last-child::before {
+    display: none;
+  }
+
+  /* Side by side: horizontal rail between the markers */
+  @media (min-width: 64rem) {
+    .approach-step::before {
+      --rail-direction: right;
+      left: 3.25rem;
+      right: -2rem;
+      top: 1.5rem;
+      bottom: auto;
+      width: auto;
+      height: 2px;
+    }
+  }
+
+  /**
+   * Header veil. Wash and blur share one ramp so neither ends on a hard line.
+   * The fade runs the full bar height (plus a short tail) with no opaque hold.
+   * Last stops are 0-alpha canvas, not `transparent`, to avoid a grey shelf.
+   */
+  .header-veil {
+    --header-veil-ramp: linear-gradient(
+      to bottom,
+      rgb(0 0 0 / 1) 0%,
+      rgb(0 0 0 / 0.55) 24%,
+      rgb(0 0 0 / 0.22) 50%,
+      rgb(0 0 0 / 0.06) 76%,
+      rgb(0 0 0 / 0) 100%
+    );
+    position: absolute;
+    inset: 0 0 -0.75rem 0;
+    pointer-events: none;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    -webkit-mask-image: var(--header-veil-ramp);
+    mask-image: var(--header-veil-ramp);
+    background: linear-gradient(
+      to bottom,
+      rgb(from var(--canvas) r g b / 0.68) 0%,
+      rgb(from var(--canvas) r g b / 0.32) 24%,
+      rgb(from var(--canvas) r g b / 0.1) 50%,
+      rgb(from var(--canvas) r g b / 0.02) 76%,
+      rgb(from var(--canvas) r g b / 0) 100%
+    );
+    transition: background 200ms ease;
+  }
+
+  /**
+   * Once scrolled, denser at the top for contrast over dark bands; same ramp.
+   */
+  .header-veil[data-scrolled="true"] {
+    background: linear-gradient(
+      to bottom,
+      rgb(from var(--canvas) r g b / 0.96) 0%,
+      rgb(from var(--canvas) r g b / 0.58) 24%,
+      rgb(from var(--canvas) r g b / 0.22) 50%,
+      rgb(from var(--canvas) r g b / 0.05) 76%,
+      rgb(from var(--canvas) r g b / 0) 100%
+    );
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .header-veil {
+      transition: none;
+    }
+  }
+
+  /**
+   * Section colour bands. Static linear-gradients only — nothing
+   * scroll-driven, so Lenis is left alone.
+   *
+   * Sky bands use a long inbound ramp *inside* the section padding, not a
+   * negative-margin overlap. Overlap was hidden under the sticky capability
+   * viewport, so the first visible pixel was already the hold — a hard cut
+   * immediately above the eyebrow. Stops are canvas → hold (never
+   * `transparent`) so interpolation cannot pass through grey.
+   */
+  .section-wash {
+    position: relative;
+  }
+
+  .section-wash-sky {
+    --wash-in: clamp(12rem, 32vh, 20rem);
+    --wash-out: clamp(6rem, 16vh, 10rem);
+    padding-top: var(--wash-in);
+    padding-bottom: var(--wash-out);
+    background-color: var(--section-sky-hold);
+    /* Ramp lives only in the top padding — sized to --wash-in, then the hold shows. */
+    background-image: linear-gradient(
+      to bottom,
+      var(--canvas) 0%,
+      color-mix(in srgb, var(--brand-sky-soft) 12%, var(--canvas)) 38%,
+      color-mix(in srgb, var(--brand-sky-soft) 36%, var(--canvas)) 68%,
+      var(--section-sky-hold) 100%
+    );
+    background-size: 100% var(--wash-in);
+    background-repeat: no-repeat;
+    background-position: top;
+  }
+
+  /**
+   * Second layer: hold through the middle, dissolve back to canvas at the
+   * bottom. Stacked with the inbound ramp via a pseudo so the two ramps
+   * cannot fight a single background-image list.
+   */
+  .section-wash-sky::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: var(--wash-out);
+    pointer-events: none;
+    z-index: 0;
+    background: linear-gradient(
+      to bottom,
+      var(--section-sky-hold) 0%,
+      var(--canvas) 100%
+    );
+  }
+
+  .section-wash-mist {
+    --wash: var(--section-mist-hold);
+    --wash-in: clamp(3.5rem, 10vh, 7rem);
+    --wash-out: clamp(3.5rem, 10vh, 7rem);
+    background-color: transparent;
+    background-image: linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--wash) 0%, var(--canvas)) 0%,
+      var(--wash) var(--wash-in),
+      var(--wash) calc(100% - var(--wash-out)),
+      color-mix(in srgb, var(--wash) 0%, var(--canvas)) 100%
+    );
+  }
+
+  /**
+   * Capability stack viewport: fade the white slab above the 66vh card into
+   * the header veil. Stay behind the photo (z-index 0 vs cards at 1) and stop
+   * at the card’s top edge — never a white veil across the image.
+   */
+  .stack-viewport-fade {
+    isolation: isolate;
+  }
+
+  .stack-viewport-fade::before,
+  .stack-viewport-fade::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .stack-viewport-fade::before {
+    top: 0;
+    height: calc(
+      var(--header-height) +
+        max(0px, (100svh - var(--header-height) - 66vh) / 2)
+    );
+    background: linear-gradient(
+      to bottom,
+      var(--canvas) 0%,
+      rgb(from var(--canvas) r g b / 0.45) 70%,
+      rgb(from var(--canvas) r g b / 0) 100%
+    );
+  }
+
+  .stack-viewport-fade::after {
+    display: none;
+  }
+
+  .stack-progress-track {
+    position: relative;
+    height: 2px;
+    width: 5.5rem;
+    overflow: hidden;
+    border-radius: 999px;
+    background: linear-gradient(
+      to right,
+      rgb(from var(--brand-sky) r g b / 0),
+      rgb(from var(--brand-sky) r g b / 0.35) 50%,
+      rgb(from var(--brand-sky) r g b / 0)
+    );
+  }
+
+  @media (min-width: 40rem) {
+    .stack-progress-track {
+      width: 6.5rem;
+    }
+  }
+
+  /**
+   * Photo panels on a canvas page: white ramps at the top and bottom so a
+   * rounded image card dissolves into the header/next band instead of sitting
+   * on a hard slab. Overlay, not a mask, so the photo never punches a hole.
+   */
+  .photo-card-fade::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    background: linear-gradient(
+      to bottom,
+      rgb(from var(--canvas) r g b / 0.7) 0%,
+      rgb(from var(--canvas) r g b / 0) 16%,
+      rgb(from var(--canvas) r g b / 0) 78%,
+      rgb(from var(--canvas) r g b / 0.72) 100%
+    );
+  }
+
+  /**
+   * CTA press ripple. Mounted per click and removed on animationend, so the
+   * keyframes only ever run once per press.
+   */
+  @keyframes cta-ripple {
+    from {
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 1;
+    }
+    to {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0;
+    }
+  }
+
+  .cta-ripple {
+    transform: translate(-50%, -50%) scale(0);
+    animation: cta-ripple 520ms ease-out forwards;
+  }
+
+  /*
+   * Card lift shared by interactive panels. The transform rides a spring
+   * (generated linear() curve, ~0.35s perceptual with a soft settle) so the
+   * lift lands with a little life instead of easing to a stop; colour and
+   * shadow stay on a plain fade underneath.
+   */
+  .lift {
+    /* Bounce 0 spring — healthcare UI, no overshoot. Perceptual 0.35s. */
+    transition:
+      transform 650ms
+        linear(
+          0,
+          0.0792,
+          0.2371,
+          0.4044,
+          0.5525,
+          0.6726,
+          0.7652,
+          0.8341,
+          0.8842,
+          0.9199,
+          0.9451,
+          0.9626,
+          0.9747,
+          0.9829,
+          0.9886,
+          0.9924,
+          0.9949,
+          0.9966,
+          0.9978,
+          0.9985,
+          0.999,
+          1
+        ),
+      box-shadow 200ms ease-out,
+      border-color 200ms ease-out;
+  }
+
+  .lift:hover {
+    transform: translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lift,
+    .lift:hover {
+      transform: none;
+      transition: none;
+    }
+  }
+
+  /*
+   * Partnership infographic: one dot runs the active connector once. The dot
+   * is a zero-length, round-capped dash walked along the path by its offset;
+   * the component sets --dot-travel to the negative path length.
+   */
+  @keyframes partnership-dot {
+    from {
+      stroke-dashoffset: 0;
+      opacity: 0;
+    }
+    12% {
+      opacity: 1;
+    }
+    85% {
+      opacity: 1;
+    }
+    to {
+      stroke-dashoffset: var(--dot-travel);
+      opacity: 0;
+    }
+  }
+
+  .partnership-dot {
+    animation: partnership-dot 850ms cubic-bezier(0.45, 0, 0.2, 1) forwards;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .partnership-dot {
+      display: none;
+    }
+  }
+}
+
+/**
+ * Custom site cursor (components/react-bits/user-cursor.tsx).
+ * The component toggles `has-custom-cursor` on <html> only while the
+ * custom cursor is visible over the document. Leaving the viewport
+ * removes the class so the system cursor returns. Text inputs,
+ * textareas and selects keep their native cursors for editing affordance.
+ * Unlayered on purpose: must override Tailwind preflight's
+ * `button { cursor: pointer }`.
+ */
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: none;
+  }
+
+  html.has-custom-cursor input,
+  html.has-custom-cursor textarea,
+  html.has-custom-cursor select {
+    cursor: auto;
+  }
+}
+
+/**
+ * Lenis (components/marketing/smooth-scroll.tsx). Native CSS smooth
+ * scrolling fights Lenis interpolation. The instance adds `.lenis` to
+ * <html>; keep scroll-behavior auto so only Lenis animates. Lenis is not
+ * created under prefers-reduced-motion, so this rule never applies then.
+ */
+html.lenis {
+  scroll-behavior: auto !important;
+}
