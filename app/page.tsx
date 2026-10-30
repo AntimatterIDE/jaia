@@ -7,6 +7,7 @@ import { AboutStory } from "@/components/marketing/about-story";
 import { SocialProof } from "@/components/marketing/social-proof";
 import { Faq } from "@/components/marketing/faq";
 import { FinalCta } from "@/components/marketing/final-cta";
+import { caseStudySection } from "@/content/case-studies";
 import { siteConfig } from "@/content/site";
 
 /** Verified organization fields only — no invented address, phone, or socials */
@@ -29,7 +30,7 @@ export default function HomePage() {
       <Hero />
       <CaseStudiesStrip />
       <div id="capabilities">
-        <Features5 />
+        <Features5 secondary={caseStudySection.cta} />
       </div>
       <Outcomes />
       <Approach />

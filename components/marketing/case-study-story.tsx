@@ -99,11 +99,6 @@ export function CaseStudyStory({
               ))}
             </dl>
           ) : null}
-          {narrative.resultStatement ? (
-            <p className="text-brand-ink mt-6 max-w-3xl text-[1.0625rem] leading-relaxed">
-              {narrative.resultStatement}
-            </p>
-          ) : null}
           {narrative.resultsNote ? (
             <p className="text-brand-slate mt-5 max-w-3xl text-sm leading-relaxed">
               {narrative.resultsNote}

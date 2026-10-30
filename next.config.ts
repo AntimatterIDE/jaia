@@ -9,13 +9,13 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/case-studies/apcm-bhi",
-        destination: "/case-studies/wecare",
+        destination: "/case-studies",
         permanent: true,
       },
       {
-        source: "/case-studies/mukesh-gandhi",
-        destination: "/case-studies/wecare",
-        statusCode: 301,
+        source: "/case-studies/wecare",
+        destination: "/case-studies",
+        permanent: true,
       },
       {
         source: "/case-studies/hrv-assessment",

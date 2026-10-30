@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { Hero1 } from "@/components/blocks/hero-1";
-import { CaseStudyMark } from "@/components/marketing/case-study-mark";
 import { CaseStudyStory } from "@/components/marketing/case-study-story";
 import { CtaLink } from "@/components/marketing/cta";
 import {
   caseStudies,
+  caseStudyComingSoon,
   caseStudyMeta,
   caseStudyServices,
   caseStudyUrl,
@@ -62,27 +62,27 @@ export default async function CaseStudyPage({
   return (
     <article>
       <Hero1
-        eyebrow={study.narrative ? "Case study" : caseStudyMeta(study)}
+        eyebrow={study.comingSoon ? "Coming soon" : study.narrative ? "Case study" : caseStudyMeta(study)}
         heading={study.name}
         headingId="study-heading"
         body={
-          subtitle
-            ? `${subtitle}. ${study.intro}`
-            : `${studyServices.map((service) => service.shortName).join(" · ")}. ${study.intro}`
+          study.comingSoon
+            ? `${study.intro} ${caseStudyComingSoon.body}`
+            : subtitle
+              ? `${subtitle}. ${study.intro}`
+              : `${studyServices.map((service) => service.shortName).join(" · ")}. ${study.intro}`
         }
         primary={
-          study.narrative
-            ? { label: "Read the story", href: "#study-story" }
-            : studyServices.length === 1
-              ? { label: "Read the capability", href: serviceUrl(studyServices[0].slug) }
-              : { label: "See the work", href: "#study-services" }
+          study.comingSoon
+            ? caseStudyComingSoon.cta
+            : study.narrative
+              ? { label: "Read the story", href: "#study-story" }
+              : studyServices.length === 1
+                ? { label: "Read the capability", href: serviceUrl(studyServices[0].slug) }
+                : { label: "See the work", href: "#study-services" }
         }
         secondary={primaryCta}
-        media={
-          <div className="bg-brand-sky-soft flex min-h-[280px] items-center justify-center rounded-[2rem] sm:min-h-[420px]">
-            <CaseStudyMark icon={study.icon} />
-          </div>
-        }
+        image={{ src: study.image.src, alt: study.image.alt }}
       />
 
       {study.narrative ? (

@@ -178,7 +178,7 @@ export function Hero24({
   const item: Variants = reduceMotion
     ? { hidden: { opacity: 1 }, show: { opacity: 1 } }
     : {
-        hidden: { opacity: 0, y: 20 },
+        hidden: { opacity: 1, y: 16 },
         show: {
           opacity: 1,
           y: 0,
@@ -192,7 +192,7 @@ export function Hero24({
         show: { opacity: 1, filter: "blur(0px)" },
       }
     : {
-        hidden: { opacity: 0, y: 26, filter: "blur(10px)" },
+        hidden: { opacity: 1, y: 16, filter: "blur(0px)" },
         show: {
           opacity: 1,
           y: 0,

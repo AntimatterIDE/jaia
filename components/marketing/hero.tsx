@@ -1,7 +1,7 @@
 "use client";
 
-import { Hero29 } from "@/components/react-bits/hero-29";
+import { Hero14 } from "@/components/react-bits/hero-14";
 
 export function Hero() {
-  return <Hero29 />;
+  return <Hero14 />;
 }

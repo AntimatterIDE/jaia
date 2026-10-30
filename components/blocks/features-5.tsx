@@ -4,6 +4,7 @@
  * React Bits Pro `features-5`: a six-up icon grid. Demo compliance copy is not used.
  */
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
 import type { LucideIcon } from "lucide-react";
@@ -16,6 +17,7 @@ export interface FeatureItem {
   title: string;
   description: string;
   href?: string;
+  image?: { src: string; alt: string };
 }
 
 interface Features5Props {
@@ -33,6 +35,7 @@ const homeItems: FeatureItem[] = services.map((service) => ({
   title: service.shortName,
   description: service.summary,
   href: serviceUrl(service.slug),
+  image: service.image,
 }));
 
 export function Features5({
@@ -45,7 +48,7 @@ export function Features5({
   items = homeItems,
 }: Features5Props = {}) {
   return (
-    <section aria-labelledby={id} className="bg-canvas relative w-full px-5 py-16 sm:px-8 sm:py-24">
+    <section aria-labelledby={id} className="bg-canvas-soft relative w-full px-5 py-16 sm:px-8 sm:py-24">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
@@ -95,7 +98,19 @@ export function Features5({
             const Icon = feature.icon;
             const card = (
               <>
-                <Icon className="text-brand-action mb-6 size-12" strokeWidth={1.25} />
+                {feature.image ? (
+                  <div className="relative mb-6 aspect-[16/10] overflow-hidden rounded-xl">
+                    <Image
+                      src={feature.image.src}
+                      alt={feature.image.alt}
+                      fill
+                      sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 90vw"
+                      className="object-cover"
+                    />
+                  </div>
+                ) : (
+                  <Icon className="text-brand-action mb-6 size-12" strokeWidth={1.25} />
+                )}
                 <h3 className="font-display text-brand-ink text-xl font-semibold">{feature.title}</h3>
                 <p className="text-brand-slate mt-3 text-base leading-relaxed">{feature.description}</p>
               </>

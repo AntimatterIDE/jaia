@@ -8,11 +8,11 @@
  * cities/dates, and `#` links are not used. Cards link to real routes.
  */
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion, type Variants } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 
-import { CaseStudyMark } from "@/components/marketing/case-study-mark";
 import { CtaButton } from "@/components/marketing/cta";
 import { cn } from "@/lib/utils";
 
@@ -22,9 +22,14 @@ export interface Showcase6Card {
   href: string;
   caption: string;
   meta: string;
-  icon: "wellness" | "care";
+  image: {
+    src: string;
+    alt: string;
+    objectPosition?: string;
+  };
   tilt: number;
   lift: string;
+  comingSoon?: boolean;
 }
 
 export interface Showcase6Props {
@@ -45,7 +50,18 @@ function PolaroidFace({ item }: { item: Showcase6Card }) {
   return (
     <div className="border-brand-mist rounded-2xl border bg-white p-3 shadow-[0_18px_45px_-20px_rgba(50,47,47,0.28)] transition-shadow duration-300 group-hover:shadow-[0_30px_70px_-28px_rgba(50,47,47,0.4)] motion-reduce:transition-none sm:p-3.5">
       <div className="bg-brand-mist relative aspect-square overflow-hidden rounded-lg">
-        <CaseStudyMark icon={item.icon} className="absolute inset-0" />
+        <Image
+          src={item.image.src}
+          alt={item.image.alt}
+          fill
+          sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 90vw"
+          className={cn("object-cover", item.image.objectPosition)}
+        />
+        {item.comingSoon ? (
+          <span className="bg-brand-ink/80 absolute bottom-3 left-3 rounded-full px-3 py-1 text-xs font-semibold tracking-wide text-white uppercase">
+            Coming soon
+          </span>
+        ) : null}
       </div>
       <div className="flex items-baseline justify-between gap-3 px-1 pt-4 pb-1.5">
         <span className="font-display text-brand-ink truncate text-[0.8125rem] font-semibold tracking-[0.08em] uppercase">
@@ -86,7 +102,7 @@ export function Showcase6({
   const fadeUp: Variants = prefersReducedMotion
     ? { hidden: { opacity: 1 }, visible: { opacity: 1 } }
     : {
-        hidden: { opacity: 0, y: 16 },
+        hidden: { opacity: 1, y: 12 },
         visible: {
           opacity: 1,
           y: 0,
@@ -162,7 +178,7 @@ export function Showcase6({
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 sm:gap-10 lg:mx-auto lg:mt-24 lg:max-w-4xl"
+          className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 sm:gap-10 lg:mt-24 lg:grid-cols-4"
         >
           {items.map((item) => (
             <MotionLink

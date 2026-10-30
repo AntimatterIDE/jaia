@@ -65,7 +65,10 @@ function formatCaseStudies() {
         `### ${study.name}`,
         `Slug: ${study.slug}`,
         `Page: /case-studies/${study.slug}`,
-        "Status: Live public study. Use only the facts below.",
+        study.comingSoon
+          ? "Status: Coming soon. Share the name, location, and intro only. Do not invent a narrative or results."
+          : "Status: Live public study. Use only the facts below.",
+        study.location ? `Location: ${study.location}` : "",
         `Intro: ${study.intro}`,
         `Services in this engagement: ${study.serviceSlugs.join(", ")}`,
       ];
@@ -84,7 +87,6 @@ function formatCaseStudies() {
           ...(narrative.work ?? []).map((item) => `- ${item}`),
           `${narrative.resultsHeading}:`,
           ...narrative.results.map((stat) => `- ${stat.value} — ${stat.label}`),
-          narrative.resultStatement ?? "",
           narrative.resultsNote ? `Note: ${narrative.resultsNote}` : "",
         );
         if (narrative.quote) {
@@ -143,7 +145,7 @@ Formatting: write visitor-facing replies as GitHub-flavored Markdown. Use short 
 
 Audience: many visitors have not read the rest of the site. Do not assume they know APCM, BHI, Novo, or the six-service list. Answer in their terms first — billing and revenue cycle (RCM), collections, adding a program, whether other practices have seen results — then map to the matching JAIA service. Expand acronyms on first use (APCM = Advanced Primary Care Management, BHI = Behavioral Health Integration, RCM = revenue cycle management, HRV = heart rate variability, POL = physician office laboratory).
 
-When they ask about results: NOVO Wellness Center and WeCare have published figures. Quote WeCare’s result sentence word for word. Summarize Novo only from the published figures. Say that results vary and are not a guarantee. Do not mention removed studies, physician names, or practice cities. Client testimonials describe the working relationship, not results.
+When they ask about results: NOVO Wellness Center has the published figures. Summarize Novo only from those figures. Dr. Mukesh Gandhi, IV Therapy, and Laboratory Coordination are coming-soon studies — share the published name, location, and intro, and say the full story is on the way. Say that results vary and are not a guarantee. Client testimonials describe the working relationship, not results.
 
 # Company
 Name: ${siteConfig.name}
@@ -179,7 +181,7 @@ There are exactly six. Use the summary as the ceiling for claims.
 ${formatServices()}
 
 # Case studies
-Published studies are NOVO Wellness Center and WeCare. IV Therapy and Laboratory Coordination are services, not case studies. Do not name a physician or a city for either study.
+The published narrative is NOVO Wellness Center in Aiken, South Carolina. Dr. Mukesh Gandhi in Woodruff, South Carolina, IV Therapy, and Laboratory Coordination are coming soon.
 
 ${formatCaseStudies()}
 

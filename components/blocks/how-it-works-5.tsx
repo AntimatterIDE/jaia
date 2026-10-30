@@ -57,7 +57,7 @@ export function HowItWorks5({
               transition={{ duration: 0.45, delay: index * 0.06 }}
               className="flex items-start gap-5"
             >
-              <span className="bg-brand-ink flex size-12 shrink-0 items-center justify-center rounded-full text-lg font-semibold text-white">
+              <span className="bg-brand-action flex size-12 shrink-0 items-center justify-center rounded-full text-lg font-semibold text-white">
                 {index + 1}
               </span>
               <div>

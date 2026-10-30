@@ -1,13 +1,27 @@
 /**
  * Case studies shown on the homepage strip and `/case-studies`.
  *
- * Published studies are NOVO Wellness Center and WeCare only. Do not invent
- * outcome statistics, quotes, locations, or physician names. Novo’s condensed
- * narrative comes from the client-supplied JAIA × Novo Wellness case study
- * (v2). WeCare’s result line is the client-approved sentence.
+ * Named practices (NOVO Wellness Center, Dr. Mukesh Gandhi) were supplied by
+ * the client. Do not invent outcome statistics, quotes, or extra services.
+ * Novo’s condensed narrative comes from the client-supplied JAIA × Novo
+ * Wellness case study (v2); headline capital and collections figures were
+ * later updated by the client for the public site. IV Therapy and Laboratory
+ * Coordination remain unnamed capability illustrations until a practice is
+ * attached. See docs/content-status.md.
  */
 
 import { getService, type ServiceRecord } from "@/content/services";
+
+export const CASE_STUDIES_ARE_PLACEHOLDER = false;
+
+export interface CaseStudyImage {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  /** Tailwind object-position class for the square polaroid crop */
+  objectPosition?: string;
+}
 
 export interface CaseStudyQuote {
   text: string;
@@ -26,16 +40,14 @@ export interface CaseStudyNarrative {
   practice?: string;
   engagement?: string;
   quote?: CaseStudyQuote;
-  situationHeading?: string;
-  situation?: string;
-  workHeading?: string;
-  work?: readonly string[];
+  situationHeading: string;
+  situation: string;
+  workHeading: string;
+  work: readonly string[];
   resultsHeading: string;
   results: readonly CaseStudyStat[];
   /** One-line note under the headline figures */
   resultsNote?: string;
-  /** A single approved result sentence, used when there is no stat grid */
-  resultStatement?: string;
 }
 
 export interface CaseStudyRecord {
@@ -50,28 +62,29 @@ export interface CaseStudyRecord {
   serviceSlugs: readonly string[];
   /** Condensed public story. Omit to keep the service-summary layout. */
   narrative?: CaseStudyNarrative;
-  /** Clean icon instead of a practice photograph */
-  icon: "wellness" | "care";
+  image: CaseStudyImage;
   /**
    * Polaroid tilt in degrees (Showcase6). Ignored under reduced motion.
    */
   tilt: number;
   /** Vertical offset on the overlapping desktop strip */
   lift: string;
-  /** Show on the homepage strip */
+  /** Show on the homepage strip (Showcase6 uses four cards) */
   featured: boolean;
+  /** Teaser only — polaroids and the study page show Coming soon */
+  comingSoon?: boolean;
 }
 
 export const caseStudies: readonly CaseStudyRecord[] = [
   {
     slug: "novo-wellness",
     name: "NOVO Wellness Center",
+    location: "Aiken, SC",
     intro:
-      "JAIA has partnered with NOVO Wellness Center since December 2024 to stabilize operations and add care-management, IV therapy, and HRV programs.",
+      "JAIA has partnered with NOVO Wellness Center in Aiken, South Carolina since December 2024 to stabilize operations and add care-management, IV therapy, and HRV programs.",
     serviceSlugs: ["billing-rcm", "apcm-bhi", "iv-therapy", "hrv-assessment"],
-    icon: "wellness",
     narrative: {
-      practice: "Novo Wellness",
+      practice: "Aiken Neurosciences & Pain Management",
       engagement: "December 2024 – Present",
       quote: {
         text: "The JAIA team was instrumental in helping facilitate the implementation, institution, and success of the ancillary services, care management, IV Therapy, and practice workflow strategy.",
@@ -99,26 +112,70 @@ export const caseStudies: readonly CaseStudyRecord[] = [
       resultsNote:
         "APCM reached 250 patients across the first two invoices. IV therapy dispensed 122 bags in October 2025.",
     },
-    tilt: -2,
-    lift: "",
+    image: {
+      src: "/images/case-novo-wellness.jpg",
+      alt: "The tan two-story exterior of NOVO Wellness Center in Aiken, South Carolina, with the practice sign on the lawn",
+      width: 1024,
+      height: 790,
+      objectPosition: "object-[center_72%]",
+    },
+    tilt: -4,
+    lift: "lg:mt-12",
     featured: true,
   },
   {
-    slug: "wecare",
-    name: "WeCare",
+    slug: "mukesh-gandhi",
+    name: "Dr. Mukesh Gandhi",
+    location: "Woodruff, SC",
     intro:
-      "JAIA works with WeCare on billing and revenue cycle management, Advanced Primary Care Management, and physician office laboratory operations.",
+      "JAIA works with Dr. Mukesh Gandhi in Woodruff, South Carolina on billing and revenue cycle management, Advanced Primary Care Management, and physician office laboratory operations.",
     serviceSlugs: ["billing-rcm", "apcm-bhi", "pol-establishment"],
-    icon: "care",
-    narrative: {
-      resultsHeading: "Result",
-      results: [],
-      resultStatement:
-        "Increased monthly practice revenue by 30%, sustained month over month, through a strong RCM partner and ancillary services.",
+    image: {
+      src: "/images/case-mukesh-gandhi.jpg",
+      alt: "The red-brick medical office of Dr. Mukesh Gandhi in Woodruff, South Carolina, with a columned entrance at 409",
+      width: 1024,
+      height: 727,
+      objectPosition: "object-[center_42%]",
     },
-    tilt: 2,
-    lift: "",
+    tilt: 2.5,
+    lift: "lg:mt-2",
     featured: true,
+    comingSoon: true,
+  },
+  {
+    slug: "iv-therapy",
+    name: "IV Therapy",
+    intro:
+      "Turnkey in-practice IV therapy programs: protocol design, supply chain, staff training, and regulatory considerations—so practices can offer the service confidently and sustainably.",
+    serviceSlugs: ["iv-therapy"],
+    image: {
+      src: "/images/iv-therapy-suite.jpg",
+      alt: "A calm in-practice infusion suite with a comfortable recliner beside an IV stand, lit by soft daylight",
+      width: 1536,
+      height: 1024,
+    },
+    tilt: -2,
+    lift: "lg:mt-16",
+    featured: true,
+    comingSoon: true,
+  },
+  {
+    slug: "laboratory-coordination",
+    name: "Laboratory Coordination",
+    intro:
+      "Coordinated access to established third-party reference laboratories, giving practices broad diagnostic coverage at favorable economics. Testing is performed by accredited labs; JAIA handles the partnerships and routing.",
+    serviceSlugs: ["laboratory-coordination"],
+    image: {
+      src: "/images/case-laboratory.jpg",
+      alt: "A laboratory technician in blue gloves pipetting amber liquid into a test tube beside a rack of capped tubes",
+      width: 1024,
+      height: 682,
+      objectPosition: "object-center",
+    },
+    tilt: 3.5,
+    lift: "lg:mt-6",
+    featured: true,
+    comingSoon: true,
   },
 ];
 
@@ -127,14 +184,23 @@ export const caseStudySection = {
   heading: "How practices put JAIA to work.",
   headingLead: "How practices put JAIA ",
   headingAccent: "to work.",
-  body: "Two practices, and the programs and operations JAIA brought into how they already run.",
+  body: "Programs, diagnostics, therapies, and operations brought into how a practice already runs — without the team having to invent the operating model themselves.",
   cta: { label: "Browse case studies", href: "/case-studies" },
 } as const;
 
 export const caseStudiesPage = {
   title: "Case studies",
   intro:
-    "How JAIA works with NOVO Wellness Center and WeCare.",
+    "The NOVO Wellness Center study is live. Additional studies are coming soon.",
+} as const;
+
+export const caseStudyComingSoon = {
+  eyebrow: "Coming soon",
+  body: "This case study is on the way. In the meantime, you can read the NOVO Wellness Center story or start a conversation.",
+  cta: {
+    label: "Read the NOVO study",
+    href: "/case-studies/novo-wellness",
+  },
 } as const;
 
 export function caseStudyUrl(slug: string) {
@@ -162,22 +228,26 @@ export function caseStudyServices(study: CaseStudyRecord): ServiceRecord[] {
 }
 
 export function caseStudyMeta(study: CaseStudyRecord): string {
+  if (study.comingSoon) return "Coming soon";
   if (study.location) return study.location;
   const [primary] = caseStudyServices(study);
-  return primary.shortName;
+  return primary.category;
 }
 
 export function publishedCaseStudies() {
-  return caseStudies;
+  return caseStudies.filter((study) => !study.comingSoon);
 }
 
 export function caseStudyShowcaseItem(study: CaseStudyRecord) {
   return {
     href: caseStudyUrl(study.slug),
     caption: study.name,
-    meta: caseStudyMeta(study),
-    icon: study.icon,
+    meta: study.comingSoon
+      ? (study.location ?? "Coming soon")
+      : caseStudyMeta(study),
+    image: study.image,
     tilt: study.tilt,
     lift: study.lift,
+    comingSoon: Boolean(study.comingSoon),
   };
 }

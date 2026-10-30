@@ -86,7 +86,6 @@ function indexPassages(): KnowledgePassage[] {
           : "",
         `${narrative.resultsHeading}:`,
         ...narrative.results.map((stat) => `${stat.value} — ${stat.label}`),
-        narrative.resultStatement ?? "",
         narrative.resultsNote ?? "",
         narrative.quote
           ? `Quote: “${narrative.quote.text}” — ${narrative.quote.attribution}, ${narrative.quote.role}`
