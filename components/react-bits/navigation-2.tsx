@@ -126,7 +126,7 @@ export function Navigation2() {
           className="relative mx-auto hidden w-fit lg:block"
           onMouseLeave={() => setActiveMenu(null)}
         >
-          <div className="border-brand-mist overflow-hidden rounded-3xl border bg-white/75 shadow-xl backdrop-blur-2xl">
+          <div className="border-brand-mist rounded-3xl border bg-white/75 shadow-xl backdrop-blur-2xl">
             <div className="flex items-center gap-2 py-2.5 pr-3 pl-5">
               <HomeLink aria-label="JAIA Health — home" className="mr-4 flex items-center">
                 <Image
@@ -163,23 +163,23 @@ export function Navigation2() {
                 {primaryCta.label}
               </Link>
             </div>
-
-            <AnimatePresence>
-              {activeMenu ? (
-                <motion.div
-                  initial={{ height: 0, opacity: 1 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 1 }}
-                  transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
-                  className="overflow-hidden"
-                >
-                  <div className="w-[640px] p-3 pt-0">
-                    <MenuCards items={menus[activeMenu]} />
-                  </div>
-                </motion.div>
-              ) : null}
-            </AnimatePresence>
           </div>
+
+          <AnimatePresence>
+            {activeMenu ? (
+              <motion.div
+                initial={{ opacity: 1, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 1, y: 8 }}
+                transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+                className="absolute top-full left-1/2 z-50 w-[40rem] -translate-x-1/2 pt-2"
+              >
+                <div className="border-brand-mist rounded-3xl border bg-white/95 p-3 shadow-xl backdrop-blur-2xl">
+                  <MenuCards items={menus[activeMenu]} />
+                </div>
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
         </div>
 
         <div className="lg:hidden">
