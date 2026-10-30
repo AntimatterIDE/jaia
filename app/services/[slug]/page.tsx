@@ -11,7 +11,7 @@ import { RelatedServices } from "@/components/marketing/related-services";
 import { ServicePartner } from "@/components/marketing/service-partner";
 import { FinalCta } from "@/components/marketing/final-cta";
 import { getService, services, serviceUrl } from "@/content/services";
-import { approachStepsWithBodies, siteConfig } from "@/content/site";
+import { siteConfig } from "@/content/site";
 
 export function generateStaticParams() {
   return services.map((service) => ({ slug: service.slug }));
@@ -88,52 +88,19 @@ export default async function ServicePage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      <ServiceHero
-        category={service.category}
-        name={service.name}
-        summary={service.summary}
-        tagline={service.page.heroTagline}
-        primaryCtaLabel={service.page.heroCtaLabel}
-      />
+      <ServiceHero slug={service.slug} />
 
-      <ServiceCapabilities service={service} />
+      <ServiceCapabilities slug={service.slug} />
 
       <ServicePartner slug={service.slug} />
 
-      <Outcomes
-        id="service-outcomes-heading"
-        eyebrow={service.page.outcomesEyebrow ?? "What this makes possible"}
-        heading={
-          service.page.outcomesHeading ??
-          `Why practices add ${service.shortName.replace(/ \+ /g, "\u00a0+\u00a0").replace(/ & /g, "\u00a0&\u00a0")} to how they operate.`
-        }
-        headingClassName="max-w-3xl"
-        items={service.page.outcomes}
-      />
+      <Outcomes id="service-outcomes-heading" slug={service.slug} />
 
       {service.page.secondaryOutcomes ? (
-        <Outcomes
-          id={service.page.secondaryOutcomes.id}
-          eyebrow={service.page.secondaryOutcomes.eyebrow}
-          heading={service.page.secondaryOutcomes.heading}
-          headingClassName="max-w-3xl"
-          items={service.page.secondaryOutcomes.items}
-        />
+        <Outcomes slug={service.slug} secondary />
       ) : null}
 
-      <Approach
-        id="service-approach-heading"
-        eyebrow={service.page.approachEyebrow}
-        heading={
-          service.page.approachHeading ??
-          `Bringing ${service.shortName} into the practice.`
-        }
-        steps={approachStepsWithBodies(service.page.approachBodies)}
-        footnote={
-          service.page.approachFootnote ??
-          `Every ${service.shortName} engagement starts by understanding the practice you already run.`
-        }
-      />
+      <Approach id="service-approach-heading" slug={service.slug} />
 
       <SocialProof />
 

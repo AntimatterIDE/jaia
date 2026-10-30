@@ -1,6 +1,6 @@
 import { Hero } from "@/components/marketing/hero";
 import { CaseStudiesStrip } from "@/components/marketing/case-studies-strip";
-import { CapabilityScrollStack } from "@/components/marketing/capability-scroll-stack";
+import { Features5 } from "@/components/blocks/features-5";
 import { Outcomes } from "@/components/marketing/outcomes";
 import { Approach } from "@/components/marketing/approach";
 import { AboutStory } from "@/components/marketing/about-story";
@@ -28,7 +28,9 @@ export default function HomePage() {
       />
       <Hero />
       <CaseStudiesStrip />
-      <CapabilityScrollStack />
+      <div id="capabilities">
+        <Features5 />
+      </div>
       <Outcomes />
       <Approach />
       <AboutStory />

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { Hero1 } from "@/components/blocks/hero-1";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -16,15 +17,15 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <article className="bg-canvas">
-      <div className="mx-auto w-full max-w-3xl px-5 pt-[calc(var(--header-height)+2.5rem)] pb-20 sm:px-8 sm:pt-[calc(var(--header-height)+4rem)] sm:pb-24">
-        <p className="text-eyebrow font-display text-brand-action font-semibold tracking-[0.18em] uppercase">
-          Legal
-        </p>
-        <h1 className="font-display text-h2 text-brand-ink mt-5 font-semibold text-balance">
-          Privacy Policy
-        </h1>
-        <div className="text-brand-slate mt-8 space-y-5 text-[1.0625rem] leading-relaxed">
+    <>
+      <Hero1
+        eyebrow="Legal"
+        heading="Privacy Policy"
+        headingId="privacy-heading"
+        body="How JAIA Health handles business inquiries submitted through this website."
+      />
+      <article className="bg-canvas">
+        <div className="text-brand-slate mx-auto w-full max-w-3xl space-y-5 px-5 pb-20 text-[1.0625rem] leading-relaxed sm:px-8 sm:pb-24">
           <p>
             This website is operated by JAIA Health. It is a business site for
             independent practices. It is not a patient portal and it is not for
@@ -51,7 +52,7 @@ export default function PrivacyPage() {
             Questions about this policy can be sent through the contact form.
           </p>
         </div>
-      </div>
-    </article>
+      </article>
+    </>
   );
 }

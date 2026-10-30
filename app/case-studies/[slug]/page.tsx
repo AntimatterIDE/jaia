@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { Hero1 } from "@/components/blocks/hero-1";
 import { CaseStudyMark } from "@/components/marketing/case-study-mark";
 import { CaseStudyStory } from "@/components/marketing/case-study-story";
-import { CtaButton, CtaLink } from "@/components/marketing/cta";
+import { CtaLink } from "@/components/marketing/cta";
 import {
   caseStudies,
   caseStudyMeta,
@@ -60,48 +61,29 @@ export default async function CaseStudyPage({
 
   return (
     <article>
-      <header className="bg-canvas">
-        <div className="mx-auto grid w-full max-w-[90rem] gap-10 px-5 pt-[calc(var(--header-height)+2.5rem)] pb-16 sm:px-8 sm:pt-[calc(var(--header-height)+4rem)] sm:pb-20 lg:grid-cols-2 lg:items-end lg:gap-16 lg:pt-[calc(var(--header-height)+5rem)]">
-          <div className="flex max-w-xl flex-col items-start gap-5">
-            <p className="text-eyebrow font-display text-brand-action font-semibold tracking-[0.18em] uppercase">
-              {study.narrative ? "Case study" : caseStudyMeta(study)}
-            </p>
-            <h1 className="font-display text-h2 text-brand-ink font-semibold text-balance">
-              {study.name}
-            </h1>
-            {subtitle ? (
-              <p className="text-brand-slate text-sm font-medium tracking-[0.04em]">
-                {subtitle}
-              </p>
-            ) : (
-              <p className="text-brand-slate text-sm font-medium tracking-[0.04em]">
-                {studyServices.map((service) => service.shortName).join(" · ")}
-              </p>
-            )}
-            <p className="measure text-lead text-brand-slate">{study.intro}</p>
-            <div className="flex flex-wrap items-center gap-4">
-              {study.narrative ? (
-                <CtaButton href="#study-story" withArrow>
-                  Read the story
-                </CtaButton>
-              ) : studyServices.length === 1 ? (
-                <CtaButton href={serviceUrl(studyServices[0].slug)} withArrow>
-                  Read the capability
-                </CtaButton>
-              ) : (
-                <CtaButton href="#study-services" withArrow>
-                  See the work
-                </CtaButton>
-              )}
-              <CtaLink href={primaryCta.href}>{primaryCta.label}</CtaLink>
-            </div>
-          </div>
-
-          <div className="shadow-lift ring-brand-ink/5 relative aspect-4/3 overflow-hidden rounded-[1.75rem] ring-1">
+      <Hero1
+        eyebrow={study.narrative ? "Case study" : caseStudyMeta(study)}
+        heading={study.name}
+        headingId="study-heading"
+        body={
+          subtitle
+            ? `${subtitle}. ${study.intro}`
+            : `${studyServices.map((service) => service.shortName).join(" · ")}. ${study.intro}`
+        }
+        primary={
+          study.narrative
+            ? { label: "Read the story", href: "#study-story" }
+            : studyServices.length === 1
+              ? { label: "Read the capability", href: serviceUrl(studyServices[0].slug) }
+              : { label: "See the work", href: "#study-services" }
+        }
+        secondary={primaryCta}
+        media={
+          <div className="bg-brand-sky-soft flex min-h-[280px] items-center justify-center rounded-[2rem] sm:min-h-[420px]">
             <CaseStudyMark icon={study.icon} />
           </div>
-        </div>
-      </header>
+        }
+      />
 
       {study.narrative ? (
         <CaseStudyStory study={study} services={studyServices} />

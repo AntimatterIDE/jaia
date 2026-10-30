@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { Hero1 } from "@/components/blocks/hero-1";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -16,15 +17,15 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <article className="bg-canvas">
-      <div className="mx-auto w-full max-w-3xl px-5 pt-[calc(var(--header-height)+2.5rem)] pb-20 sm:px-8 sm:pt-[calc(var(--header-height)+4rem)] sm:pb-24">
-        <p className="text-eyebrow font-display text-brand-action font-semibold tracking-[0.18em] uppercase">
-          Legal
-        </p>
-        <h1 className="font-display text-h2 text-brand-ink mt-5 font-semibold text-balance">
-          Terms
-        </h1>
-        <div className="text-brand-slate mt-8 space-y-5 text-[1.0625rem] leading-relaxed">
+    <>
+      <Hero1
+        eyebrow="Legal"
+        heading="Terms"
+        headingId="terms-heading"
+        body="Terms for using the JAIA Health website. The site is for general business information."
+      />
+      <article className="bg-canvas">
+        <div className="text-brand-slate mx-auto w-full max-w-3xl space-y-5 px-5 pb-20 text-[1.0625rem] leading-relaxed sm:px-8 sm:pb-24">
           <p>
             By using this website you agree to these terms. The site describes
             JAIA Health’s services for independent medical practices.
@@ -50,7 +51,7 @@ export default function TermsPage() {
             posting a new version on this page.
           </p>
         </div>
-      </div>
-    </article>
+      </article>
+    </>
   );
 }

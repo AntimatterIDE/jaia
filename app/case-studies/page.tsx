@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { Hero1 } from "@/components/blocks/hero-1";
 import { Showcase6Grid } from "@/components/react-bits/showcase-6";
 import {
   caseStudies,
@@ -23,26 +24,20 @@ export default function CaseStudiesPage() {
   const items = caseStudies.map(caseStudyShowcaseItem);
 
   return (
-    <section
-      aria-labelledby="case-studies-index-heading"
-      className="bg-canvas"
-    >
-      <div className="mx-auto w-full max-w-[90rem] px-5 pt-[calc(var(--header-height)+2.5rem)] pb-16 sm:px-8 sm:pt-[calc(var(--header-height)+4rem)] sm:pb-24 lg:pt-[calc(var(--header-height)+5rem)]">
-        <p className="text-eyebrow font-display text-brand-action font-semibold tracking-[0.18em] uppercase">
-          {caseStudySection.eyebrow}
-        </p>
-        <h1
-          id="case-studies-index-heading"
-          className="font-display text-h2 text-brand-ink mt-5 max-w-3xl font-semibold text-balance"
-        >
-          {caseStudySection.heading}
-        </h1>
-        <p className="measure text-lead text-brand-slate mt-5 max-w-2xl">
-          {caseStudiesPage.intro}
-        </p>
-
+    <>
+      <Hero1
+        eyebrow={caseStudySection.eyebrow}
+        heading={caseStudySection.heading}
+        headingId="case-studies-index-heading"
+        body={caseStudiesPage.intro}
+        image={{
+          src: "/images/about-team-collaboration.jpg",
+          alt: "A physician and practice team reviewing how a program is running",
+        }}
+      />
+      <div className="mx-auto w-full max-w-[90rem] px-5 pb-20 sm:px-8">
         <Showcase6Grid items={items} />
       </div>
-    </section>
+    </>
   );
 }
