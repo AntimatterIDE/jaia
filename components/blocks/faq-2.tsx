@@ -6,10 +6,10 @@
  */
 
 import { useState } from "react";
-import Link from "next/link";
-import { ArrowRight, Minus, Plus } from "lucide-react";
+import { Minus, Plus } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 
+import { CtaButton, CtaLink } from "@/components/marketing/cta";
 import { faq, primaryCta } from "@/content/site";
 
 interface Faq2Props {
@@ -31,25 +31,14 @@ export function Faq2({
 
   return (
     <section aria-labelledby={id} className="bg-canvas w-full px-5 py-16 sm:px-8 sm:py-24">
-      <div className="mx-auto grid w-full max-w-[1400px] gap-12 lg:grid-cols-[1fr_2fr] lg:gap-16">
+      <div className="mx-auto grid w-full max-w-[90rem] gap-12 lg:grid-cols-[1fr_2fr] lg:gap-16">
         <div className="flex flex-col gap-6 lg:sticky lg:top-28 lg:self-start">
           <h2 id={id} className="font-display text-brand-ink text-4xl leading-tight font-semibold tracking-tight sm:text-5xl">
             {heading}
           </h2>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <Link
-              href={primary.href}
-              className="bg-brand-ink inline-flex h-12 items-center justify-center rounded-full px-6 text-sm font-medium text-white"
-            >
-              {primary.label}
-            </Link>
-            <Link
-              href={secondary.href}
-              className="border-brand-mist text-brand-ink inline-flex h-12 items-center justify-center gap-2 rounded-full border px-6 text-sm font-medium"
-            >
-              {secondary.label}
-              <ArrowRight className="size-4" />
-            </Link>
+          <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+            <CtaButton href={primary.href}>{primary.label}</CtaButton>
+            <CtaLink href={secondary.href}>{secondary.label}</CtaLink>
           </div>
         </div>
         <div className="flex flex-col gap-5">

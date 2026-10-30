@@ -5,6 +5,7 @@ import {
   useEffect,
   useRef,
   useState,
+  type MouseEventHandler,
   type PointerEvent,
 } from "react";
 import Link from "next/link";
@@ -74,6 +75,7 @@ interface CtaButtonProps {
   className?: string;
   /** Renders a trailing arrow that nudges on hover */
   withArrow?: boolean;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
 }
 
 interface Ripple {
@@ -102,6 +104,7 @@ export function CtaButton({
   size = "default",
   className,
   withArrow = false,
+  onClick,
 }: CtaButtonProps) {
   const styles = toneStyles[tone];
   const [origin, setOrigin] = useState({ x: 0.5, y: 0.5 });
@@ -187,7 +190,7 @@ export function CtaButton({
         className,
       )}
     >
-      <Link href={href}>
+      <Link href={href} onClick={onClick}>
         <span
           aria-hidden="true"
           className={cn(

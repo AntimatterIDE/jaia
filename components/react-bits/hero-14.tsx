@@ -5,14 +5,12 @@
  * The demo rating, email capture, and stock photo are not used.
  */
 
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
-import { useState } from "react";
 
 import { Bento1 } from "@/components/blocks/bento-1";
+import { CtaButton, CtaLink } from "@/components/marketing/cta";
 import { getService } from "@/content/services";
-import { capabilityPillars, hero, partnership } from "@/content/site";
+import { capabilityPillars, hero, partnership, siteConfig } from "@/content/site";
 
 const rise = {
   initial: { opacity: 1, y: 16 },
@@ -20,20 +18,32 @@ const rise = {
 } as const;
 
 export function Hero14() {
-  const [isLinkHovered, setIsLinkHovered] = useState(false);
-
   return (
-    <section className="bg-canvas relative flex min-h-[100svh] w-full items-start overflow-hidden px-4 pt-[calc(var(--header-height)+2.75rem)] pb-16 sm:px-6 lg:items-center lg:px-8 lg:pb-20">
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[70%] bg-[radial-gradient(ellipse_at_50%_100%,rgba(135,205,236,0.28),transparent_70%)]" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[50%] bg-[radial-gradient(ellipse_at_30%_100%,rgba(39,111,145,0.08),transparent_60%)]" />
+    <section className="bg-canvas relative flex min-h-[100svh] w-full items-start overflow-hidden px-5 pt-[calc(var(--header-height)+2.75rem)] pb-16 sm:px-8 lg:items-center lg:pb-20">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[70%] bg-[radial-gradient(ellipse_at_50%_100%,rgba(135,205,236,0.28),transparent_70%)]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[50%] bg-[radial-gradient(ellipse_at_30%_100%,rgba(39,111,145,0.08),transparent_60%)]"
+      />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1400px]">
+      <div className="relative z-10 mx-auto w-full max-w-[90rem]">
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
           <div className="flex flex-col">
             <motion.p
               {...rise}
+              transition={{ duration: 0.5, delay: 0.02 }}
+              className="font-display text-brand-ink text-sm font-semibold tracking-[0.04em]"
+            >
+              {siteConfig.name}
+            </motion.p>
+
+            <motion.p
+              {...rise}
               transition={{ duration: 0.5, delay: 0.05 }}
-              className="font-display text-brand-action text-[0.8125rem] font-semibold tracking-[0.14em] uppercase"
+              className="font-display text-brand-action mt-3 text-[0.8125rem] font-semibold tracking-[0.14em] uppercase"
             >
               {hero.eyebrow}
             </motion.p>
@@ -57,41 +67,21 @@ export function Hero14() {
             <motion.div
               {...rise}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="mt-9 sm:mt-10"
+              className="mt-9 flex flex-col items-start gap-4 sm:mt-10 min-[26rem]:flex-row min-[26rem]:items-center"
             >
-              <Link
-                href={hero.primaryCta.href}
-                className="bg-brand-ink hover:bg-brand-action-deep inline-flex min-h-14 items-center justify-center rounded-2xl px-7 text-base font-semibold text-white transition-colors duration-200"
-              >
+              <CtaButton href={hero.primaryCta.href}>
                 {hero.primaryCta.label}
-              </Link>
-            </motion.div>
-
-            <motion.div
-              {...rise}
-              transition={{ duration: 0.5, delay: 0.25 }}
-              className="mt-8 sm:mt-9"
-            >
-              <Link
-                href={hero.secondaryCta.href}
-                onMouseEnter={() => setIsLinkHovered(true)}
-                onMouseLeave={() => setIsLinkHovered(false)}
-                className="text-brand-ink inline-flex min-h-11 items-center gap-2 text-sm font-medium sm:text-base"
-              >
+              </CtaButton>
+              <CtaLink href={hero.secondaryCta.href}>
                 {hero.secondaryCta.label}
-                <motion.span
-                  animate={{ x: isLinkHovered ? 4 : 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <ArrowRight className="size-4" />
-                </motion.span>
-              </Link>
+              </CtaLink>
             </motion.div>
 
             <motion.ul
               {...rise}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="mt-10 flex flex-wrap gap-x-6 gap-y-3"
+              className="border-brand-mist mt-10 flex flex-wrap gap-x-6 gap-y-3 border-t pt-8 sm:mt-12"
+              aria-label="Capability areas"
             >
               {capabilityPillars.map((pillar) => (
                 <li
@@ -129,5 +119,3 @@ export function Hero14() {
     </section>
   );
 }
-
-export default Hero14;

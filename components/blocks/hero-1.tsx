@@ -5,10 +5,12 @@
  * The demo badge, stock photo, play button, and invented “50k+” stat are not used.
  */
 
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import type { ReactNode } from "react";
+import Link from "next/link";
+
+import { CtaButton, CtaLink } from "@/components/marketing/cta";
 
 export interface Hero1Action {
   label: string;
@@ -30,7 +32,7 @@ interface Hero1Props {
 }
 
 const rise = {
-  initial: { opacity: 1, y: 12 },
+  initial: { opacity: 0, y: 12 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true },
 } as const;
@@ -48,7 +50,11 @@ export function Hero1({
   tone = "hero",
 }: Hero1Props) {
   const Heading = tone === "hero" ? motion.h1 : motion.h2;
-  const visual = media ?? (image ? <HeroVisual image={image} href={primary?.href} /> : null);
+  const visual =
+    media ??
+    (image ? (
+      <HeroVisual image={image} href={primary?.href} label={primary?.label} />
+    ) : null);
 
   return (
     <section
@@ -62,7 +68,7 @@ export function Hero1({
       <div
         className={
           visual
-            ? "mx-auto grid w-full max-w-[1400px] items-center gap-10 lg:grid-cols-2 lg:gap-16"
+            ? "mx-auto grid w-full max-w-[90rem] items-center gap-10 lg:grid-cols-2 lg:gap-16"
             : "mx-auto flex w-full max-w-3xl flex-col gap-10"
         }
       >
@@ -101,27 +107,17 @@ export function Hero1({
               className="flex flex-col items-start gap-3 min-[26rem]:flex-row min-[26rem]:items-center"
             >
               {primary ? (
-                <Link
-                  href={primary.href}
-                  className="bg-brand-ink inline-flex h-12 items-center justify-center rounded-full px-6 text-sm font-medium text-white transition-colors hover:bg-brand-ink/90"
-                >
-                  {primary.label}
-                </Link>
+                <CtaButton href={primary.href}>{primary.label}</CtaButton>
               ) : null}
               {secondary ? (
-                <Link
-                  href={secondary.href}
-                  className="text-brand-ink border-brand-mist inline-flex h-12 items-center justify-center rounded-full border px-5 text-sm font-medium transition-colors hover:bg-brand-sky-soft"
-                >
-                  {secondary.label}
-                </Link>
+                <CtaLink href={secondary.href}>{secondary.label}</CtaLink>
               ) : null}
             </motion.div>
           ) : null}
         </div>
         {visual ? (
           <motion.div
-            initial={{ opacity: 1, scale: 0.98 }}
+            initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
@@ -137,18 +133,24 @@ export function Hero1({
 function HeroVisual({
   image,
   href,
+  label,
 }: {
   image: { src: string; alt: string };
   href?: string;
+  label?: string;
 }) {
   return (
-    <div className="bg-brand-sky-soft relative min-h-[280px] overflow-hidden rounded-[2rem] sm:min-h-[420px]">
-      <img src={image.src} alt={image.alt} className="absolute inset-0 h-full w-full object-cover" />
+    <div className="bg-brand-sky-soft photo-card-fade relative min-h-[280px] overflow-hidden rounded-[2rem] sm:min-h-[420px]">
+      <img
+        src={image.src}
+        alt={image.alt}
+        className="img-tone absolute inset-0 h-full w-full object-cover"
+      />
       {href ? (
         <Link
           href={href}
-          aria-label="Continue"
-          className="bg-brand-ink absolute right-4 bottom-4 flex size-16 items-center justify-center rounded-2xl text-white"
+          aria-label={label ?? "Continue"}
+          className="bg-brand-ink hover:bg-brand-action-deep absolute right-4 bottom-4 flex size-14 items-center justify-center rounded-2xl text-white transition-colors duration-150 sm:size-16"
         >
           <ArrowRight className="size-6 -rotate-45" />
         </Link>

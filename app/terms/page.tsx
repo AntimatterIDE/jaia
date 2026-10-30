@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { Hero1 } from "@/components/blocks/hero-1";
+import { CtaLink } from "@/components/marketing/cta";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -24,8 +25,8 @@ export default function TermsPage() {
         headingId="terms-heading"
         body="Terms for using the JAIA Health website. The site is for general business information."
       />
-      <article className="bg-canvas">
-        <div className="text-brand-slate mx-auto w-full max-w-3xl space-y-5 px-5 pb-20 text-[1.0625rem] leading-relaxed sm:px-8 sm:pb-24">
+      <article className="section-wash section-wash-mist">
+        <div className="text-brand-slate measure mx-auto w-full max-w-3xl space-y-5 px-5 py-4 pb-16 text-[1.0625rem] leading-relaxed sm:px-8 sm:pb-24">
           <p>
             By using this website you agree to these terms. The site describes
             JAIA Health’s services for independent medical practices.
@@ -49,6 +50,9 @@ export default function TermsPage() {
             You may not copy the site’s content for a competing service or
             misrepresent it as your own. JAIA may update these terms by
             posting a new version on this page.
+          </p>
+          <p className="pt-4">
+            <CtaLink href="/contact">Contact JAIA</CtaLink>
           </p>
         </div>
       </article>

@@ -13,6 +13,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Building2, Handshake, Menu, NotebookPen, X, type LucideIcon } from "lucide-react";
 
 import { HomeLink } from "@/components/marketing/home-link";
+import { pauseLenis, resumeLenis } from "@/components/marketing/smooth-scroll";
 import { services, serviceUrl } from "@/content/services";
 import { primaryCta } from "@/content/site";
 import { cn } from "@/lib/utils";
@@ -105,6 +106,12 @@ export function Navigation2() {
     setMobileMenuOpen(false);
     setActiveMenu(null);
   }, [pathname]);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    pauseLenis();
+    return () => resumeLenis();
+  }, [mobileMenuOpen]);
 
   const linkClass = (href: string) =>
     cn(
@@ -206,9 +213,12 @@ export function Navigation2() {
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 1 }}
                   transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
+                  data-lenis-prevent
+                  data-lenis-prevent-wheel
+                  data-lenis-prevent-touch
                   className="overflow-hidden"
                 >
-                  <div className="space-y-5 px-4 pt-1 pb-4">
+                  <div className="max-h-[min(70dvh,32rem)] touch-pan-y space-y-5 overflow-y-auto overscroll-contain px-4 pt-1 pb-4 [overflow-anchor:none]">
                     <Link
                       href={primaryCta.href}
                       className="bg-brand-ink block rounded-full px-6 py-2.5 text-center text-sm font-semibold text-white"

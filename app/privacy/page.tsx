@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { Hero1 } from "@/components/blocks/hero-1";
+import { CtaLink } from "@/components/marketing/cta";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -24,8 +25,8 @@ export default function PrivacyPage() {
         headingId="privacy-heading"
         body="How JAIA Health handles business inquiries submitted through this website."
       />
-      <article className="bg-canvas">
-        <div className="text-brand-slate mx-auto w-full max-w-3xl space-y-5 px-5 pb-20 text-[1.0625rem] leading-relaxed sm:px-8 sm:pb-24">
+      <article className="section-wash section-wash-mist">
+        <div className="text-brand-slate measure mx-auto w-full max-w-3xl space-y-5 px-5 py-4 pb-16 text-[1.0625rem] leading-relaxed sm:px-8 sm:pb-24">
           <p>
             This website is operated by JAIA Health. It is a business site for
             independent practices. It is not a patient portal and it is not for
@@ -50,6 +51,9 @@ export default function PrivacyPage() {
           </p>
           <p>
             Questions about this policy can be sent through the contact form.
+          </p>
+          <p className="pt-4">
+            <CtaLink href="/contact">Contact JAIA</CtaLink>
           </p>
         </div>
       </article>

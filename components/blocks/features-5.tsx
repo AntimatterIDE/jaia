@@ -9,6 +9,7 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import type { LucideIcon } from "lucide-react";
 
+import { CtaButton, CtaLink } from "@/components/marketing/cta";
 import { hero, primaryCta, servicesIntro } from "@/content/site";
 import { services, serviceUrl } from "@/content/services";
 
@@ -58,11 +59,11 @@ export function Features5({
           maskImage: "radial-gradient(ellipse 80% 70% at 100% 0%, #000 15%, transparent 75%)",
         }}
       />
-      <div className="relative mx-auto w-full max-w-[1400px]">
+      <div className="relative mx-auto w-full max-w-[90rem]">
         <div className="mb-12 max-w-3xl">
           <motion.h2
             id={id}
-            initial={{ opacity: 1, y: 10 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="font-display text-brand-ink text-3xl font-semibold tracking-tight sm:text-5xl"
@@ -71,22 +72,12 @@ export function Features5({
           </motion.h2>
           {body ? <p className="text-brand-slate mt-5 text-lg">{body}</p> : null}
           {showCtas && (primary || secondary) ? (
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
               {primary ? (
-                <Link
-                  href={primary.href}
-                  className="bg-brand-ink inline-flex h-12 items-center justify-center rounded-full px-7 text-sm font-medium text-white"
-                >
-                  {primary.label}
-                </Link>
+                <CtaButton href={primary.href}>{primary.label}</CtaButton>
               ) : null}
               {secondary ? (
-                <Link
-                  href={secondary.href}
-                  className="border-brand-mist text-brand-ink inline-flex h-12 items-center justify-center rounded-full border px-7 text-sm font-medium"
-                >
-                  {secondary.label}
-                </Link>
+                <CtaLink href={secondary.href}>{secondary.label}</CtaLink>
               ) : null}
             </div>
           ) : null}

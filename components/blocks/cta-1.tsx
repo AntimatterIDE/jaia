@@ -6,9 +6,9 @@
  * and the real conversation link.
  */
 
-import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform, type MotionValue } from "motion/react";
 
+import { CtaButton } from "@/components/marketing/cta";
 import { finalCta } from "@/content/site";
 
 const orbs = [
@@ -76,12 +76,9 @@ export function Cta1({
           {heading}
         </h2>
         <p className="text-brand-slate mx-auto mt-6 max-w-xl text-lg leading-relaxed">{body}</p>
-        <Link
-          href={ctaHref}
-          className="bg-brand-ink mt-8 inline-flex h-12 items-center justify-center rounded-full px-8 text-sm font-medium text-white"
-        >
-          {ctaLabel}
-        </Link>
+        <div className="mt-8 flex justify-center">
+          <CtaButton href={ctaHref}>{ctaLabel}</CtaButton>
+        </div>
       </div>
     </section>
   );
