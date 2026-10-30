@@ -313,7 +313,7 @@ export const contactPage = {
   eyebrow: "Contact",
   heading: "Start a conversation.",
   intro:
-    "Tell us about your practice and where you want to grow. This form is for business inquiries only—please do not include patient names, medical records, or other protected health information.",
+    "Tell us about your practice and where you want to grow.",
   phiNotice:
     "Please do not include patient names, medical records, or other protected health information in this form.",
 } as const;

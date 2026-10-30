@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import { Montserrat, Lato, Noto_Serif } from "next/font/google";
+import localFont from "next/font/local";
 import { SiteHeader } from "@/components/marketing/site-header";
 import { SiteFooter } from "@/components/marketing/site-footer";
 import { ScrollToTop } from "@/components/marketing/scroll-to-top";
 import { SmoothScroll } from "@/components/marketing/smooth-scroll";
 import { SalesAgent } from "@/components/marketing/sales-agent";
-import UserCursor from "@/components/react-bits/user-cursor";
 import { siteConfig } from "@/content/site";
 import "./globals.css";
 
@@ -17,24 +16,44 @@ const shareImage = {
   type: "image/png",
 } as const;
 
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
+/**
+ * Self-hosted so production builds do not download Google Fonts. Next.js
+ * fails the Turbopack build when Google answers with extensionless font URLs.
+ */
+const montserrat = localFont({
+  src: [
+    { path: "./fonts/montserrat-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/montserrat-600.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/montserrat-700.woff2", weight: "700", style: "normal" },
+  ],
   variable: "--font-montserrat",
   display: "swap",
 });
 
-const lato = Lato({
-  subsets: ["latin"],
-  weight: ["400", "700"],
+const lato = localFont({
+  src: [
+    { path: "./fonts/lato-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/lato-700.woff2", weight: "700", style: "normal" },
+  ],
   variable: "--font-lato",
   display: "swap",
 });
 
-const notoSerif = Noto_Serif({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  style: ["normal", "italic"],
+const notoSerif = localFont({
+  src: [
+    { path: "./fonts/noto-serif-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/noto-serif-500.woff2", weight: "500", style: "normal" },
+    {
+      path: "./fonts/noto-serif-400-italic.woff2",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "./fonts/noto-serif-500-italic.woff2",
+      weight: "500",
+      style: "italic",
+    },
+  ],
   variable: "--font-noto-serif",
   display: "swap",
 });
@@ -87,23 +106,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <SiteFooter />
-        {/* Site cursor: brand-action fill (--brand-action), no user-name
-            label, fixed arrow angle (no direction-aware tilt). Renders
-            nothing on coarse pointers and under prefers-reduced-motion. */}
-        <UserCursor
-          fullScreen
-          trigger="always"
-          showLabel={false}
-          color="#276f91"
-          size={26}
-          tilt={18}
-          directionAwareTilt={false}
-          pressScale={0.9}
-          /* Above sales-agent panel (z-40) and sheets (z-100). The layer is
-             pointer-events: none, so it never blocks clicks — only paints. */
-          zIndex={110}
-          spring={{ stiffness: 1100, damping: 55, mass: 0.28 }}
-        />
         <SmoothScroll />
         <ScrollToTop />
         <SalesAgent />

@@ -14,7 +14,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { services } from "@/content/services";
-import { contactPage } from "@/content/site";
 import { submitInquiry } from "@/app/contact/actions";
 import { validateInquiry, type InquiryInput } from "@/lib/inquiry";
 import { cn } from "@/lib/utils";
@@ -296,7 +295,7 @@ export function ContactForm({ initialService }: { initialService?: string }) {
           id="message-note"
           className="text-brand-slate text-sm leading-relaxed"
         >
-          {contactPage.phiNotice}
+          A short note about your practice is enough to start.
         </p>
         <FieldError id="error-message" message={errors.message} />
       </div>

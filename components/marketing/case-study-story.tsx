@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import AnimatedContent from "@/components/AnimatedContent";
+import { ResultsDisclaimer } from "@/components/marketing/results-disclaimer";
 import type { CaseStudyRecord } from "@/content/case-studies";
 import { serviceUrl, type ServiceRecord } from "@/content/services";
 
@@ -40,61 +41,75 @@ export function CaseStudyStory({
           </AnimatedContent>
         ) : null}
 
-        <div className="mt-12 grid gap-10 lg:mt-14 lg:grid-cols-2 lg:gap-16">
-          <AnimatedContent delay={0.06}>
-            <h2 className="font-display text-brand-ink text-xl font-semibold">
-              {narrative.situationHeading}
-            </h2>
-            <p className="measure text-brand-slate mt-4 text-[1.0625rem] leading-relaxed">
-              {narrative.situation}
-            </p>
-          </AnimatedContent>
+        {narrative.situation || (narrative.work && narrative.work.length > 0) ? (
+          <div className="mt-12 grid gap-10 lg:mt-14 lg:grid-cols-2 lg:gap-16">
+          {narrative.situation ? (
+            <AnimatedContent delay={0.06}>
+              <h2 className="font-display text-brand-ink text-xl font-semibold">
+                {narrative.situationHeading}
+              </h2>
+              <p className="measure text-brand-slate mt-4 text-[1.0625rem] leading-relaxed">
+                {narrative.situation}
+              </p>
+            </AnimatedContent>
+          ) : null}
 
-          <AnimatedContent delay={0.1}>
-            <h2 className="font-display text-brand-ink text-xl font-semibold">
-              {narrative.workHeading}
-            </h2>
-            <ul className="mt-4 space-y-3">
-              {narrative.work.map((item) => (
-                <li
-                  key={item}
-                  className="text-brand-slate flex gap-3 text-[1.0625rem] leading-relaxed"
-                >
-                  <span
-                    aria-hidden="true"
-                    className="bg-brand-sky mt-2.5 size-1.5 shrink-0 rounded-full"
-                  />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </AnimatedContent>
-        </div>
+          {narrative.work && narrative.work.length > 0 ? (
+            <AnimatedContent delay={0.1}>
+              <h2 className="font-display text-brand-ink text-xl font-semibold">
+                {narrative.workHeading}
+              </h2>
+              <ul className="mt-4 space-y-3">
+                {narrative.work.map((item) => (
+                  <li
+                    key={item}
+                    className="text-brand-slate flex gap-3 text-[1.0625rem] leading-relaxed"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="bg-brand-sky mt-2.5 size-1.5 shrink-0 rounded-full"
+                    />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </AnimatedContent>
+          ) : null}
+          </div>
+        ) : null}
 
         <AnimatedContent delay={0.08}>
           <h2 className="font-display text-brand-ink mt-14 text-xl font-semibold">
             {narrative.resultsHeading}
           </h2>
-          <dl className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
-            {narrative.results.map((stat) => (
-              <div
-                key={stat.label}
-                className="border-brand-mist flex flex-col rounded-[1.5rem] border bg-white px-5 py-6"
-              >
-                <dt className="text-brand-slate order-2 mt-3 text-sm leading-snug">
-                  {stat.label}
-                </dt>
-                <dd className="font-display text-brand-ink order-1 text-[1.75rem] leading-none font-semibold tracking-tight">
-                  {stat.value}
-                </dd>
-              </div>
-            ))}
-          </dl>
+          {narrative.results.length > 0 ? (
+            <dl className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
+              {narrative.results.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="border-brand-mist flex flex-col rounded-[1.5rem] border bg-white px-5 py-6"
+                >
+                  <dt className="text-brand-slate order-2 mt-3 text-sm leading-snug">
+                    {stat.label}
+                  </dt>
+                  <dd className="font-display text-brand-ink order-1 text-[1.75rem] leading-none font-semibold tracking-tight">
+                    {stat.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          ) : null}
+          {narrative.resultStatement ? (
+            <p className="text-brand-ink mt-6 max-w-3xl text-[1.0625rem] leading-relaxed">
+              {narrative.resultStatement}
+            </p>
+          ) : null}
           {narrative.resultsNote ? (
             <p className="text-brand-slate mt-5 max-w-3xl text-sm leading-relaxed">
               {narrative.resultsNote}
             </p>
           ) : null}
+          <ResultsDisclaimer className="mt-5" />
         </AnimatedContent>
 
         <AnimatedContent delay={0.1}>

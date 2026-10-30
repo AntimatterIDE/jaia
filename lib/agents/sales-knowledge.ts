@@ -65,24 +65,26 @@ function formatCaseStudies() {
         `### ${study.name}`,
         `Slug: ${study.slug}`,
         `Page: /case-studies/${study.slug}`,
-        study.location ? `Location: ${study.location}` : "",
-        study.comingSoon
-          ? "Status: Coming soon. You may name this study and its listed services, but you must not invent outcomes, quotes, statistics, or extra details."
-          : "Status: Live public study. Use only the facts below.",
+        "Status: Live public study. Use only the facts below.",
         `Intro: ${study.intro}`,
         `Services in this engagement: ${study.serviceSlugs.join(", ")}`,
       ];
 
-      if (study.narrative && !study.comingSoon) {
+      if (study.narrative) {
         const { narrative } = study;
         lines.push(
           narrative.practice ? `Practice / DBA: ${narrative.practice}` : "",
           narrative.engagement ? `Engagement: ${narrative.engagement}` : "",
-          `${narrative.situationHeading}: ${narrative.situation}`,
-          `${narrative.workHeading}:`,
-          ...narrative.work.map((item) => `- ${item}`),
+          narrative.situation
+            ? `${narrative.situationHeading}: ${narrative.situation}`
+            : "",
+          narrative.work && narrative.work.length > 0
+            ? `${narrative.workHeading}:`
+            : "",
+          ...(narrative.work ?? []).map((item) => `- ${item}`),
           `${narrative.resultsHeading}:`,
           ...narrative.results.map((stat) => `- ${stat.value} — ${stat.label}`),
+          narrative.resultStatement ?? "",
           narrative.resultsNote ? `Note: ${narrative.resultsNote}` : "",
         );
         if (narrative.quote) {
@@ -141,7 +143,7 @@ Formatting: write visitor-facing replies as GitHub-flavored Markdown. Use short 
 
 Audience: many visitors have not read the rest of the site. Do not assume they know APCM, BHI, Novo, or the six-service list. Answer in their terms first — billing and revenue cycle (RCM), collections, adding a program, whether other practices have seen results — then map to the matching JAIA service. Expand acronyms on first use (APCM = Advanced Primary Care Management, BHI = Behavioral Health Integration, RCM = revenue cycle management, HRV = heart rate variability, POL = physician office laboratory).
 
-When they ask about results: only NOVO Wellness Center has published figures. Summarize those published results and you may name the Coming soon studies without inventing numbers. Client testimonials describe the working relationship, not results.
+When they ask about results: NOVO Wellness Center and WeCare have published figures. Quote WeCare’s result sentence word for word. Summarize Novo only from the published figures. Say that results vary and are not a guarantee. Do not mention removed studies, physician names, or practice cities. Client testimonials describe the working relationship, not results.
 
 # Company
 Name: ${siteConfig.name}
@@ -177,7 +179,7 @@ There are exactly six. Use the summary as the ceiling for claims.
 ${formatServices()}
 
 # Case studies
-Only NOVO Wellness Center is a live public study. Gandhi, IV Therapy, and Laboratory Coordination are Coming soon.
+Published studies are NOVO Wellness Center and WeCare. IV Therapy and Laboratory Coordination are services, not case studies. Do not name a physician or a city for either study.
 
 ${formatCaseStudies()}
 

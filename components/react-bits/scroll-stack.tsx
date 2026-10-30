@@ -536,7 +536,7 @@ export function Face({
           {/* Bottom-left ink only — no white veil over the photo */}
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-ink/90 via-brand-ink/45 via-[36%] to-transparent to-[58%]"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-ink from-[12%] via-brand-ink/92 via-[48%] to-transparent to-[78%]"
           />
         </>
       ) : null}
@@ -554,8 +554,8 @@ export function Face({
         {item.eyebrow ? (
           <span
             className={cn(
-              "font-display font-semibold tracking-[0.2em] uppercase text-[11px]",
-              !item.accent && (item.image ? "text-white/75" : "text-brand-slate"),
+              "font-display font-semibold tracking-[0.16em] uppercase text-[0.8125rem]",
+              !item.accent && (item.image ? "text-white" : "text-brand-slate"),
             )}
             style={item.accent ? { color: item.accent } : undefined}
           >

@@ -147,10 +147,10 @@ export const services: readonly ServiceRecord[] = [
     metaDescription:
       "Medicare-recognized APCM and Behavioral Health Integration programs designed to generate recurring monthly revenue while strengthening chronic care coordination.",
     image: {
-      src: "/images/stack-body-scan-interface.jpg",
-      alt: "A clinician holding a stethoscope up to a glowing holographic display of a human body and health readings, beside a DNA strand",
-      width: 2048,
-      height: 1365,
+      src: "/images/care-management-coordinator.jpg",
+      alt: "A care coordinator speaking with a patient by phone at a practice desk",
+      width: 1536,
+      height: 1024,
     },
     page: {
       acronymNote:
@@ -238,10 +238,10 @@ export const services: readonly ServiceRecord[] = [
     metaDescription:
       "Objective heart rate variability testing that quantifies autonomic nervous system function, informing personalized care plans and longitudinal tracking.",
     image: {
-      src: "/images/stack-hrv-heartbeat-line.jpg",
-      alt: "A single glowing heartbeat trace running across a deep blue background",
-      width: 2048,
-      height: 1638,
+      src: "/images/hrv-assessment-clinic.jpg",
+      alt: "A clinician reviewing a heart-rate waveform on a monitor during an assessment",
+      width: 1536,
+      height: 1024,
     },
     page: {
       acronymNote:
@@ -329,10 +329,10 @@ export const services: readonly ServiceRecord[] = [
     metaDescription:
       "Help independent practices integrate medically necessary, insurance-reimbursable IV therapy—expanding patient access, supporting proactive care, and creating sustainable ancillary revenue.",
     image: {
-      src: "/images/stack-vessel-visualization.jpg",
-      alt: "A clinician in a white coat reaching through glowing blue strands that resemble blood vessels",
-      width: 2048,
-      height: 1365,
+      src: "/images/iv-therapy-suite.jpg",
+      alt: "A calm in-practice infusion suite with a recliner beside an IV stand",
+      width: 1536,
+      height: 1024,
     },
     page: {
       heroTagline:
@@ -472,10 +472,10 @@ export const services: readonly ServiceRecord[] = [
     metaDescription:
       "End-to-end revenue cycle management — coding, claims, denials, and A/R recovery — built to integrate with how your practice already operates.",
     image: {
-      src: "/images/stack-heart-scan-dashboard.jpg",
-      alt: "A holographic heart scan surrounded by glowing charts, waveforms, and data panels in a clinic waiting area",
-      width: 2048,
-      height: 1365,
+      src: "/images/billing-rcm-workspace.jpg",
+      alt: "A practice billing workspace with claims and revenue-cycle work on screen",
+      width: 1536,
+      height: 1024,
     },
     page: {
       acronymNote:
@@ -563,10 +563,10 @@ export const services: readonly ServiceRecord[] = [
     metaDescription:
       "Coordinated access to established third-party reference laboratories, giving practices broad diagnostic coverage at favorable economics.",
     image: {
-      src: "/images/stack-high-tech-lab.jpg",
-      alt: "Laboratory staff in protective suits and masks reviewing results at monitors in a high-tech lab",
-      width: 2048,
-      height: 1300,
+      src: "/images/lab-reference-coordination.jpg",
+      alt: "A specimen rack beside a laboratory analyzer, with clear liquid and blue caps",
+      width: 1536,
+      height: 1024,
     },
     page: {
       intro:
@@ -652,10 +652,10 @@ export const services: readonly ServiceRecord[] = [
     metaDescription:
       "Physician Office Laboratory setup and ongoing operations — CLIA considerations, equipment selection, validation, and staff training from end to end.",
     image: {
-      src: "/images/stack-diagnostics-touchscreen.jpg",
-      alt: "A clinician's finger touching a translucent diagnostics panel showing lungs, heart, and waveform readings beside a glowing DNA strand",
-      width: 2048,
-      height: 1365,
+      src: "/images/lab-office-bench.jpg",
+      alt: "A physician office laboratory bench with instruments set up for in-practice testing",
+      width: 1536,
+      height: 1024,
     },
     page: {
       acronymNote:

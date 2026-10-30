@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import AnimatedContent from "@/components/AnimatedContent";
+import { ResultsDisclaimer } from "@/components/marketing/results-disclaimer";
 import { SectionHeading } from "@/components/marketing/section-heading";
 import {
   Accordion,
@@ -108,6 +109,11 @@ export function PartnerInterview({ slug }: { slug: string }) {
                               </div>
                             ))}
                           </dl>
+                        ) : null}
+                        {item.id === "q4" ||
+                        item.id === "q5" ||
+                        item.id === "q6" ? (
+                          <ResultsDisclaimer className="mt-5" />
                         ) : null}
                       </AccordionContent>
                     </AccordionItem>

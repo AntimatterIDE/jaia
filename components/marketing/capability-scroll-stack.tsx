@@ -25,12 +25,12 @@ const stackImages: Record<
   string,
   { src: string; imagePosition?: string }
 > = {
-  "apcm-bhi": { src: "/images/stack-body-scan-interface.jpg" },
-  "hrv-assessment": { src: "/images/stack-hrv-heartbeat-line.jpg" },
-  "iv-therapy": { src: "/images/stack-vessel-visualization.jpg" },
-  "billing-rcm": { src: "/images/stack-heart-scan-dashboard.jpg" },
-  "laboratory-coordination": { src: "/images/stack-high-tech-lab.jpg" },
-  "pol-establishment": { src: "/images/stack-diagnostics-touchscreen.jpg" },
+  "apcm-bhi": { src: "/images/care-management-coordinator.jpg" },
+  "hrv-assessment": { src: "/images/hrv-assessment-clinic.jpg" },
+  "iv-therapy": { src: "/images/iv-therapy-suite.jpg" },
+  "billing-rcm": { src: "/images/billing-rcm-workspace.jpg" },
+  "laboratory-coordination": { src: "/images/lab-reference-coordination.jpg" },
+  "pol-establishment": { src: "/images/lab-office-bench.jpg" },
 };
 
 const homepageItems: ScrollStackItem[] = services.map((service, index) => {

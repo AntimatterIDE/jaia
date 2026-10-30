@@ -16,32 +16,32 @@ const includeImages: Record<
 > = {
   "apcm-bhi": [
     { src: "/images/include-program-infrastructure.jpg" },
-    { src: "/images/stack-body-scan-interface.jpg" },
+    { src: "/images/care-management-coordinator.jpg" },
     { src: "/images/include-behavioral-health.jpg" },
   ],
   "hrv-assessment": [
-    { src: "/images/stack-hrv-heartbeat-line.jpg" },
+    { src: "/images/hrv-assessment-clinic.jpg" },
     { src: "/images/include-care-plan-insights.jpg" },
     { src: "/images/include-longitudinal-tracking.jpg" },
   ],
   "iv-therapy": [
-    { src: "/images/stack-vessel-visualization.jpg" },
+    { src: "/images/iv-therapy-suite.jpg" },
     { src: "/images/include-supply-chain.jpg" },
     { src: "/images/include-staff-training-iv.jpg" },
   ],
   "billing-rcm": [
-    { src: "/images/stack-heart-scan-dashboard.jpg" },
+    { src: "/images/billing-rcm-workspace.jpg" },
     { src: "/images/include-denial-management.jpg" },
     { src: "/images/include-ar-recovery.jpg" },
   ],
   "laboratory-coordination": [
-    { src: "/images/stack-high-tech-lab.jpg" },
+    { src: "/images/lab-reference-coordination.jpg" },
     { src: "/images/include-partnership-coordination.jpg" },
     { src: "/images/include-test-routing.jpg" },
   ],
   "pol-establishment": [
     { src: "/images/include-clia-considerations.jpg" },
-    { src: "/images/stack-diagnostics-touchscreen.jpg" },
+    { src: "/images/lab-office-bench.jpg" },
     { src: "/images/include-staff-training-pol.jpg" },
   ],
 };

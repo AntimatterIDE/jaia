@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { motion, useReducedMotion, type Variants } from "motion/react";
+import { motion, type Variants } from "motion/react";
 
 import StaggeredText from "@/components/react-bits/staggered-text";
 import { CapabilityPillarsInline } from "@/components/marketing/capability-pillars";
@@ -18,8 +18,6 @@ const HeroBackdrop = dynamic(
   { ssr: false },
 );
 
-const EASE = [0.16, 1, 0.3, 1] as const;
-
 /**
  * Hero — a left-aligned reading stack that fills the first viewport
  * (`min-h-[100svh]`). The copy column is vertically centered in the
@@ -29,28 +27,15 @@ const EASE = [0.16, 1, 0.3, 1] as const;
  * not a tight `pt-20` that still sits under the nav.
  */
 export function Hero() {
-  const prefersReducedMotion = useReducedMotion();
-
   const container: Variants = {
     hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: prefersReducedMotion ? 0 : 0.09,
-        delayChildren: prefersReducedMotion ? 0 : 0.06,
-      },
-    },
+    visible: {},
   };
 
-  const item: Variants = prefersReducedMotion
-    ? { hidden: { opacity: 1 }, visible: { opacity: 1 } }
-    : {
-        hidden: { opacity: 0, y: 14 },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.55, ease: EASE },
-        },
-      };
+  const item: Variants = {
+    hidden: { opacity: 1, y: 0 },
+    visible: { opacity: 1, y: 0 },
+  };
 
   return (
     <section
@@ -75,21 +60,10 @@ export function Hero() {
                 {hero.eyebrow}
               </motion.p>
 
-              {/*
-                The headline reveals word by word with a soft blur settle — it
-                runs on its own trigger, timed to land just after the eyebrow.
-              */}
               <StaggeredText
                 as="h1"
                 id="hero-heading"
                 text={hero.heading}
-                segmentBy="words"
-                initialDelay={0.12}
-                delay={70}
-                duration={0.7}
-                easing={[0.22, 1, 0.36, 1]}
-                from={{ opacity: 0, y: 18, filter: "blur(6px)" }}
-                to={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 className="font-display text-display-xl text-brand-ink max-w-[15ch] font-semibold tracking-[-0.02em]"
               />
             </div>

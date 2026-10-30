@@ -9,10 +9,10 @@
  */
 
 import Link from "next/link";
-import Image from "next/image";
 import { motion, useReducedMotion, type Variants } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 
+import { CaseStudyMark } from "@/components/marketing/case-study-mark";
 import { CtaButton } from "@/components/marketing/cta";
 import { cn } from "@/lib/utils";
 
@@ -22,16 +22,9 @@ export interface Showcase6Card {
   href: string;
   caption: string;
   meta: string;
-  image: {
-    src: string;
-    alt: string;
-    width: number;
-    height: number;
-    objectPosition?: string;
-  };
+  icon: "wellness" | "care";
   tilt: number;
   lift: string;
-  comingSoon?: boolean;
 }
 
 export interface Showcase6Props {
@@ -48,39 +41,22 @@ export interface Showcase6Props {
 
 const MotionLink = motion.create(Link);
 
-function PolaroidFace({ item, sizes }: { item: Showcase6Card; sizes: string }) {
+function PolaroidFace({ item }: { item: Showcase6Card }) {
   return (
     <div className="border-brand-mist rounded-2xl border bg-white p-3 shadow-[0_18px_45px_-20px_rgba(50,47,47,0.28)] transition-shadow duration-300 group-hover:shadow-[0_30px_70px_-28px_rgba(50,47,47,0.4)] motion-reduce:transition-none sm:p-3.5">
       <div className="bg-brand-mist relative aspect-square overflow-hidden rounded-lg">
-        {item.comingSoon ? (
-          <span className="text-brand-ink shadow-soft absolute top-3 left-3 z-10 rounded-full bg-white/95 px-2.5 py-1 font-mono text-[10px] font-semibold tracking-[0.14em] uppercase">
-            Coming soon
-          </span>
-        ) : null}
-        <Image
-          src={item.image.src}
-          alt={item.image.alt}
-          width={item.image.width}
-          height={item.image.height}
-          sizes={sizes}
-          className={cn(
-            "absolute inset-0 size-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100",
-            item.image.objectPosition,
-          )}
-        />
+        <CaseStudyMark icon={item.icon} className="absolute inset-0" />
       </div>
       <div className="flex items-baseline justify-between gap-3 px-1 pt-4 pb-1.5">
-        <span className="text-brand-ink truncate font-mono text-[11px] tracking-[0.12em] uppercase">
+        <span className="font-display text-brand-ink truncate text-[0.8125rem] font-semibold tracking-[0.08em] uppercase">
           {item.caption}
         </span>
-        <span className="text-brand-slate flex shrink-0 items-center gap-1 font-mono text-[11px] tracking-[0.12em]">
+        <span className="font-display text-brand-slate flex shrink-0 items-center gap-1 text-[0.8125rem] font-medium tracking-[0.04em]">
           {item.meta}
-          {item.comingSoon ? null : (
-            <ArrowUpRight
-              aria-hidden="true"
-              className="size-3.5 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 motion-reduce:opacity-100"
-            />
-          )}
+          <ArrowUpRight
+            aria-hidden="true"
+            className="size-3.5 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 motion-reduce:opacity-100"
+          />
         </span>
       </div>
     </div>
@@ -186,7 +162,7 @@ export function Showcase6({
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:mt-24 lg:flex lg:justify-center lg:gap-0"
+          className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 sm:gap-10 lg:mx-auto lg:mt-24 lg:max-w-4xl"
         >
           {items.map((item) => (
             <MotionLink
@@ -198,18 +174,9 @@ export function Showcase6({
                 prefersReducedMotion ? undefined : { rotate: 0, y: -6 }
               }
               transition={{ duration: 0.35, ease: EASE }}
-              className={cn(
-                "group focus-visible:outline-brand-action relative block rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 lg:-ml-14 lg:w-[28%] lg:first:ml-0",
-                item.lift,
-              )}
-              aria-label={
-                item.comingSoon ? `${item.caption}, coming soon` : undefined
-              }
+              className="group focus-visible:outline-brand-action relative block rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4"
             >
-              <PolaroidFace
-                item={item}
-                sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, calc(100vw - 2.5rem)"
-              />
+              <PolaroidFace item={item} />
             </MotionLink>
           ))}
         </motion.div>
@@ -226,14 +193,8 @@ export function Showcase6Grid({ items }: { items: readonly Showcase6Card[] }) {
           <Link
             href={item.href}
             className="group focus-visible:outline-brand-action relative block rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4"
-            aria-label={
-              item.comingSoon ? `${item.caption}, coming soon` : undefined
-            }
           >
-            <PolaroidFace
-              item={item}
-              sizes="(min-width: 1024px) 28vw, (min-width: 640px) 45vw, calc(100vw - 2.5rem)"
-            />
+            <PolaroidFace item={item} />
           </Link>
         </li>
       ))}

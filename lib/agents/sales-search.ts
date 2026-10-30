@@ -67,23 +67,26 @@ function indexPassages(): KnowledgePassage[] {
 
   for (const study of caseStudies) {
     const lines = [
-      study.location ? `${study.name}, ${study.location}` : study.name,
-      study.comingSoon
-        ? "Status: Coming soon. Do not invent outcomes, quotes, or statistics."
-        : "Status: Live public study. Use only the facts in this passage.",
+      study.name,
+      "Status: Live public study. Use only the facts in this passage.",
       study.intro,
       `Services: ${study.serviceSlugs.join(", ")}`,
     ];
 
-    if (study.narrative && !study.comingSoon) {
+    if (study.narrative) {
       const { narrative } = study;
       lines.push(
         narrative.practice ? `Practice: ${narrative.practice}` : "",
         narrative.engagement ? `Engagement: ${narrative.engagement}` : "",
-        `${narrative.situationHeading}: ${narrative.situation}`,
-        `${narrative.workHeading}: ${narrative.work.join(" ")}`,
+        narrative.situation
+          ? `${narrative.situationHeading}: ${narrative.situation}`
+          : "",
+        narrative.work && narrative.work.length > 0
+          ? `${narrative.workHeading}: ${narrative.work.join(" ")}`
+          : "",
         `${narrative.resultsHeading}:`,
         ...narrative.results.map((stat) => `${stat.value} — ${stat.label}`),
+        narrative.resultStatement ?? "",
         narrative.resultsNote ?? "",
         narrative.quote
           ? `Quote: “${narrative.quote.text}” — ${narrative.quote.attribution}, ${narrative.quote.role}`

@@ -6,6 +6,7 @@ import { Sprout } from "lucide-react";
 import AnimatedContent from "@/components/AnimatedContent";
 import { JaiaSymbol } from "@/components/jaia-symbol";
 import { CountUp } from "@/components/marketing/count-up";
+import { ResultsDisclaimer } from "@/components/marketing/results-disclaimer";
 import { SectionHeading } from "@/components/marketing/section-heading";
 import {
   getPartnerSpotlight,
@@ -164,6 +165,8 @@ function Results({ partner }: { partner: PartnerSpotlight }) {
             ))}
           </dl>
         </motion.div>
+
+        <ResultsDisclaimer className="mt-8" />
 
         <AnimatedContent delay={0.1}>
           <div className="border-brand-sky/50 mt-5 flex flex-col gap-4 rounded-[1.5rem] border border-dashed bg-brand-sky-soft/50 p-6 sm:mt-6 sm:flex-row sm:items-center sm:gap-5">

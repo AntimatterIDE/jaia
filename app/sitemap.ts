@@ -30,6 +30,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.7,
     },
+    {
+      url: `${siteConfig.url}/privacy`,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${siteConfig.url}/terms`,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
     ...publishedCaseStudies().map((study) => ({
       url: `${siteConfig.url}${caseStudyUrl(study.slug)}`,
       changeFrequency: "monthly" as const,

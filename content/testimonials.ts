@@ -49,7 +49,7 @@ export const testimonials: readonly Testimonial[] = [
     name: "Dr. Arimah",
     title: "Owner & Founder",
     organization: "Arimah Medical Inc.",
-    initials: "A",
+    initials: "AR",
   },
   {
     quote:
@@ -57,7 +57,7 @@ export const testimonials: readonly Testimonial[] = [
     name: "Dr. Burton",
     title: "Owner & Founder",
     organization: "Burton Medical Group",
-    initials: "B",
+    initials: "BU",
   },
   {
     quote:

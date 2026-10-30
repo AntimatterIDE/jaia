@@ -21,6 +21,11 @@ const companyLinks = [
   { href: "/contact", label: "Contact" },
 ] as const;
 
+const legalLinks = [
+  { href: "/privacy", label: "Privacy Policy" },
+  { href: "/terms", label: "Terms" },
+] as const;
+
 /**
  * lucide-react 1.x no longer exports brand marks (`Linkedin`, `Instagram`).
  * These match the former Lucide 24×24 stroke glyphs.
@@ -204,12 +209,21 @@ export function SiteFooter() {
                     <FooterLink href={link.href}>{link.label}</FooterLink>
                   </li>
                 ))}
+                {legalLinks.map((link) => (
+                  <li key={link.href}>
+                    <FooterLink href={link.href}>{link.label}</FooterLink>
+                  </li>
+                ))}
               </ul>
             </nav>
           </div>
         </div>
 
-        <p className="mt-12 border-t border-white/10 pt-8 text-sm font-medium text-white/70 sm:mt-16 sm:text-base">
+        <p className="mt-12 max-w-3xl text-[0.9375rem] leading-relaxed text-white/90">
+          Information on this site is for general business purposes and is not
+          medical, legal or billing advice.
+        </p>
+        <p className="mt-6 border-t border-white/10 pt-8 text-sm font-medium text-white/70 sm:text-base">
           © {year} {siteConfig.name}. All rights reserved.
         </p>
       </div>
