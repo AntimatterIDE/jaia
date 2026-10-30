@@ -23,34 +23,48 @@ export default async function ContactPage({
     : undefined;
 
   return (
-    <Hero1
-      eyebrow={contactPage.eyebrow}
-      heading={contactPage.heading}
-      headingId="contact-heading"
-      body={contactPage.intro}
-      aside={
-        <>
-          <div className="border-brand-mist bg-brand-sky-soft/60 flex items-start gap-3 rounded-2xl border p-5">
-            <ShieldCheck aria-hidden="true" className="text-brand-action mt-0.5 size-5 shrink-0" />
+    <>
+      <Hero1
+        eyebrow={contactPage.eyebrow}
+        heading={contactPage.heading}
+        headingId="contact-heading"
+        body={contactPage.intro}
+        aside={
+          <div className="border-brand-mist bg-brand-sky-soft/60 flex items-start gap-3 rounded-2xl border p-4 sm:p-5">
+            <ShieldCheck
+              aria-hidden="true"
+              className="text-brand-action mt-0.5 size-5 shrink-0"
+            />
             <p className="text-brand-ink text-sm leading-relaxed">
               This form is for business inquiries only. {contactPage.phiNotice}
             </p>
           </div>
-          <div className="text-brand-slate flex flex-col gap-2 text-sm leading-relaxed">
-            <p className="text-brand-ink font-semibold">Helpful to include in your message:</p>
-            <ul className="list-disc space-y-1 pl-5">
-              <li>Your practice type and approximate size</li>
-              <li>The services or capabilities you are exploring</li>
-              <li>Where you are in the decision process</li>
-            </ul>
+        }
+        media={
+          <div className="border-brand-mist rounded-[1.75rem] border bg-white p-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] sm:p-9">
+            <ContactForm initialService={initialService} />
           </div>
-        </>
-      }
-      media={
-        <div className="border-brand-mist rounded-[1.75rem] border bg-white p-6 sm:p-9">
-          <ContactForm initialService={initialService} />
+        }
+      />
+
+      <section
+        aria-labelledby="contact-tips-heading"
+        className="bg-canvas-soft border-brand-mist border-t"
+      >
+        <div className="mx-auto flex w-full max-w-[90rem] flex-col gap-3 px-5 py-10 sm:px-8 sm:py-12">
+          <h2
+            id="contact-tips-heading"
+            className="text-brand-ink text-sm font-semibold"
+          >
+            Helpful to include in your message
+          </h2>
+          <ul className="text-brand-slate list-disc space-y-1.5 pl-5 text-sm leading-relaxed sm:columns-2 sm:gap-10">
+            <li>Your practice type and approximate size</li>
+            <li>The services or capabilities you are exploring</li>
+            <li>Where you are in the decision process</li>
+          </ul>
         </div>
-      }
-    />
+      </section>
+    </>
   );
 }

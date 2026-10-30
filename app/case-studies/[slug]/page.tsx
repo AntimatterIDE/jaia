@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { Hero1 } from "@/components/blocks/hero-1";
 import { CaseStudyStory } from "@/components/marketing/case-study-story";
 import { CtaLink } from "@/components/marketing/cta";
+import { FinalCta } from "@/components/marketing/final-cta";
 import {
   caseStudies,
   caseStudyComingSoon,
@@ -154,26 +157,59 @@ export default async function CaseStudyPage({
         </section>
       )}
 
-      <section aria-labelledby="more-studies-heading" className="bg-canvas">
+      <section
+        aria-labelledby="more-studies-heading"
+        className="section-wash section-wash-mist"
+      >
         <div className="mx-auto w-full max-w-[90rem] px-5 py-16 sm:px-8 sm:py-24">
           <h2
             id="more-studies-heading"
-            className="font-display text-brand-ink text-xl font-semibold"
+            className="font-display text-h2 text-brand-ink font-semibold"
           >
             More studies
           </h2>
-          <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {others.map((item) => (
               <li key={item.slug}>
-                <CtaLink href={caseStudyUrl(item.slug)}>{item.name}</CtaLink>
-                <p className="text-brand-slate mt-1 text-sm">
-                  {caseStudyMeta(item)}
-                </p>
+                <Link
+                  href={caseStudyUrl(item.slug)}
+                  className="lift border-brand-mist group/study flex h-full flex-col overflow-hidden rounded-[1.5rem] border bg-white"
+                >
+                  <div className="bg-brand-sky-soft relative aspect-4/3 overflow-hidden">
+                    <Image
+                      src={item.image.src}
+                      alt=""
+                      fill
+                      sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
+                      className="img-tone object-cover transition-transform duration-500 group-hover/study:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover/study:scale-100"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col gap-2 p-5">
+                    <p className="text-brand-slate text-xs font-semibold tracking-[0.14em] uppercase">
+                      {item.comingSoon ? "Coming soon" : caseStudyMeta(item)}
+                    </p>
+                    <p className="text-brand-ink text-lg font-semibold text-balance">
+                      {item.name}
+                    </p>
+                    <span className="text-brand-action mt-auto pt-3 text-sm font-semibold">
+                      {item.comingSoon ? "Preview" : "Read the study"}
+                    </span>
+                  </div>
+                </Link>
               </li>
             ))}
           </ul>
         </div>
       </section>
+
+      <FinalCta
+        heading={
+          study.comingSoon
+            ? "Talk with JAIA about your practice."
+            : "Want a similar path for your practice?"
+        }
+        body="Tell us where you want to grow. JAIA will help you map the right next conversation."
+      />
     </article>
   );
 }
