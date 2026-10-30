@@ -10,7 +10,7 @@ import { motion, type Variants } from "motion/react";
 import type { LucideIcon } from "lucide-react";
 
 const fadeUp: Variants = {
-  hidden: { opacity: 1, y: 16 },
+  hidden: { opacity: 0, y: 16 },
   show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
 };
 
@@ -32,7 +32,7 @@ interface Features11Props {
 export function Features11({ id = "features-heading", heading, body, items }: Features11Props) {
   return (
     <section aria-labelledby={id} className="bg-canvas w-full px-5 py-16 sm:px-8 sm:py-24">
-      <div className="mx-auto w-full max-w-[1400px]">
+      <div className="mx-auto w-full max-w-[90rem]">
         <div className="grid items-end gap-6 lg:grid-cols-[1.4fr_0.6fr] lg:gap-16">
           <h2
             id={id}
@@ -52,7 +52,7 @@ export function Features11({ id = "features-heading", heading, body, items }: Fe
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="border-brand-mist flex min-h-[280px] flex-col rounded-3xl border bg-white p-7 sm:p-8"
+                className="lift border-brand-mist flex min-h-[280px] flex-col rounded-3xl border bg-white p-7 sm:p-8"
               >
                 <div className="flex items-start justify-between">
                   <div className="bg-brand-sky-soft text-brand-action flex size-11 items-center justify-center rounded-xl">

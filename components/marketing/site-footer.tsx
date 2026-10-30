@@ -117,34 +117,25 @@ const socialButtonClass =
   "inline-flex size-10 items-center justify-center rounded-full border border-white/20 text-white/90 transition-colors duration-150";
 
 function FooterSocials() {
-  const hasLinks = siteConfig.socials.some((social) => social.href);
+  const linked = siteConfig.socials.filter((social) => social.href);
+  if (linked.length === 0) return null;
 
   return (
-    <ul
-      className="flex items-center gap-3"
-      {...(hasLinks ? { "aria-label": "Social" } : { "aria-hidden": true })}
-    >
-      {siteConfig.socials.map((social) => {
+    <ul className="flex items-center gap-3" aria-label="Social">
+      {linked.map((social) => {
         const Icon = SOCIAL_ICONS[social.network];
-        const icon = (
-          <Icon aria-hidden="true" className="size-4" strokeWidth={1.75} />
-        );
 
         return (
           <li key={social.network}>
-            {social.href ? (
-              <a
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.label}
-                className={`${socialButtonClass} hover:text-brand-sky hover:border-brand-sky`}
-              >
-                {icon}
-              </a>
-            ) : (
-              <span className={socialButtonClass}>{icon}</span>
-            )}
+            <a
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={social.label}
+              className={`${socialButtonClass} hover:text-brand-sky hover:border-brand-sky`}
+            >
+              <Icon aria-hidden="true" className="size-4" strokeWidth={1.75} />
+            </a>
           </li>
         );
       })}

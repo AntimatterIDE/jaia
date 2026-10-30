@@ -21,10 +21,13 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { CtaButton } from "@/components/marketing/cta";
 import { HomeLink } from "@/components/marketing/home-link";
+import {
+  pauseLenis,
+  resumeLenis,
+} from "@/components/marketing/smooth-scroll";
 import { services, serviceUrl } from "@/content/services";
 import { primaryCta } from "@/content/site";
 import { reducedMotionQuery } from "@/lib/motion";
@@ -125,6 +128,16 @@ export function SiteHeader() {
   // Never hide while a menu is open or something inside has keyboard focus
   const pinned = sheetOpen || navOpen;
   const receded = hidden && !pinned;
+
+  // Pause Lenis while the sheet is open — nested overflow alone is not enough
+  // when the document scroller still owns wheel/touch through Lenis.
+  React.useEffect(() => {
+    if (!sheetOpen) return;
+    pauseLenis();
+    return () => {
+      resumeLenis();
+    };
+  }, [sheetOpen]);
 
   return (
     <header
@@ -265,9 +278,12 @@ export function SiteHeader() {
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="bg-canvas z-[100] flex w-full max-w-sm flex-col px-6 pt-6 pb-8"
+              data-lenis-prevent
+              data-lenis-prevent-wheel
+              data-lenis-prevent-touch
+              className="bg-canvas z-[100] flex h-dvh max-h-dvh w-full max-w-sm min-h-0 flex-col gap-0 overflow-hidden px-6 pt-6 pb-[max(1.5rem,env(safe-area-inset-bottom))]"
             >
-              <SheetHeader className="p-0 text-left">
+              <SheetHeader className="shrink-0 p-0 text-left">
                 <SheetTitle className="sr-only">Menu</SheetTitle>
                 <SheetDescription className="sr-only">
                   Site navigation and contact actions
@@ -283,7 +299,11 @@ export function SiteHeader() {
 
               <nav
                 aria-label="Mobile"
-                className="mt-6 flex flex-1 flex-col overflow-y-auto"
+                data-lenis-prevent
+                data-lenis-prevent-wheel
+                data-lenis-prevent-touch
+                onWheel={(event) => event.stopPropagation()}
+                className="mt-6 flex min-h-0 flex-1 touch-pan-y flex-col overflow-y-auto overscroll-contain [overflow-anchor:none]"
               >
                 <p className="text-brand-slate text-xs font-semibold tracking-[0.14em] uppercase">
                   Services
@@ -318,7 +338,7 @@ export function SiteHeader() {
 
                 <Separator className="my-4" />
 
-                <ul className="flex flex-col">
+                <ul className="flex flex-col pb-2">
                   {topLevelLinks.map((link) => {
                     const active =
                       pathname === link.href ||
@@ -343,17 +363,15 @@ export function SiteHeader() {
                 </ul>
               </nav>
 
-              <Button
-                asChild
-                className="bg-brand-ink hover:bg-brand-action-deep mt-4 h-12 w-full shrink-0 rounded-full text-base font-semibold text-white"
-              >
-                <Link
+              <div className="border-brand-mist mt-4 shrink-0 border-t pt-4">
+                <CtaButton
                   href={primaryCta.href}
+                  className="w-full"
                   onClick={() => setSheetOpen(false)}
                 >
                   {primaryCta.label}
-                </Link>
-              </Button>
+                </CtaButton>
+              </div>
             </SheetContent>
           </Sheet>
         </div>

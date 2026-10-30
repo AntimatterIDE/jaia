@@ -11,9 +11,21 @@ import { reducedMotionQuery } from "@/lib/motion";
 import "lenis/dist/lenis.css";
 
 let lenisInstance: Lenis | null = null;
+/** Nested overlays (mobile sheet, etc.) can pause Lenis before it mounts. */
+let pauseCount = 0;
 
 export function getLenis() {
   return lenisInstance;
+}
+
+export function pauseLenis() {
+  pauseCount += 1;
+  lenisInstance?.stop();
+}
+
+export function resumeLenis() {
+  pauseCount = Math.max(0, pauseCount - 1);
+  if (pauseCount === 0) lenisInstance?.start();
 }
 
 function headerOffset() {
@@ -59,6 +71,7 @@ export function SmoothScroll() {
       });
 
       lenisInstance = lenis;
+      if (pauseCount > 0) lenis.stop();
 
       const skip = document.querySelector<HTMLAnchorElement>("a.skip-link");
       const onSkip = () => {
