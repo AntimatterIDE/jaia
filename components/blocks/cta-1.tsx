@@ -11,30 +11,30 @@ import { motion, useMotionValue, useSpring, useTransform, type MotionValue } fro
 
 import { finalCta } from "@/content/site";
 
-const cards = [
-  { src: "/images/care-management-coordinator.jpg", x: "8%", y: "12%", rotation: -10, intensity: 0.02 },
-  { src: "/images/hrv-assessment-clinic.jpg", x: "72%", y: "8%", rotation: 8, intensity: 0.03 },
-  { src: "/images/iv-therapy-suite.jpg", x: "28%", y: "58%", rotation: 12, intensity: 0.025 },
-  { src: "/images/billing-rcm-workspace.jpg", x: "70%", y: "62%", rotation: -8, intensity: 0.02 },
-  { src: "/images/lab-office-bench.jpg", x: "48%", y: "34%", rotation: -6, intensity: 0.015 },
-  { src: "/images/about-team-collaboration.jpg", x: "6%", y: "64%", rotation: 6, intensity: 0.03 },
+const orbs = [
+  { x: "8%", y: "12%", size: "9rem", color: "var(--brand-sky)" },
+  { x: "72%", y: "8%", size: "7rem", color: "var(--brand-sky-soft)" },
+  { x: "18%", y: "68%", size: "6rem", color: "var(--brand-action)" },
+  { x: "78%", y: "64%", size: "8rem", color: "var(--brand-sky)" },
 ];
 
-function DriftCard({
-  card,
+function DriftOrb({
+  orb,
   mouseX,
   mouseY,
 }: {
-  card: (typeof cards)[number];
+  orb: (typeof orbs)[number];
   mouseX: MotionValue<number>;
   mouseY: MotionValue<number>;
 }) {
-  const x = useTransform(mouseX, [-1, 1], [-18 * card.intensity * 80, 18 * card.intensity * 80]);
-  const y = useTransform(mouseY, [-1, 1], [-12 * card.intensity * 80, 12 * card.intensity * 80]);
+  const x = useTransform(mouseX, [-1, 1], [-18, 18]);
+  const y = useTransform(mouseY, [-1, 1], [-12, 12]);
   return (
-    <motion.div className="absolute hidden sm:block" style={{ left: card.x, top: card.y, x, y, rotate: card.rotation }}>
-      <img src={card.src} alt="" className="size-36 rounded-2xl object-cover opacity-25 md:size-44" />
-    </motion.div>
+    <motion.div
+      aria-hidden="true"
+      className="absolute hidden rounded-full opacity-40 blur-2xl sm:block"
+      style={{ left: orb.x, top: orb.y, width: orb.size, height: orb.size, background: orb.color, x, y }}
+    />
   );
 }
 
@@ -67,8 +67,8 @@ export function Cta1({
       }}
     >
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        {cards.map((card) => (
-          <DriftCard key={card.src} card={card} mouseX={smoothX} mouseY={smoothY} />
+        {orbs.map((orb) => (
+          <DriftOrb key={`${orb.x}-${orb.y}`} orb={orb} mouseX={smoothX} mouseY={smoothY} />
         ))}
       </div>
       <div className="relative mx-auto max-w-3xl text-center">

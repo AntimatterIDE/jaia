@@ -10,7 +10,9 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
 
-import { capabilityPillars, hero } from "@/content/site";
+import { Bento1 } from "@/components/blocks/bento-1";
+import { getService } from "@/content/services";
+import { capabilityPillars, hero, partnership } from "@/content/site";
 
 const rise = {
   initial: { opacity: 1, y: 16 },
@@ -108,13 +110,19 @@ export function Hero14() {
             transition={{ duration: 0.7, delay: 0.15 }}
             className="relative w-full"
           >
-            <div className="border-brand-mist aspect-4/3 w-full overflow-hidden rounded-2xl border shadow-[0_24px_60px_-28px_rgba(50,47,47,0.45)]">
-              <img
-                src="/images/about-team-collaboration.jpg"
-                alt="A physician, a practice administrator, and a clinical staff member reviewing performance charts together on a monitor"
-                className="h-full w-full object-cover"
-              />
-            </div>
+            <Bento1
+              hub="JAIA"
+              title="One partnership"
+              body={partnership.statement}
+              sources={capabilityPillars.map((pillar) => ({
+                label: pillar.label,
+                icon: pillar.icon,
+                detail: pillar.slugs
+                  .map((slug) => getService(slug)?.shortName)
+                  .filter((name): name is string => Boolean(name))
+                  .join(" · "),
+              }))}
+            />
           </motion.div>
         </div>
       </div>

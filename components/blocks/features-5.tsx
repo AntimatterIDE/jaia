@@ -35,7 +35,6 @@ const homeItems: FeatureItem[] = services.map((service) => ({
   title: service.shortName,
   description: service.summary,
   href: serviceUrl(service.slug),
-  image: service.image,
 }));
 
 export function Features5({

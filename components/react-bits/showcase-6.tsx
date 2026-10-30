@@ -30,6 +30,7 @@ export interface Showcase6Card {
   tilt: number;
   lift: string;
   comingSoon?: boolean;
+  showPhoto?: boolean;
 }
 
 export interface Showcase6Props {
@@ -49,7 +50,13 @@ const MotionLink = motion.create(Link);
 function PolaroidFace({ item }: { item: Showcase6Card }) {
   return (
     <div className="border-brand-mist rounded-2xl border bg-white p-3 shadow-[0_18px_45px_-20px_rgba(50,47,47,0.28)] transition-shadow duration-300 group-hover:shadow-[0_30px_70px_-28px_rgba(50,47,47,0.4)] motion-reduce:transition-none sm:p-3.5">
-      <div className="bg-brand-mist relative aspect-square overflow-hidden rounded-lg">
+      <div className="bg-brand-sky-soft relative aspect-square overflow-hidden rounded-lg">
+        {item.showPhoto === false ? (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="border-brand-action/40 size-24 rounded-full border" aria-hidden="true" />
+            <span className="bg-brand-action absolute size-3 rounded-full" aria-hidden="true" />
+          </div>
+        ) : (
         <Image
           src={item.image.src}
           alt={item.image.alt}
@@ -57,7 +64,8 @@ function PolaroidFace({ item }: { item: Showcase6Card }) {
           sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 90vw"
           className={cn("object-cover", item.image.objectPosition)}
         />
-        {item.comingSoon ? (
+        )}
+        {item.comingSoon && item.meta !== "Coming soon" ? (
           <span className="bg-brand-ink/80 absolute bottom-3 left-3 rounded-full px-3 py-1 text-xs font-semibold tracking-wide text-white uppercase">
             Coming soon
           </span>

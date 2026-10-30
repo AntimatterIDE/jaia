@@ -8,6 +8,7 @@ import { PartnerProfile } from "@/components/marketing/partner-profile";
 import { PartnerResults } from "@/components/marketing/partner-results";
 import { PartnerStatement } from "@/components/marketing/partner-statement";
 import { PartnerTechnology } from "@/components/marketing/partner-technology";
+import { Bento33 } from "@/components/blocks/bento-33";
 import { Hero24, type Hero24Logo } from "@/components/react-bits/hero-24";
 import { partnerSpotlights, partnersPage } from "@/content/partner-spotlights";
 import { servicePartners } from "@/content/partners";
@@ -51,9 +52,23 @@ export default function PartnersPage() {
           href: lead ? `#${lead.anchor}` : `#${partnersPage.technology.anchor}`,
         }}
         logos={{ label: partnersPage.logosLabel, items: featuredLogos }}
-        image={partnersPage.heroImage}
         parallax
       />
+
+      <section aria-label={partnersPage.logosLabel} className="bg-canvas px-5 py-16 sm:px-8">
+        <div className="mx-auto w-full max-w-[1400px]">
+          <Bento33
+            title={partnersPage.logosLabel}
+            body={partnersPage.intro}
+            marks={featuredLogos.map((logo) => ({
+              src: logo.src,
+              alt: logo.alt,
+              width: logo.width,
+              height: logo.height,
+            }))}
+          />
+        </div>
+      </section>
 
       {partnerSpotlights.map((partner) => (
         <Fragment key={partner.slug}>

@@ -87,7 +87,7 @@
   --brand-action-deep: #1d5570;
   --canvas: #ffffff;
   --canvas-soft: #f7f8f8;
-  --header-height: 4.5rem;
+  --header-height: 6.25rem;
   /*
    * Section band holds. Sky is pre-mixed with canvas so ink/slate type
    * never sits on raw --brand-sky-soft at the mid-fade; mist is already

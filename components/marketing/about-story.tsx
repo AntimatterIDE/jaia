@@ -1,7 +1,8 @@
 "use client";
 
+import { Bento16 } from "@/components/blocks/bento-16";
 import { Hero1 } from "@/components/blocks/hero-1";
-import { aboutStory } from "@/content/site";
+import { aboutStory, partnershipMap } from "@/content/site";
 
 export function AboutStory() {
   return (
@@ -12,10 +13,17 @@ export function AboutStory() {
       headingId="about-story-heading"
       body={aboutStory.body}
       primary={aboutStory.cta}
-      image={{
-        src: "/images/about-team-collaboration.jpg",
-        alt: "A physician, a practice administrator, and a clinical staff member reviewing performance charts together on a monitor",
-      }}
+      media={
+        <Bento16
+          title={partnershipMap.title}
+          body={partnershipMap.defaultBody}
+          layers={partnershipMap.areas.map((area) => ({
+            label: area.label,
+            detail: area.description,
+            icon: area.icon,
+          }))}
+        />
+      }
     />
   );
 }

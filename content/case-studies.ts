@@ -249,5 +249,6 @@ export function caseStudyShowcaseItem(study: CaseStudyRecord) {
     tilt: study.tilt,
     lift: study.lift,
     comingSoon: Boolean(study.comingSoon),
+    showPhoto: !(study.comingSoon && !study.location),
   };
 }
