@@ -34,11 +34,11 @@ export function PartnerTechnology() {
         </AnimatedContent>
 
         <ul className="mt-12 flex flex-col gap-6 sm:mt-14">
-          {technologyPartners.map(({ slug, partner }) => {
+          {technologyPartners.map(({ slug, partner }, index) => {
             const service = getService(slug);
             return (
               <li key={partner.name}>
-                <AnimatedContent delay={0.08}>
+                <AnimatedContent delay={index * 0.08}>
                   <SpotlightCard className="border-brand-mist shadow-soft hover:border-brand-sky grid overflow-hidden rounded-[2rem] border bg-white transition-colors duration-200 lg:grid-cols-12">
                     <div className="relative flex items-center justify-center overflow-hidden bg-gradient-to-br from-brand-sky-soft via-white to-brand-sky-soft px-8 py-14 lg:col-span-5 lg:py-0">
                       <div aria-hidden="true" className="dot-grid absolute inset-0" />

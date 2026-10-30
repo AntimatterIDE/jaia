@@ -1,11 +1,29 @@
 "use client";
 
+/**
+ * React Bits Pro `features-5`: a six-up icon grid. Demo compliance copy is not used.
+ */
+
+import Image from "next/image";
 import Link from "next/link";
+import { motion } from "motion/react";
 import type { LucideIcon } from "lucide-react";
 
 import { CtaButton, CtaLink } from "@/components/marketing/cta";
 import { hero, primaryCta, servicesIntro } from "@/content/site";
 import { services, serviceUrl } from "@/content/services";
+
+const ease = [0.22, 1, 0.36, 1] as const;
+const MotionLink = motion.create(Link);
+
+function cardMotion(index: number) {
+  return {
+    initial: { opacity: 0, y: 18 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.3 },
+    transition: { duration: 0.55, delay: (index % 3) * 0.08, ease },
+  } as const;
+}
 
 export interface FeatureItem {
   icon: LucideIcon;
@@ -17,7 +35,6 @@ export interface FeatureItem {
 
 interface Features5Props {
   id?: string;
-  eyebrow?: string;
   heading?: string;
   body?: string;
   primary?: { label: string; href: string };
@@ -35,7 +52,6 @@ const homeItems: FeatureItem[] = services.map((service) => ({
 
 export function Features5({
   id = "capabilities-heading",
-  eyebrow = servicesIntro.eyebrow,
   heading = servicesIntro.heading,
   body = servicesIntro.body,
   primary = primaryCta,
@@ -44,62 +60,104 @@ export function Features5({
   items = homeItems,
 }: Features5Props = {}) {
   return (
-    <section aria-labelledby={id} className="bg-canvas w-full px-5 py-20 sm:px-8 sm:py-28">
-      <div className="mx-auto w-full max-w-[90rem]">
-        {eyebrow ? <p className="eyebrow-label">{eyebrow}</p> : null}
-        <div className="mt-5 grid items-end gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-          <h2
+    <section aria-labelledby={id} className="bg-canvas-soft relative w-full px-5 py-16 sm:px-8 sm:py-24">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, rgba(50,47,47,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(50,47,47,0.05) 1px, transparent 1px)",
+          backgroundSize: "20px 20px",
+          maskImage: "radial-gradient(ellipse 80% 70% at 100% 0%, #000 15%, transparent 75%)",
+        }}
+      />
+      <div className="relative mx-auto w-full max-w-[90rem]">
+        <div className="mb-12 max-w-3xl">
+          <motion.h2
             id={id}
-            className="font-display text-brand-ink max-w-3xl text-[clamp(2.25rem,1.4rem+2.4vw,3.75rem)] leading-[1.05] font-medium tracking-tight text-balance"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-display text-brand-ink text-3xl font-semibold tracking-tight sm:text-5xl"
           >
             {heading}
-          </h2>
-          <div>
-            {body ? <p className="text-brand-slate text-lg leading-relaxed">{body}</p> : null}
-            {showCtas && (primary || secondary) ? (
-              <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-                {primary ? <CtaButton href={primary.href}>{primary.label}</CtaButton> : null}
-                {secondary ? <CtaLink href={secondary.href}>{secondary.label}</CtaLink> : null}
-              </div>
-            ) : null}
-          </div>
+          </motion.h2>
+          {body ? (
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.08, ease }}
+              className="text-brand-slate mt-5 text-lg"
+            >
+              {body}
+            </motion.p>
+          ) : null}
+          {showCtas && (primary || secondary) ? (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.14, ease }}
+              className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center"
+            >
+              {primary ? (
+                <CtaButton href={primary.href}>{primary.label}</CtaButton>
+              ) : null}
+              {secondary ? (
+                <CtaLink href={secondary.href}>{secondary.label}</CtaLink>
+              ) : null}
+            </motion.div>
+          ) : null}
         </div>
 
-        <ol className="border-brand-mist mt-16 border-t">
+        <div className="border-brand-mist grid grid-cols-1 overflow-hidden rounded-2xl border md:grid-cols-2 lg:grid-cols-3">
           {items.map((feature, index) => {
-            const row = (
+            const Icon = feature.icon;
+            const card = (
               <>
-                <span className="text-brand-slate font-label text-sm tracking-[0.16em]">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span>
-                  <span className="font-display text-brand-ink block text-2xl leading-tight sm:text-3xl">
-                    {feature.title}
-                  </span>
-                  <span className="text-brand-slate mt-2 block max-w-xl text-base leading-relaxed">
-                    {feature.description}
-                  </span>
-                </span>
+                {feature.image ? (
+                  <div className="relative mb-6 aspect-[16/10] overflow-hidden rounded-xl">
+                    <Image
+                      src={feature.image.src}
+                      alt={feature.image.alt}
+                      fill
+                      sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 90vw"
+                      className="object-cover"
+                    />
+                  </div>
+                ) : (
+                  <Icon
+                    className="text-brand-action mb-6 size-12 transition-transform duration-300 group-hover:scale-110 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                    strokeWidth={1.25}
+                  />
+                )}
+                <h3 className="font-display text-brand-ink text-xl font-semibold">{feature.title}</h3>
+                <p className="text-brand-slate mt-3 text-base leading-relaxed">{feature.description}</p>
               </>
             );
-            const className =
-              "border-brand-mist grid grid-cols-[3rem_1fr] items-baseline gap-4 border-b py-8 sm:grid-cols-[4.5rem_1fr] sm:gap-8 sm:py-10";
+            const className = `group bg-canvas block p-8 transition-colors duration-200 sm:p-10 ${
+              index < items.length - 1 ? "border-brand-mist border-b" : ""
+            } ${index % 2 === 0 ? "md:border-brand-mist md:border-r" : ""} ${
+              (index + 1) % 3 !== 0 ? "lg:border-brand-mist lg:border-r" : "lg:border-r-0"
+            } ${index < items.length - (items.length % 3 || 3) ? "lg:border-brand-mist lg:border-b" : "lg:border-b-0"}`;
             return feature.href ? (
-              <li key={feature.title}>
-                <Link href={feature.href} className={`${className} hover:text-brand-action-deep group`}>
-                  {row}
-                </Link>
-              </li>
+              <MotionLink
+                key={feature.title}
+                href={feature.href}
+                {...cardMotion(index)}
+                className={`${className} hover:bg-brand-sky-soft/50`}
+              >
+                {card}
+              </MotionLink>
             ) : (
-              <li key={feature.title} className={className}>
-                {row}
-              </li>
+              <motion.div key={feature.title} {...cardMotion(index)} className={className}>
+                {card}
+              </motion.div>
             );
           })}
-        </ol>
+        </div>
       </div>
     </section>
   );
 }
-
-export default Features5;

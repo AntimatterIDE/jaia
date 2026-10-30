@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { useMotionValueEvent, useScroll } from "motion/react";
+import { FileSearch } from "lucide-react";
 
 import AnimatedContent from "@/components/AnimatedContent";
 import { ScrollRailSegment } from "@/components/marketing/scroll-rail";
@@ -111,8 +112,8 @@ function ClaimFlow({ partner }: { partner: PartnerSpotlight }) {
                       className={cn(
                         "relative z-10 flex size-14 items-center justify-center rounded-full border-2 transition-[background-color,border-color,color,box-shadow,scale] duration-300 ease-out motion-reduce:transition-none lg:mx-auto",
                         lit
-                          ? "border-brand-ink bg-brand-ink text-canvas"
-                          : "border-brand-mist text-brand-slate bg-canvas",
+                          ? "border-brand-action bg-brand-action shadow-lift text-white"
+                          : "border-brand-mist text-brand-slate bg-white",
                         motionAllowed && index === reached && "scale-110",
                       )}
                     >
@@ -139,7 +140,13 @@ function ClaimFlow({ partner }: { partner: PartnerSpotlight }) {
               })}
             </ol>
 
-            <div className="border-brand-mist relative mt-10 flex flex-col gap-4 border-t pt-6 sm:mt-12">
+            <div className="border-brand-sky/40 relative mt-10 flex flex-col gap-4 rounded-2xl border bg-white/90 p-5 backdrop-blur-xs sm:mt-12 sm:flex-row sm:items-center sm:gap-5 sm:p-6">
+              <span
+                aria-hidden="true"
+                className="bg-brand-sky-soft text-brand-action flex size-12 shrink-0 items-center justify-center rounded-2xl"
+              >
+                <FileSearch className="size-5" strokeWidth={1.75} />
+              </span>
               <p className="text-brand-slate text-[1rem] leading-relaxed">
                 <span className="font-display text-brand-ink block font-semibold sm:inline">
                   {claims.receivables.label}

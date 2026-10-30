@@ -11,7 +11,6 @@ export function ServiceCapabilities({ slug }: { slug: string }) {
     <div id="included">
       <Features5
         id="included-heading"
-        eyebrow={service.category}
         heading={service.page.includesHeading ?? `What ${service.shortName} includes`}
         body={service.page.includesEyebrow ?? service.page.intro}
         showCtas={false}

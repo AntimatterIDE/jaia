@@ -73,9 +73,9 @@ export function PartnerInterview({ slug }: { slug: string }) {
                   {section.title}
                 </p>
                 <div className="mt-4 flex flex-col gap-3">
-                  {section.items.map((item) => (
+                  {section.items.map((item, index) => (
+                    <AnimatedContent key={item.id} delay={(index % 4) * 0.04}>
                     <AccordionItem
-                      key={item.id}
                       value={item.id}
                       className="border-brand-mist hover:border-brand-sky/70 data-open:border-brand-sky data-open:shadow-soft rounded-2xl border bg-white px-5 transition-[border-color,box-shadow] duration-200 not-last:border-b sm:px-7"
                     >
@@ -117,6 +117,7 @@ export function PartnerInterview({ slug }: { slug: string }) {
                         ) : null}
                       </AccordionContent>
                     </AccordionItem>
+                    </AnimatedContent>
                   ))}
                 </div>
               </div>

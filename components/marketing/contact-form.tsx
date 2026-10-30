@@ -14,6 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { services } from "@/content/services";
+import AnimatedContent from "@/components/AnimatedContent";
 import { submitInquiry } from "@/app/contact/actions";
 import { validateInquiry, type InquiryInput } from "@/lib/inquiry";
 import { cn } from "@/lib/utils";
@@ -22,7 +23,7 @@ type FieldName = keyof Omit<InquiryInput, "company">;
 type FieldErrors = Partial<Record<FieldName, string>>;
 
 const inputClass =
-  "min-h-12 border-input bg-canvas px-3.5 text-base text-brand-ink shadow-none";
+  "min-h-12 rounded-lg border-input bg-white px-3.5 text-base text-brand-ink shadow-none";
 
 function Required() {
   return (
@@ -125,7 +126,7 @@ export function ContactForm({ initialService }: { initialService?: string }) {
         </div>
       ) : null}
 
-      <div className="grid gap-6 sm:grid-cols-2">
+      <AnimatedContent className="grid gap-6 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
           <Label
             htmlFor="field-firstName"
@@ -167,9 +168,9 @@ export function ContactForm({ initialService }: { initialService?: string }) {
           />
           <FieldError id="error-lastName" message={errors.lastName} />
         </div>
-      </div>
+      </AnimatedContent>
 
-      <div className="flex flex-col gap-2">
+      <AnimatedContent delay={0.06} className="flex flex-col gap-2">
         <Label
           htmlFor="field-workEmail"
           className="text-brand-ink text-sm font-semibold"
@@ -189,9 +190,9 @@ export function ContactForm({ initialService }: { initialService?: string }) {
           className={inputClass}
         />
         <FieldError id="error-workEmail" message={errors.workEmail} />
-      </div>
+      </AnimatedContent>
 
-      <div className="grid gap-6 sm:grid-cols-2">
+      <AnimatedContent delay={0.1} className="grid gap-6 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
           <Label
             htmlFor="field-organization"
@@ -235,9 +236,9 @@ export function ContactForm({ initialService }: { initialService?: string }) {
           />
           <FieldError id="error-role" message={errors.role} />
         </div>
-      </div>
+      </AnimatedContent>
 
-      <div className="flex flex-col gap-2">
+      <AnimatedContent delay={0.14} className="flex flex-col gap-2">
         <Label
           htmlFor="field-service"
           className="text-brand-ink text-sm font-semibold"
@@ -269,9 +270,9 @@ export function ContactForm({ initialService }: { initialService?: string }) {
           </SelectContent>
         </Select>
         <FieldError id="error-service" message={errors.service} />
-      </div>
+      </AnimatedContent>
 
-      <div className="flex flex-col gap-2">
+      <AnimatedContent delay={0.18} className="flex flex-col gap-2">
         <Label
           htmlFor="field-message"
           className="text-brand-ink text-sm font-semibold"
@@ -289,7 +290,7 @@ export function ContactForm({ initialService }: { initialService?: string }) {
           }
           value={values.message}
           onChange={(e) => set("message", e.target.value)}
-          className="border-input text-brand-ink bg-canvas min-h-32 px-3.5 py-3 text-base shadow-none"
+          className="border-input text-brand-ink min-h-32 rounded-lg bg-white px-3.5 py-3 text-base shadow-none"
         />
         <p
           id="message-note"
@@ -298,7 +299,7 @@ export function ContactForm({ initialService }: { initialService?: string }) {
           A short note about your practice is enough to start.
         </p>
         <FieldError id="error-message" message={errors.message} />
-      </div>
+      </AnimatedContent>
 
       {/* Honeypot — invisible to people, ignored by assistive tech */}
       <div
@@ -323,7 +324,7 @@ export function ContactForm({ initialService }: { initialService?: string }) {
         {status === "unavailable" ? (
           <p
             id="form-status"
-            className="border-brand-mist text-brand-ink border-l pl-4 text-sm leading-relaxed"
+            className="border-brand-sky bg-brand-sky-soft text-brand-ink rounded-xl border p-4 text-sm leading-relaxed"
           >
             Thank you for your interest. This online form is not yet connected
             to JAIA&rsquo;s inbox, so your message could not be sent from here.
@@ -335,6 +336,7 @@ export function ContactForm({ initialService }: { initialService?: string }) {
         )}
       </div>
 
+      <AnimatedContent delay={0.22}>
       <Button
         type="submit"
         disabled={status === "submitting"}
@@ -353,6 +355,7 @@ export function ContactForm({ initialService }: { initialService?: string }) {
           "Send inquiry"
         )}
       </Button>
+      </AnimatedContent>
     </form>
   );
 }

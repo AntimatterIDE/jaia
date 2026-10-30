@@ -17,6 +17,7 @@ import {
 } from "react";
 import { SalesAgentMessage } from "@/components/marketing/sales-agent-message";
 import { Shimmer } from "@/components/ai-elements/shimmer";
+import { JaiaSymbol } from "@/components/jaia-symbol";
 import { Button } from "@/components/ui/button";
 import {
   salesAgentCopy,
@@ -149,9 +150,12 @@ export function SalesAgent() {
             data-lenis-prevent
             data-lenis-prevent-wheel
             data-lenis-prevent-touch
-            className="border-brand-mist bg-canvas pointer-events-auto grid h-[min(36rem,calc(100dvh-7.5rem))] w-[min(24rem,calc(100vw-2rem))] grid-rows-[auto_minmax(0,1fr)_auto] overflow-hidden border outline-none"
+            className="border-brand-mist shadow-lift ring-brand-ink/10 pointer-events-auto grid h-[min(36rem,calc(100dvh-7.5rem))] w-[min(24rem,calc(100vw-2rem))] grid-rows-[auto_minmax(0,1fr)_auto] overflow-hidden rounded-2xl border bg-white ring-1 outline-none"
           >
-            <header className="border-brand-mist flex shrink-0 items-start gap-3 border-b px-4 py-3">
+            <header className="border-brand-mist bg-brand-sky-soft flex shrink-0 items-start gap-3 border-b px-4 py-3">
+              <span className="bg-brand-ink mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-full text-white">
+                <JaiaSymbol className="size-5" />
+              </span>
               <div className="min-w-0 flex-1">
                 <p
                   id="sales-agent-title"
@@ -185,7 +189,7 @@ export function SalesAgent() {
             >
               <div className="flex flex-col gap-3">
                 {configured === false ? (
-                  <div className="border-brand-mist text-brand-ink border p-3 text-sm leading-relaxed">
+                  <div className="border-brand-sky bg-brand-sky-soft text-brand-ink rounded-xl border p-3 text-sm leading-relaxed">
                     <p>{salesAgentCopy.unavailable}</p>
                     <Link
                       href="/contact"
@@ -208,7 +212,7 @@ export function SalesAgent() {
                             type="button"
                             disabled={busy || configured !== true}
                             onClick={() => submitText(starter.prompt)}
-                            className="border-brand-mist text-brand-ink hover:border-brand-ink w-full border bg-transparent px-3 py-2.5 text-left text-sm transition-colors duration-150 disabled:opacity-60 motion-reduce:transition-none"
+                            className="border-brand-mist text-brand-ink hover:border-brand-sky hover:bg-brand-sky-soft w-full rounded-xl border bg-white px-3 py-2.5 text-left text-sm font-medium transition-colors duration-150 disabled:opacity-60 motion-reduce:transition-none"
                           >
                             {starter.label}
                           </button>
@@ -280,7 +284,7 @@ export function SalesAgent() {
                   onKeyDown={onComposerKeyDown}
                   disabled={!chatReady || busy}
                   placeholder={salesAgentCopy.placeholder}
-                  className="border-input text-brand-ink placeholder:text-brand-slate focus-visible:border-ring focus-visible:ring-ring/50 bg-canvas max-h-24 min-h-10 flex-1 resize-none border px-3 py-2 text-sm outline-none focus-visible:ring-3 disabled:opacity-60"
+                  className="border-input text-brand-ink placeholder:text-brand-slate focus-visible:border-ring focus-visible:ring-ring/50 max-h-24 min-h-10 flex-1 resize-none rounded-xl border bg-white px-3 py-2 text-sm outline-none focus-visible:ring-3 disabled:opacity-60"
                 />
                 <Button
                   type="submit"
@@ -300,7 +304,7 @@ export function SalesAgent() {
       <Button
         ref={launcherRef}
         type="button"
-        size="lg"
+        size="icon"
         aria-haspopup="dialog"
         aria-expanded={open}
         aria-controls="sales-agent-panel"
@@ -308,9 +312,9 @@ export function SalesAgent() {
           open ? salesAgentCopy.launcherClose : salesAgentCopy.launcherOpen
         }
         onClick={() => setOpen((current) => !current)}
-        className="bg-brand-ink hover:bg-brand-action-deep pointer-events-auto h-11 w-auto rounded-full px-5 text-sm font-medium text-white"
+        className="bg-brand-ink hover:bg-brand-action-deep shadow-lift pointer-events-auto size-14 rounded-full text-white"
       >
-        {open ? "Close" : "Inquire"}
+        {open ? <X className="size-6" /> : <JaiaSymbol className="size-7" />}
       </Button>
     </div>
   );

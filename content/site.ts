@@ -241,28 +241,6 @@ export const faq = {
   ] satisfies FaqItem[],
 } as const;
 
-/**
- * Draft marketing language — pending client review.
- * A standard of fit, drawn from the published positioning. Not an application scorecard.
- */
-export const rightFit = {
-  eyebrow: "The right fit",
-  heading: "A partnership, not a catalog.",
-  body: "JAIA works closely with independent practices. The relationship holds when the practice wants one coordinated partner — and is ready to be understood before anything new is added.",
-  forLabel: "The practices we take on",
-  forItems: [
-    "Independent private practices that intend to stay independent",
-    "Physician-led groups ready for one accountable relationship",
-    "Practices that want new capability without a stack of vendors",
-  ],
-  notLabel: "Where we step back",
-  notItems: [
-    "Another vendor in an already crowded stack",
-    "A single disconnected service with no operating plan",
-    "A transition the practice is asked to carry alone",
-  ],
-} as const;
-
 export const finalCta = {
   heading: "Ready to expand what your practice can do?",
   body: "Tell us where you want to grow. JAIA will help you map the right next conversation.",

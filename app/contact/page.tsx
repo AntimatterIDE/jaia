@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { ShieldCheck } from "lucide-react";
 
 import { Hero1 } from "@/components/blocks/hero-1";
+import AnimatedContent from "@/components/AnimatedContent";
 import { ContactForm } from "@/components/marketing/contact-form";
 import { services } from "@/content/services";
 import { contactPage } from "@/content/site";
@@ -29,12 +31,18 @@ export default async function ContactPage({
         headingId="contact-heading"
         body={contactPage.intro}
         aside={
-          <p className="border-brand-mist text-brand-slate border-l pl-4 text-sm leading-relaxed">
-            This form is for business inquiries only. {contactPage.phiNotice}
-          </p>
+          <div className="border-brand-mist bg-brand-sky-soft/60 flex items-start gap-3 rounded-2xl border p-4 sm:p-5">
+            <ShieldCheck
+              aria-hidden="true"
+              className="text-brand-action mt-0.5 size-5 shrink-0"
+            />
+            <p className="text-brand-ink text-sm leading-relaxed">
+              This form is for business inquiries only. {contactPage.phiNotice}
+            </p>
+          </div>
         }
         media={
-          <div className="border-brand-mist border-t pt-8 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
+          <div className="border-brand-mist rounded-[1.75rem] border bg-white p-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] sm:p-9">
             <ContactForm initialService={initialService} />
           </div>
         }
@@ -44,7 +52,7 @@ export default async function ContactPage({
         aria-labelledby="contact-tips-heading"
         className="bg-canvas-soft border-brand-mist border-t"
       >
-        <div className="mx-auto flex w-full max-w-[90rem] flex-col gap-3 px-5 py-10 sm:px-8 sm:py-12">
+        <AnimatedContent className="mx-auto flex w-full max-w-[90rem] flex-col gap-3 px-5 py-10 sm:px-8 sm:py-12">
           <h2
             id="contact-tips-heading"
             className="text-brand-ink text-sm font-semibold"
@@ -56,7 +64,7 @@ export default async function ContactPage({
             <li>The services or capabilities you are exploring</li>
             <li>Where you are in the decision process</li>
           </ul>
-        </div>
+        </AnimatedContent>
       </section>
     </>
   );

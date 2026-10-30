@@ -67,7 +67,7 @@ export function CaseStudyStory({
                   >
                     <span
                       aria-hidden="true"
-                      className="bg-brand-ink mt-2.5 size-1 shrink-0 rounded-full"
+                      className="bg-brand-sky mt-2.5 size-1.5 shrink-0 rounded-full"
                     />
                     <span>{item}</span>
                   </li>
@@ -84,10 +84,10 @@ export function CaseStudyStory({
           </h2>
           {narrative.results.length > 0 ? (
             <dl className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
-              {narrative.results.map((stat) => (
+              {narrative.results.map((stat, index) => (
+                <AnimatedContent key={stat.label} delay={index * 0.06} className="h-full">
                 <div
-                  key={stat.label}
-                  className="border-brand-mist flex flex-col border-t py-6 pr-5"
+                  className="border-brand-mist flex h-full flex-col rounded-[1.5rem] border bg-white px-5 py-6"
                 >
                   <dt className="text-brand-slate order-2 mt-3 text-sm leading-snug">
                     {stat.label}
@@ -96,6 +96,7 @@ export function CaseStudyStory({
                     {stat.value}
                   </dd>
                 </div>
+                </AnimatedContent>
               ))}
             </dl>
           ) : null}
@@ -116,8 +117,13 @@ export function CaseStudyStory({
               <li key={service.slug}>
                 <Link
                   href={serviceUrl(service.slug)}
-                  className="text-brand-ink hover:text-brand-action-deep border-brand-mist inline-flex min-h-10 items-center border-b text-sm"
+                  className="border-brand-mist text-brand-action hover:border-brand-sky hover:bg-brand-sky-soft active:bg-brand-sky-soft inline-flex min-h-10 items-center gap-2 rounded-full border bg-white px-3.5 text-[0.8125rem] font-semibold transition-colors duration-150"
                 >
+                  <service.icon
+                    aria-hidden="true"
+                    className="size-3.5"
+                    strokeWidth={1.75}
+                  />
                   {service.shortName}
                 </Link>
               </li>

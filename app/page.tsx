@@ -2,7 +2,6 @@ import { Hero } from "@/components/marketing/hero";
 import { CaseStudiesStrip } from "@/components/marketing/case-studies-strip";
 import { Features5 } from "@/components/blocks/features-5";
 import { Outcomes } from "@/components/marketing/outcomes";
-import { RightFit } from "@/components/marketing/right-fit";
 import { Approach } from "@/components/marketing/approach";
 import { AboutStory } from "@/components/marketing/about-story";
 import { SocialProof } from "@/components/marketing/social-proof";
@@ -34,7 +33,6 @@ export default function HomePage() {
         <Features5 secondary={caseStudySection.cta} />
       </div>
       <Outcomes />
-      <RightFit />
       <Approach />
       <AboutStory />
       <SocialProof />

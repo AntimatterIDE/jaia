@@ -65,7 +65,7 @@ export function CompanyTimeline() {
         >
           <motion.p
             variants={item}
-            className="eyebrow-label"
+            className="text-eyebrow font-display text-brand-action font-semibold tracking-[0.18em] uppercase"
           >
             {timelineSection.eyebrow}
           </motion.p>
@@ -79,7 +79,7 @@ export function CompanyTimeline() {
             easing={EASE}
             from={{ opacity: 0, y: 12, filter: "blur(4px)" }}
             to={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            className="font-display text-h2 text-brand-ink mt-5 font-medium tracking-tight text-balance"
+            className="font-display text-h2 text-brand-ink mt-5 font-semibold text-balance"
           />
           <motion.p
             variants={item}
@@ -140,17 +140,17 @@ export function CompanyTimeline() {
               >
                 <span
                   aria-hidden="true"
-                  className="bg-brand-ink ring-canvas relative z-10 size-[7px] shrink-0 rounded-full ring-4"
+                  className="bg-brand-action ring-canvas relative z-10 size-[11px] shrink-0 rounded-full ring-4"
                 />
                 {isLast ? null : (
                   <span
                     aria-hidden="true"
-                    className="bg-brand-mist mt-1 w-px min-h-4 flex-1"
+                    className="from-brand-action to-brand-sky mt-1 w-px min-h-4 flex-1 bg-gradient-to-b"
                   />
                 )}
               </div>
               <div className={isLast ? undefined : "pb-14 sm:pb-16"}>
-                <p className="eyebrow-label">
+                <p className="text-eyebrow font-display text-brand-action font-semibold tracking-[0.18em] uppercase">
                   {chapter.label}
                 </p>
                 <h3 className="font-display text-brand-ink mt-3 text-xl font-semibold tracking-tight sm:text-2xl">
@@ -166,7 +166,7 @@ export function CompanyTimeline() {
                       return (
                         <li
                           key={chip}
-                          className="text-brand-action-deep inline-flex items-center gap-1.5 text-sm"
+                          className="bg-brand-sky-soft text-brand-action-deep inline-flex items-center gap-1.5 rounded-full py-1.5 pr-3.5 pl-3 text-[0.8125rem] font-semibold"
                         >
                           {Icon ? (
                             <Icon

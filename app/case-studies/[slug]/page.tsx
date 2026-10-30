@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { Hero1 } from "@/components/blocks/hero-1";
 import { CaseStudyStory } from "@/components/marketing/case-study-story";
 import { CtaLink } from "@/components/marketing/cta";
+import { RevealItem } from "@/components/marketing/reveal-item";
 import { FinalCta } from "@/components/marketing/final-cta";
 import {
   caseStudies,
@@ -107,9 +108,10 @@ export default async function CaseStudyPage({
             </h2>
             {studyServices.length === 1 ? (
               <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {studyServices[0].page.detail.map((item) => (
-                  <li
+                {studyServices[0].page.detail.map((item, index) => (
+                  <RevealItem
                     key={item.label}
+                    index={index}
                     className="border-brand-mist rounded-[1.5rem] border bg-white p-6"
                   >
                     <item.icon
@@ -123,14 +125,15 @@ export default async function CaseStudyPage({
                     <p className="text-brand-slate mt-2 text-[0.9375rem] leading-relaxed">
                       {item.body}
                     </p>
-                  </li>
+                  </RevealItem>
                 ))}
               </ul>
             ) : (
               <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {studyServices.map((service) => (
-                  <li
+                {studyServices.map((service, index) => (
+                  <RevealItem
                     key={service.slug}
+                    index={index}
                     className="border-brand-mist flex flex-col rounded-[1.5rem] border bg-white p-6"
                   >
                     <service.icon
@@ -149,7 +152,7 @@ export default async function CaseStudyPage({
                         Read the capability
                       </CtaLink>
                     </div>
-                  </li>
+                  </RevealItem>
                 ))}
               </ul>
             )}
@@ -169,8 +172,8 @@ export default async function CaseStudyPage({
             More studies
           </h2>
           <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {others.map((item) => (
-              <li key={item.slug}>
+            {others.map((item, index) => (
+              <RevealItem key={item.slug} index={index}>
                 <Link
                   href={caseStudyUrl(item.slug)}
                   className="lift border-brand-mist group/study flex h-full flex-col overflow-hidden rounded-[1.5rem] border bg-white"
@@ -196,7 +199,7 @@ export default async function CaseStudyPage({
                     </span>
                   </div>
                 </Link>
-              </li>
+              </RevealItem>
             ))}
           </ul>
         </div>
