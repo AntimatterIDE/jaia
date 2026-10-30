@@ -22,7 +22,7 @@ type FieldName = keyof Omit<InquiryInput, "company">;
 type FieldErrors = Partial<Record<FieldName, string>>;
 
 const inputClass =
-  "min-h-12 rounded-lg border-input bg-white px-3.5 text-base text-brand-ink shadow-none";
+  "min-h-12 border-input bg-canvas px-3.5 text-base text-brand-ink shadow-none";
 
 function Required() {
   return (
@@ -289,7 +289,7 @@ export function ContactForm({ initialService }: { initialService?: string }) {
           }
           value={values.message}
           onChange={(e) => set("message", e.target.value)}
-          className="border-input text-brand-ink min-h-32 rounded-lg bg-white px-3.5 py-3 text-base shadow-none"
+          className="border-input text-brand-ink bg-canvas min-h-32 px-3.5 py-3 text-base shadow-none"
         />
         <p
           id="message-note"
@@ -323,7 +323,7 @@ export function ContactForm({ initialService }: { initialService?: string }) {
         {status === "unavailable" ? (
           <p
             id="form-status"
-            className="border-brand-sky bg-brand-sky-soft text-brand-ink rounded-xl border p-4 text-sm leading-relaxed"
+            className="border-brand-mist text-brand-ink border-l pl-4 text-sm leading-relaxed"
           >
             Thank you for your interest. This online form is not yet connected
             to JAIA&rsquo;s inbox, so your message could not be sent from here.

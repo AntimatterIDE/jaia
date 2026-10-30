@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { ShieldCheck } from "lucide-react";
 
 import { Hero1 } from "@/components/blocks/hero-1";
 import { ContactForm } from "@/components/marketing/contact-form";
@@ -30,18 +29,12 @@ export default async function ContactPage({
         headingId="contact-heading"
         body={contactPage.intro}
         aside={
-          <div className="border-brand-mist bg-brand-sky-soft/60 flex items-start gap-3 rounded-2xl border p-4 sm:p-5">
-            <ShieldCheck
-              aria-hidden="true"
-              className="text-brand-action mt-0.5 size-5 shrink-0"
-            />
-            <p className="text-brand-ink text-sm leading-relaxed">
-              This form is for business inquiries only. {contactPage.phiNotice}
-            </p>
-          </div>
+          <p className="border-brand-mist text-brand-slate border-l pl-4 text-sm leading-relaxed">
+            This form is for business inquiries only. {contactPage.phiNotice}
+          </p>
         }
         media={
-          <div className="border-brand-mist rounded-[1.75rem] border bg-white p-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] sm:p-9">
+          <div className="border-brand-mist border-t pt-8 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
             <ContactForm initialService={initialService} />
           </div>
         }

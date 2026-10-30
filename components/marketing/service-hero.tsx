@@ -1,7 +1,6 @@
 "use client";
 
 import { Hero1 } from "@/components/blocks/hero-1";
-import { ServiceVisual } from "@/components/marketing/service-visual";
 import { primaryCta } from "@/content/site";
 import { getService } from "@/content/services";
 
@@ -21,7 +20,6 @@ export function ServiceHero({ slug }: ServiceHeroProps) {
       body={service.page.heroTagline ? `${service.page.heroTagline} ${service.summary}` : service.summary}
       primary={{ label: service.page.heroCtaLabel ?? primaryCta.label, href: primaryCta.href }}
       secondary={{ label: "See what's included", href: "#included" }}
-      media={<ServiceVisual slug={service.slug} />}
     />
   );
 }

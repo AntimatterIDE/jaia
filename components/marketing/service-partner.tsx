@@ -4,7 +4,6 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { motion, useReducedMotion, type Variants } from "motion/react";
 
-import SpotlightCard from "@/components/SpotlightCard";
 import { CtaButton } from "@/components/marketing/cta";
 import { primaryCta } from "@/content/site";
 import { servicePartners } from "@/content/partners";
@@ -65,10 +64,10 @@ export function ServicePartner({ slug }: { slug: string }) {
         >
           <div className="max-w-2xl">
             <div className="flex flex-wrap items-center gap-4">
-              <p className="text-eyebrow font-display text-brand-action font-semibold tracking-[0.18em] uppercase">
+              <p className="eyebrow-label">
                 {partner.eyebrow}
               </p>
-              <span className="border-brand-mist inline-flex items-center rounded-full border bg-gradient-to-b from-white to-brand-mist px-5 py-2.5 shadow-soft">
+              <span className="inline-flex items-center">
                 <Image
                   src={partner.logo.src}
                   alt={partner.logo.alt}
@@ -111,24 +110,21 @@ export function ServicePartner({ slug }: { slug: string }) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
-          className="mt-12 grid gap-5 sm:mt-14 sm:gap-6 lg:grid-cols-3"
+          className="border-brand-mist mt-12 border-t sm:mt-14"
         >
-          {partner.points.map((point) => (
-            <motion.li key={point.title} variants={card} className="h-full">
-              <SpotlightCard className="lift shadow-soft hover:border-brand-sky hover:shadow-lift flex h-full flex-col rounded-[1.5rem] border border-white bg-white/80 p-7 backdrop-blur-xs sm:p-8">
-                <span
-                  aria-hidden="true"
-                  className="bg-brand-sky-soft text-brand-action flex size-14 items-center justify-center rounded-2xl"
-                >
-                  <point.icon className="size-6" strokeWidth={1.75} />
-                </span>
-                <h3 className="font-display text-h3 text-brand-ink mt-6 font-semibold">
-                  {point.title}
-                </h3>
-                <p className="text-brand-slate mt-3 text-[1.0625rem] leading-relaxed">
-                  {point.body}
-                </p>
-              </SpotlightCard>
+          {partner.points.map((point, index) => (
+            <motion.li
+              key={point.title}
+              variants={card}
+              className="border-brand-mist grid grid-cols-[3rem_1fr] gap-4 border-b py-7"
+            >
+              <span className="text-brand-slate font-label text-sm tracking-[0.16em]">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span>
+                <h3 className="font-display text-brand-ink text-2xl">{point.title}</h3>
+                <p className="text-brand-slate mt-2 leading-relaxed">{point.body}</p>
+              </span>
             </motion.li>
           ))}
         </motion.ul>

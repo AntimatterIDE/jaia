@@ -36,9 +36,7 @@ export function SectionHeading({
       )}
     >
       {eyebrow ? (
-        <p className="text-eyebrow font-display text-brand-action font-semibold tracking-[0.18em] uppercase">
-          {eyebrow}
-        </p>
+        <p className="eyebrow-label">{eyebrow}</p>
       ) : null}
       <StaggeredText
         as={Heading}
@@ -50,7 +48,7 @@ export function SectionHeading({
         easing={[0.22, 1, 0.36, 1]}
         from={{ opacity: 0, y: 12, filter: "blur(4px)" }}
         to={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-        className={`font-display text-h2 text-brand-ink font-semibold text-balance${
+        className={`font-display text-h2 text-brand-ink font-medium tracking-tight text-balance${
           align === "center" ? " justify-center" : ""
         }`}
       />

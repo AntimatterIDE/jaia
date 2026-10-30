@@ -40,21 +40,21 @@ function TestimonialCard({
   return (
     <motion.article
       variants={variants}
-      className="border-brand-mist shadow-soft rounded-[1.5rem] border bg-white p-6 sm:p-7"
+      className="border-brand-mist border-t pt-6"
     >
       <p
         className={cn(
           "leading-relaxed",
           featured
-            ? "text-brand-ink text-lg font-medium"
-            : "text-brand-slate text-[0.9375rem]",
+            ? "font-display text-brand-ink text-2xl leading-snug"
+            : "font-display text-brand-ink text-xl leading-snug",
         )}
       >
         &ldquo;{testimonial.quote}&rdquo;
       </p>
 
       <div className="mt-6 flex items-center gap-3">
-        <span className="bg-brand-sky-soft text-brand-action relative flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-full text-sm font-semibold tracking-[0.04em]">
+        <span className="font-display text-brand-ink relative flex size-10 shrink-0 items-center justify-center overflow-hidden text-lg">
           {testimonial.avatarSrc ? (
             <Image
               src={testimonial.avatarSrc}
@@ -117,7 +117,7 @@ export function SocialProof() {
   return (
     <section
       aria-labelledby="social-proof-heading"
-      className="section-wash section-wash-sky relative"
+      className="bg-canvas relative py-20 sm:py-28"
     >
       <div className="relative z-10 mx-auto grid w-full max-w-[90rem] gap-12 px-5 pb-16 sm:px-8 sm:pb-20 lg:grid-cols-12 lg:gap-x-12">
         <motion.div

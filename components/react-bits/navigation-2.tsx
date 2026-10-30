@@ -1,16 +1,14 @@
 "use client";
 
 /**
- * React Bits Pro `Navigation2`, restyled for JAIA.
- * The demo product, community, pricing, and login items are not used.
+ * Flat paper bar. Services open as a type list; smaller screens use a
+ * full-screen menu. No icon cards.
  */
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "motion/react";
-import { Building2, Handshake, Menu, NotebookPen, X, type LucideIcon } from "lucide-react";
 
 import { HomeLink } from "@/components/marketing/home-link";
 import { pauseLenis, resumeLenis } from "@/components/marketing/smooth-scroll";
@@ -18,230 +16,172 @@ import { services, serviceUrl } from "@/content/services";
 import { primaryCta } from "@/content/site";
 import { cn } from "@/lib/utils";
 
-type MenuKey = "Services" | "Company";
-
-interface MenuEntry {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-  href: string;
-}
-
-const companyItems: MenuEntry[] = [
-  {
-    icon: NotebookPen,
-    title: "Case studies",
-    description: "How practices put JAIA to work",
-    href: "/case-studies",
-  },
-  {
-    icon: Handshake,
-    title: "Partners",
-    description: "Billing, consulting, and technology partners",
-    href: "/partners",
-  },
-  {
-    icon: Building2,
-    title: "About",
-    description: "Built from inside independent practice",
-    href: "/about",
-  },
-];
-
-function serviceItems(): MenuEntry[] {
-  return services.map((service) => ({
-    icon: service.icon,
-    title: service.shortName,
-    description: service.category,
-    href: serviceUrl(service.slug),
-  }));
-}
-
-const menus: Record<MenuKey, MenuEntry[]> = {
-  Services: serviceItems(),
-  Company: companyItems,
-};
-
-function MenuCards({ items }: { items: readonly MenuEntry[] }) {
-  return (
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-      {items.map((item, index) => {
-        const Icon = item.icon;
-        return (
-          <motion.div
-            key={item.href}
-            initial={{ opacity: 1, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2, delay: index * 0.04 }}
-          >
-            <Link
-              href={item.href}
-              className="group border-brand-mist hover:border-brand-sky hover:bg-brand-sky-soft/60 flex items-start gap-3 rounded-2xl border bg-white/80 p-4"
-            >
-              <span className="bg-brand-sky-soft text-brand-action shrink-0 rounded-lg p-2">
-                <Icon className="size-5" strokeWidth={1.75} />
-              </span>
-              <span className="min-w-0">
-                <span className="text-brand-ink block text-sm font-semibold">
-                  {item.title}
-                </span>
-                <span className="text-brand-slate mt-0.5 block text-xs leading-snug">
-                  {item.description}
-                </span>
-              </span>
-            </Link>
-          </motion.div>
-        );
-      })}
-    </div>
-  );
-}
+const companyLinks = [
+  { title: "Case studies", href: "/case-studies" },
+  { title: "Partners", href: "/partners" },
+  { title: "About", href: "/about" },
+] as const;
 
 export function Navigation2() {
   const pathname = usePathname();
-  const [activeMenu, setActiveMenu] = useState<MenuKey | null>(null);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [servicesPath, setServicesPath] = useState<string | null>(null);
+  const [menuPath, setMenuPath] = useState<string | null>(null);
+  const servicesOpen = servicesPath === pathname;
+  const menuOpen = menuPath === pathname;
 
   useEffect(() => {
-    setMobileMenuOpen(false);
-    setActiveMenu(null);
-  }, [pathname]);
-
-  useEffect(() => {
-    if (!mobileMenuOpen) return;
+    if (!menuOpen) return;
     pauseLenis();
-    return () => resumeLenis();
-  }, [mobileMenuOpen]);
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuPath(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      resumeLenis();
+    };
+  }, [menuOpen]);
 
-  const linkClass = (href: string) =>
+  const textLink = (href: string) =>
     cn(
-      "rounded-full px-4 py-2 text-sm font-medium text-brand-slate hover:text-brand-ink",
-      pathname === href && "text-brand-action",
+      "text-brand-slate hover:text-brand-ink text-sm tracking-wide",
+      pathname === href && "text-brand-ink",
     );
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-3 sm:px-6 lg:px-8">
-      <nav aria-label="Primary" className="mx-auto w-full max-w-[1400px]">
-        <div
-          className="relative mx-auto hidden w-fit lg:block"
-          onMouseLeave={() => setActiveMenu(null)}
-        >
-          <div className="border-brand-mist rounded-3xl border bg-white/75 shadow-xl backdrop-blur-2xl">
-            <div className="flex items-center gap-2 py-2.5 pr-3 pl-5">
-              <HomeLink aria-label="JAIA Health — home" className="mr-4 flex items-center">
-                <Image
-                  src="/brand/jaia-logo-horizontal.png"
-                  alt=""
-                  width={128}
-                  height={36}
-                  priority
-                  className="h-8 w-auto"
-                />
-              </HomeLink>
+    <>
+    <header className="border-brand-mist bg-canvas fixed inset-x-0 top-0 z-50 border-b">
+      <nav aria-label="Primary" className="mx-auto flex h-[var(--header-height)] w-full max-w-[90rem] items-center justify-between px-5 sm:px-8">
+        <HomeLink aria-label="JAIA Health — home" className="flex items-center">
+          <Image
+            src="/brand/jaia-logo-horizontal.png"
+            alt=""
+            width={128}
+            height={36}
+            priority
+            className="h-8 w-auto"
+          />
+        </HomeLink>
 
-              <div className="flex items-center">
-                {(Object.keys(menus) as MenuKey[]).map((key) => (
-                  <button
-                    key={key}
-                    type="button"
-                    aria-expanded={activeMenu === key}
-                    onMouseEnter={() => setActiveMenu(key)}
-                    onFocus={() => setActiveMenu(key)}
-                    onClick={() => setActiveMenu(key)}
-                    className="text-brand-slate hover:text-brand-ink rounded-full px-4 py-2 text-sm font-medium"
-                  >
-                    {key}
-                  </button>
-                ))}
+        <div className="hidden items-center gap-8 lg:flex">
+          <div
+            className="relative"
+            onMouseLeave={() => setServicesPath(null)}
+          >
+            <button
+              type="button"
+              aria-expanded={servicesOpen}
+              onFocus={() => setServicesPath(pathname)}
+              onClick={() => setServicesPath((current) => (current === pathname ? null : pathname))}
+              className="text-brand-slate hover:text-brand-ink text-sm tracking-wide"
+            >
+              Services
+            </button>
+            {servicesOpen ? (
+              <div className="border-brand-mist bg-canvas absolute top-full left-0 z-50 mt-3 w-72 border p-2">
+                <ul>
+                  {services.map((service) => (
+                    <li key={service.slug}>
+                      <Link
+                        href={serviceUrl(service.slug)}
+                        className="text-brand-ink hover:text-brand-action-deep block px-3 py-2.5 text-sm"
+                      >
+                        {service.shortName}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
+            ) : null}
+          </div>
+          {companyLinks.map((link) => (
+            <Link key={link.href} href={link.href} className={textLink(link.href)}>
+              {link.title}
+            </Link>
+          ))}
+          <Link
+            href={primaryCta.href}
+            className="bg-brand-ink hover:bg-brand-action-deep rounded-full px-5 py-2 text-sm font-medium text-white"
+          >
+            {primaryCta.label}
+          </Link>
+        </div>
 
+        <button
+          type="button"
+          onClick={() => setMenuPath(pathname)}
+          className="border-brand-mist text-brand-ink hover:border-brand-ink rounded-full border px-4 py-1.5 text-sm lg:hidden"
+          aria-expanded={menuOpen}
+          aria-label="Open menu"
+        >
+          Menu
+        </button>
+      </nav>
+    </header>
+
+      {menuOpen ? (
+        <div className="bg-canvas fixed inset-0 z-[60] flex flex-col overflow-y-auto px-5 py-5 sm:px-8" data-lenis-prevent>
+          <div className="flex items-center justify-between">
+            <HomeLink aria-label="JAIA Health — home" className="flex items-center" onClick={() => setMenuPath(null)}>
+              <Image
+                src="/brand/jaia-logo-horizontal.png"
+                alt=""
+                width={128}
+                height={36}
+                className="h-8 w-auto"
+              />
+            </HomeLink>
+            <button
+              type="button"
+              onClick={() => setMenuPath(null)}
+              className="border-brand-mist text-brand-ink rounded-full border px-4 py-1.5 text-sm"
+            >
+              Close
+            </button>
+          </div>
+          <div className="mt-16 grid gap-12 sm:grid-cols-2">
+            <div>
+              <p className="eyebrow-label">Services</p>
+              <ul className="mt-6 flex flex-col gap-4">
+                {services.map((service) => (
+                  <li key={service.slug}>
+                    <Link
+                      href={serviceUrl(service.slug)}
+                      className="font-display text-brand-ink text-3xl leading-tight"
+                    >
+                      {service.shortName}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className="eyebrow-label">Practice</p>
+              <ul className="mt-6 flex flex-col gap-4">
+                {companyLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="font-display text-brand-ink text-3xl leading-tight">
+                      {link.title}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link href="/contact" className="font-display text-brand-ink text-3xl leading-tight">
+                    Contact
+                  </Link>
+                </li>
+              </ul>
               <Link
                 href={primaryCta.href}
-                onMouseEnter={() => setActiveMenu(null)}
-                className="bg-brand-ink hover:bg-brand-action-deep ml-4 rounded-xl px-5 py-2 text-sm font-semibold text-white"
+                className="bg-brand-ink mt-10 inline-flex rounded-full px-6 py-3 text-sm font-medium text-white"
               >
                 {primaryCta.label}
               </Link>
             </div>
           </div>
-
-          <AnimatePresence>
-            {activeMenu ? (
-              <motion.div
-                initial={{ opacity: 1, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 1, y: 8 }}
-                transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
-                className="absolute top-full left-1/2 z-50 w-[40rem] -translate-x-1/2 pt-2"
-              >
-                <div className="border-brand-mist rounded-3xl border bg-white/95 p-3 shadow-xl backdrop-blur-2xl">
-                  <MenuCards items={menus[activeMenu]} />
-                </div>
-              </motion.div>
-            ) : null}
-          </AnimatePresence>
         </div>
-
-        <div className="lg:hidden">
-          <div className="border-brand-mist overflow-hidden rounded-3xl border bg-white/80 shadow-xl backdrop-blur-2xl">
-            <div className="flex items-center justify-between py-2.5 pr-2.5 pl-4">
-              <HomeLink aria-label="JAIA Health — home" className="flex items-center">
-                <Image
-                  src="/brand/jaia-logo-horizontal.png"
-                  alt=""
-                  width={112}
-                  height={32}
-                  priority
-                  className="h-7 w-auto"
-                />
-              </HomeLink>
-              <button
-                type="button"
-                onClick={() => setMobileMenuOpen((open) => !open)}
-                className="bg-brand-ink flex size-10 items-center justify-center rounded-lg text-white"
-                aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-                aria-expanded={mobileMenuOpen}
-              >
-                {mobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
-              </button>
-            </div>
-
-            <AnimatePresence>
-              {mobileMenuOpen ? (
-                <motion.div
-                  initial={{ height: 0, opacity: 1 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 1 }}
-                  transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
-                  data-lenis-prevent
-                  data-lenis-prevent-wheel
-                  data-lenis-prevent-touch
-                  className="overflow-hidden"
-                >
-                  <div className="max-h-[min(70dvh,32rem)] touch-pan-y space-y-5 overflow-y-auto overscroll-contain px-4 pt-1 pb-4 [overflow-anchor:none]">
-                    <Link
-                      href={primaryCta.href}
-                      className="bg-brand-ink block rounded-full px-6 py-2.5 text-center text-sm font-semibold text-white"
-                    >
-                      {primaryCta.label}
-                    </Link>
-                    {(Object.keys(menus) as MenuKey[]).map((key) => (
-                      <div key={key}>
-                        <p className="text-brand-ink mb-2 px-1 text-sm font-semibold">{key}</p>
-                        <MenuCards items={menus[key]} />
-                      </div>
-                    ))}
-                    <Link href="/contact" className={linkClass("/contact")}>
-                      Contact
-                    </Link>
-                  </div>
-                </motion.div>
-              ) : null}
-            </AnimatePresence>
-          </div>
-        </div>
-      </nav>
-    </header>
+      ) : null}
+    </>
   );
 }
 

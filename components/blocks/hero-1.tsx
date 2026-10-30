@@ -77,7 +77,7 @@ export function Hero1({
             <motion.p
               {...rise}
               transition={{ duration: 0.45 }}
-              className="text-eyebrow font-display text-brand-action font-semibold tracking-[0.18em] uppercase"
+              className="eyebrow-label"
             >
               {eyebrow}
             </motion.p>
@@ -86,7 +86,7 @@ export function Hero1({
             {...rise}
             id={headingId}
             transition={{ duration: 0.45, delay: 0.05 }}
-            className="font-display text-brand-ink text-[clamp(2.25rem,1.4rem+2.2vw,3.75rem)] leading-[1.08] font-semibold tracking-[-0.02em] text-balance"
+            className="font-display text-brand-ink text-[clamp(2.5rem,1.4rem+2.6vw,4.25rem)] leading-[1.05] font-medium tracking-[-0.03em] text-balance"
           >
             {heading}
           </Heading>
@@ -140,7 +140,7 @@ function HeroVisual({
   label?: string;
 }) {
   return (
-    <div className="bg-brand-sky-soft photo-card-fade relative min-h-[280px] overflow-hidden rounded-[2rem] sm:min-h-[420px]">
+    <div className="relative min-h-[280px] overflow-hidden sm:min-h-[420px]">
       <img
         src={image.src}
         alt={image.alt}
@@ -150,7 +150,7 @@ function HeroVisual({
         <Link
           href={href}
           aria-label={label ?? "Continue"}
-          className="bg-brand-ink hover:bg-brand-action-deep absolute right-4 bottom-4 flex size-14 items-center justify-center rounded-2xl text-white transition-colors duration-150 sm:size-16"
+          className="bg-brand-ink hover:bg-brand-action-deep absolute right-4 bottom-4 flex size-12 items-center justify-center rounded-full text-white transition-colors duration-150"
         >
           <ArrowRight className="size-6 -rotate-45" />
         </Link>

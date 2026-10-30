@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
 import { Hero1 } from "@/components/blocks/hero-1";
-import { CaseStudyVisual } from "@/components/marketing/case-study-visual";
 import { FinalCta } from "@/components/marketing/final-cta";
 import { Showcase6Grid } from "@/components/react-bits/showcase-6";
 import {
@@ -33,7 +32,6 @@ export default function CaseStudiesPage() {
         headingId="case-studies-index-heading"
         body={caseStudiesPage.intro}
         primary={primaryCta}
-        media={<CaseStudyVisual />}
       />
       <div className="mx-auto w-full max-w-[90rem] px-5 pb-12 sm:px-8 sm:pb-16">
         <Showcase6Grid items={items} />
