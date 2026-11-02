@@ -139,7 +139,8 @@ function Profile({ partner }: { partner: PartnerSpotlight }) {
                             className="size-3.5"
                             strokeWidth={1.75}
                           />
-                          {service.shortName}
+                          {profile.serviceLabels?.[service.slug] ??
+                            service.shortName}
                         </Link>
                       </li>
                     ))}

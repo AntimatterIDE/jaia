@@ -64,7 +64,7 @@ titles) is draft, pending client review.
 
 Two studies are named, client-supplied engagements:
 
-- **NOVO Wellness Center** (Aiken, SC) — condensed public story from the client-supplied JAIA × Novo Wellness case study (v2). Services shown: Billing & RCM, APCM + BHI, IV Therapy, HRV Assessment. The Ciera Newman quote and the 250-patient / 122-bag notes are from that document; headline capital and CMS collections figures were later updated by the client for the public site. Internal debt tables, loan IDs, card last-4s, payroll amounts, fee splits, pending ERC, and projections were withheld.
+- **NOVO Wellness Center** (Aiken, SC) — condensed public story from the client-supplied JAIA × Novo Wellness case study (v2). Services shown: Billing & RCM, Population Health Management, IV Therapy, HRV Assessment. The Ciera Newman quote and the 250-patient / 122-bag notes are from that document; headline capital and CMS collections figures were later updated by the client for the public site. Internal debt tables, loan IDs, card last-4s, payroll amounts, fee splits, pending ERC, and projections were withheld.
 - **Dr. Mukesh Gandhi** (Woodruff, SC) — named and photographed, but the public study is marked **Coming soon** until a narrative is approved
 
 IV Therapy and Laboratory Coordination remain unnamed capability illustrations and are also marked **Coming soon** (polaroid teasers + a short holding page). Constraints that still apply to those pages and to Gandhi:
@@ -103,7 +103,7 @@ multiple diagnostics rather than HRV alone. Deferred for a later content
 pass — do not rename the service slug or rewrite capability copy until
 JAIA supplies the replacement diagnostics list.
 
-### Care management module (APCM + BHI)
+### Care management module (Population Health Management)
 
 **File:** `content/partners.ts`  
 **Appears on:** `/services/apcm-bhi` and the infrastructure row on `/partners`

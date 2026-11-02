@@ -32,7 +32,7 @@ const AREAS: {
 }[] = [
   {
     name: "Programs",
-    place: "APCM + BHI",
+    place: "Population Health Management",
     emphasis: "Care",
     status: "ready",
     detail:

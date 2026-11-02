@@ -78,6 +78,8 @@ export interface PartnerSpotlight {
     servicesLabel: string;
     /** Approved service slugs this partner delivers alongside JAIA */
     serviceSlugs: readonly string[];
+    /** Optional chip labels keyed by service slug (overrides `shortName`) */
+    serviceLabels?: Readonly<Partial<Record<string, string>>>;
     practicesLabel: string;
     practices: readonly string[];
     pointsHeading: string;
@@ -162,6 +164,9 @@ export const partnerSpotlights: readonly PartnerSpotlight[] = [
       focus: "Medical billing, coding, and consulting",
       servicesLabel: "Ancillary services with JAIA",
       serviceSlugs: ["hrv-assessment", "apcm-bhi"],
+      serviceLabels: {
+        "apcm-bhi": "APCM + BHI + PCM",
+      },
       practicesLabel: "Practices in this spotlight",
       practices: [
         "Arimah Medical",

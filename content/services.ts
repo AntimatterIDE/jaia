@@ -110,7 +110,7 @@ export interface ServicePageContent {
 
 export interface ServiceRecord {
   slug: string;
-  /** Short public name, e.g. "APCM + BHI" */
+  /** Short public name, e.g. "Population Health Management" */
   shortName: string;
   /** Full service name used on service pages and metadata */
   name: string;
@@ -133,7 +133,7 @@ export interface ServiceRecord {
 export const services: readonly ServiceRecord[] = [
   {
     slug: "apcm-bhi",
-    shortName: "APCM + BHI",
+    shortName: "Population Health Management",
     name: "Advanced Primary Care Management + Behavioral Health Integration",
     category: "Care management",
     summary:

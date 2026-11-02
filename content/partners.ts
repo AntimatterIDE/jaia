@@ -1,5 +1,5 @@
 /**
- * Care-management infrastructure shown on APCM + BHI and the partners page.
+ * Care-management infrastructure shown on Population Health Management and the partners page.
  * Do not invent third-party logos, URLs, or product claims.
  */
 
@@ -24,7 +24,7 @@ export interface ServicePartner {
   eyebrow: string;
   /**
    * Partners-page card badge. When set, replaces the default
-   * `With {service.shortName}` line (e.g. "With APCM + BHI").
+   * `With {service.shortName}` line.
    */
   contextLabel?: string;
   heading: string;

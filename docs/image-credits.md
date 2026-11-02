@@ -43,7 +43,7 @@ stills listed below.
 
 | File                                | Used by                                                        | Subject                                                                                 | Source file                                                                      |
 | ----------------------------------- | -------------------------------------------------------------- | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `stack-body-scan-interface.jpg`     | Homepage stack; APCM + BHI — Chronic care coordination         | Clinician holding a stethoscope to a holographic whole-body interface                   | `medical-professional-using-digital-interface-techn-2026-09-22-09-34-43-utc.jpg` |
+| `stack-body-scan-interface.jpg`     | Homepage stack; Population Health Management — Chronic care coordination | Clinician holding a stethoscope to a holographic whole-body interface                   | `medical-professional-using-digital-interface-techn-2026-09-22-09-34-43-utc.jpg` |
 | `stack-hrv-heartbeat-line.jpg`      | Homepage stack; HRV — Objective assessment                     | Single glowing ECG trace on deep blue                                                   | `HRV.jpg`                                                                        |
 | `stack-vessel-visualization.jpg`    | Homepage stack; IV Therapy — Protocol design                   | Clinician touching glowing blue vessel strands                                          | `healthcare-worker-examining-medical-data-visualiza-2026-09-24-21-09-42-utc.jpg` |
 | `stack-heart-scan-dashboard.jpg`    | Homepage stack; Billing & RCM — Coding and claims              | Holographic heart scan and data panels in a waiting area                                | `futuristic-heart-scan-technology-in-a-hospital-set-2026-09-22-09-23-59-utc.jpg` |
@@ -86,8 +86,8 @@ JAIA clients or facilities. No blood or red-capped vacutainer photography.
 
 | File                                   | Used by                                            | Subject                                                                    |
 | -------------------------------------- | -------------------------------------------------- | -------------------------------------------------------------------------- |
-| `include-program-infrastructure.jpg`   | APCM + BHI — Program infrastructure                | Enrollment workflow tablet and protocol binder on a practice desk          |
-| `include-behavioral-health.jpg`        | APCM + BHI — Behavioral health access              | Empty calm consult alcove                                                  |
+| `include-program-infrastructure.jpg`   | Population Health Management — Program infrastructure | Enrollment workflow tablet and protocol binder on a practice desk          |
+| `include-behavioral-health.jpg`        | Population Health Management — Behavioral health access | Empty calm consult alcove                                                  |
 | `include-care-plan-insights.jpg`       | HRV — Care-plan insights                           | Clinician reviewing a care plan and tablet                                 |
 | `include-longitudinal-tracking.jpg`    | HRV — Longitudinal tracking                        | Monitor showing unlabeled trend charts                                     |
 | `include-supply-chain.jpg`             | IV Therapy — Supply chain                          | Organized IV fluid and supply cabinet                                      |
