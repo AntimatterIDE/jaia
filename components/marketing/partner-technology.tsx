@@ -64,9 +64,9 @@ export function PartnerTechnology() {
                     </div>
 
                     <div className="p-7 sm:p-10 lg:col-span-7 lg:p-12">
-                      {service ? (
+                      {partner.contextLabel || service ? (
                         <p className="text-eyebrow font-display text-brand-action font-semibold tracking-[0.18em] uppercase">
-                          With {service.shortName}
+                          {partner.contextLabel ?? `With ${service!.shortName}`}
                         </p>
                       ) : null}
                       <h3 className="font-display text-h3 text-brand-ink mt-3 font-semibold text-balance">

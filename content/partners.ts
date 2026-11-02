@@ -22,6 +22,11 @@ export interface ServicePartner {
     height: number;
   };
   eyebrow: string;
+  /**
+   * Partners-page card badge. When set, replaces the default
+   * `With {service.shortName}` line (e.g. "With APCM + BHI").
+   */
+  contextLabel?: string;
   heading: string;
   body: string;
   points: readonly ServicePartnerPoint[];
@@ -34,6 +39,7 @@ export const servicePartners: Partial<Record<string, ServicePartner>> = {
   "apcm-bhi": {
     name: "Care management module",
     eyebrow: "Program infrastructure",
+    contextLabel: "Population Health Management",
     heading: "An insulated module behind population health management.",
     body: "JAIA provides an insulated operating module for care management programs — Advanced Primary Care Management, Behavioral Health Integration, and Principal Care Management. Practices use it for enrollment, consent, care-plan work, and a record they can produce, while provider review and sign-off stay with the practice.",
     points: [
