@@ -115,8 +115,8 @@ export function Navigation2() {
 
   const linkClass = (href: string) =>
     cn(
-      "rounded-full px-4 py-2 text-sm font-medium text-brand-slate hover:text-brand-ink",
-      pathname === href && "text-brand-action",
+      "rounded-full px-4 py-2 text-sm font-medium text-white/75 hover:text-white",
+      pathname === href && "text-brand-sky",
     );
 
   return (
@@ -126,7 +126,7 @@ export function Navigation2() {
           className="relative mx-auto hidden w-fit lg:block"
           onMouseLeave={() => setActiveMenu(null)}
         >
-          <div className="border-brand-mist rounded-3xl border bg-white/75 shadow-xl backdrop-blur-2xl">
+          <div className="rounded-3xl border border-white/10 bg-[var(--brand-action-deep)]/92 shadow-xl backdrop-blur-2xl">
             <div className="flex items-center gap-2 py-2.5 pr-3 pl-5">
               <HomeLink aria-label="JAIA Health — home" className="mr-4 flex items-center">
                 <Image
@@ -148,7 +148,10 @@ export function Navigation2() {
                     onMouseEnter={() => setActiveMenu(key)}
                     onFocus={() => setActiveMenu(key)}
                     onClick={() => setActiveMenu(key)}
-                    className="text-brand-slate hover:text-brand-ink rounded-full px-4 py-2 text-sm font-medium"
+                    className={cn(
+                      "rounded-full px-4 py-2 text-sm font-medium text-white/80 transition-colors hover:text-white",
+                      activeMenu === key && "text-brand-sky",
+                    )}
                   >
                     {key}
                   </button>
@@ -158,7 +161,7 @@ export function Navigation2() {
               <Link
                 href={primaryCta.href}
                 onMouseEnter={() => setActiveMenu(null)}
-                className="bg-brand-ink hover:bg-brand-action-deep ml-4 rounded-xl px-5 py-2 text-sm font-semibold text-white"
+                className="text-brand-action-deep hover:bg-brand-sky ml-4 rounded-xl bg-white px-5 py-2 text-sm font-semibold transition-colors"
               >
                 {primaryCta.label}
               </Link>
@@ -183,7 +186,7 @@ export function Navigation2() {
         </div>
 
         <div className="lg:hidden">
-          <div className="border-brand-mist overflow-hidden rounded-3xl border bg-white/80 shadow-xl backdrop-blur-2xl">
+          <div className="overflow-hidden rounded-3xl border border-white/10 bg-[var(--brand-action-deep)]/92 shadow-xl backdrop-blur-2xl">
             <div className="flex items-center justify-between py-2.5 pr-2.5 pl-4">
               <HomeLink aria-label="JAIA Health — home" className="flex items-center">
                 <Image
@@ -198,7 +201,7 @@ export function Navigation2() {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen((open) => !open)}
-                className="bg-brand-ink flex size-10 items-center justify-center rounded-lg text-white"
+                className="text-brand-action-deep flex size-10 items-center justify-center rounded-lg bg-white transition-colors hover:bg-[var(--brand-sky)]"
                 aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={mobileMenuOpen}
               >
@@ -221,13 +224,13 @@ export function Navigation2() {
                   <div className="max-h-[min(70dvh,32rem)] touch-pan-y space-y-5 overflow-y-auto overscroll-contain px-4 pt-1 pb-4 [overflow-anchor:none]">
                     <Link
                       href={primaryCta.href}
-                      className="bg-brand-ink block rounded-full px-6 py-2.5 text-center text-sm font-semibold text-white"
+                      className="text-brand-action-deep hover:bg-brand-sky block rounded-full bg-white px-6 py-2.5 text-center text-sm font-semibold transition-colors"
                     >
                       {primaryCta.label}
                     </Link>
                     {(Object.keys(menus) as MenuKey[]).map((key) => (
                       <div key={key}>
-                        <p className="text-brand-ink mb-2 px-1 text-sm font-semibold">{key}</p>
+                        <p className="mb-2 px-1 text-sm font-semibold text-white">{key}</p>
                         <MenuCards items={menus[key]} />
                       </div>
                     ))}
