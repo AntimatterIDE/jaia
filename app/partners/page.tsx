@@ -1,7 +1,6 @@
 import { Fragment } from "react";
 import type { Metadata } from "next";
 
-import { CaseStudiesStrip } from "@/components/marketing/case-studies-strip";
 import { FinalCta } from "@/components/marketing/final-cta";
 import { PartnerClaimFlow } from "@/components/marketing/partner-claim-flow";
 import { PartnerInterview } from "@/components/marketing/partner-interview";
@@ -46,8 +45,6 @@ export default function PartnersPage() {
         logos={{ label: partnersPage.logosLabel, items: featuredLogos }}
         parallax
       />
-
-      <CaseStudiesStrip />
 
       {partnerSpotlights.map((partner) => (
         <Fragment key={partner.slug}>

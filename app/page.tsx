@@ -1,5 +1,4 @@
 import { Hero } from "@/components/marketing/hero";
-import { CaseStudiesStrip } from "@/components/marketing/case-studies-strip";
 import { Features5 } from "@/components/blocks/features-5";
 import { Outcomes } from "@/components/marketing/outcomes";
 import { Approach } from "@/components/marketing/approach";
@@ -28,7 +27,6 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
       />
       <Hero />
-      <CaseStudiesStrip />
       <div id="capabilities">
         <Features5 secondary={caseStudySection.cta} />
       </div>
