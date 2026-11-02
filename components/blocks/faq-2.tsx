@@ -30,12 +30,12 @@ export function Faq2({
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section aria-labelledby={id} className="bg-brand-sky-soft/55 relative overflow-hidden px-5 py-16 sm:px-8 sm:py-24">
+    <section aria-labelledby={id} className="section-flow relative overflow-hidden px-5 py-16 sm:px-8 sm:py-24">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_0%_40%,rgba(135,205,236,0.42),transparent_52%),radial-gradient(ellipse_at_100%_80%,rgba(39,111,145,0.08),transparent_50%)]"
+        className="pointer-events-none absolute inset-[12%_0] bg-[radial-gradient(ellipse_at_30%_45%,rgba(135,205,236,0.32),transparent_58%),radial-gradient(ellipse_at_80%_55%,rgba(234,245,251,0.85),transparent_52%),radial-gradient(ellipse_at_55%_50%,rgba(39,111,145,0.05),transparent_55%)]"
       />
-      <div className="relative mx-auto grid w-full max-w-[90rem] gap-12 lg:grid-cols-[1fr_2fr] lg:gap-16">
+      <div className="relative z-10 mx-auto grid w-full max-w-[90rem] gap-12 lg:grid-cols-[1fr_2fr] lg:gap-16">
         <div className="flex flex-col gap-6 lg:sticky lg:top-28 lg:self-start">
           <h2 id={id} className="font-display text-brand-ink text-4xl leading-tight font-semibold tracking-tight sm:text-5xl">
             {heading}

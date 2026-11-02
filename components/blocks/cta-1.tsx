@@ -62,7 +62,7 @@ export function Cta1({
   return (
     <section
       aria-labelledby="final-cta-heading"
-      className="bg-canvas relative flex w-full items-center overflow-hidden border-b border-[color-mix(in_srgb,var(--brand-sky)_35%,var(--brand-mist))] px-5 py-20 sm:px-8 sm:py-28"
+      className="section-flow-in relative flex w-full items-center overflow-hidden border-b border-[color-mix(in_srgb,var(--brand-sky)_35%,var(--brand-mist))] px-5 py-20 sm:px-8 sm:py-28"
       onMouseMove={(event) => {
         const rect = event.currentTarget.getBoundingClientRect();
         mouseX.set(((event.clientX - rect.left) / rect.width - 0.5) * 2);
@@ -78,7 +78,7 @@ export function Cta1({
           <DriftOrb key={`${orb.x}-${orb.y}`} orb={orb} mouseX={smoothX} mouseY={smoothY} />
         ))}
       </div>
-      <div className="relative mx-auto max-w-3xl text-center">
+      <div className="relative z-10 mx-auto max-w-3xl text-center">
         <h2 id="final-cta-heading" className="font-display text-brand-ink text-4xl font-semibold tracking-tight text-balance sm:text-6xl">
           {heading}
         </h2>

@@ -417,6 +417,96 @@
   }
 
   /**
+   * Soft section handoffs. Colour blooms live in child layers; these edges
+   * dissolve every band back to canvas so adjacent gradients never meet as
+   * a hard horizontal seam.
+   */
+  .section-flow {
+    position: relative;
+    isolation: isolate;
+    background-color: var(--canvas);
+  }
+
+  .section-flow::before,
+  .section-flow::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    height: clamp(8rem, 22vh, 14rem);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .section-flow::before {
+    top: 0;
+    background: linear-gradient(
+      to bottom,
+      var(--canvas) 0%,
+      rgb(from var(--canvas) r g b / 0.92) 28%,
+      rgb(from var(--canvas) r g b / 0.55) 58%,
+      rgb(from var(--canvas) r g b / 0) 100%
+    );
+  }
+
+  .section-flow::after {
+    bottom: 0;
+    background: linear-gradient(
+      to top,
+      var(--canvas) 0%,
+      rgb(from var(--canvas) r g b / 0.92) 28%,
+      rgb(from var(--canvas) r g b / 0.55) 58%,
+      rgb(from var(--canvas) r g b / 0) 100%
+    );
+  }
+
+  /* Heroes keep colour under the header; only dissolve into the next band. */
+  .section-flow-out {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .section-flow-out::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: clamp(9rem, 24vh, 16rem);
+    pointer-events: none;
+    z-index: 2;
+    background: linear-gradient(
+      to bottom,
+      rgb(from var(--canvas) r g b / 0) 0%,
+      rgb(from var(--canvas) r g b / 0.35) 32%,
+      rgb(from var(--canvas) r g b / 0.78) 68%,
+      var(--canvas) 100%
+    );
+  }
+
+  /* Soft inbound only — keep a clean edge into the deep footer. */
+  .section-flow-in {
+    position: relative;
+    isolation: isolate;
+    background-color: var(--canvas);
+  }
+
+  .section-flow-in::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: clamp(8rem, 22vh, 14rem);
+    pointer-events: none;
+    z-index: 1;
+    background: linear-gradient(
+      to bottom,
+      var(--canvas) 0%,
+      rgb(from var(--canvas) r g b / 0.92) 28%,
+      rgb(from var(--canvas) r g b / 0.55) 58%,
+      rgb(from var(--canvas) r g b / 0) 100%
+    );
+  }
+
+  /**
    * Capability stack viewport: fade the white slab above the 66vh card into
    * the header veil. Stay behind the photo (z-index 0 vs cards at 1) and stop
    * at the card’s top edge — never a white veil across the image.

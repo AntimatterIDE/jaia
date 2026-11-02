@@ -60,22 +60,22 @@ export function Features5({
   items = homeItems,
 }: Features5Props = {}) {
   return (
-    <section aria-labelledby={id} className="bg-canvas-soft relative overflow-hidden px-5 py-16 sm:px-8 sm:py-24">
+    <section aria-labelledby={id} className="section-flow relative overflow-hidden px-5 py-16 sm:px-8 sm:py-24">
       <div
         aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_0%_0%,rgba(135,205,236,0.36),transparent_44%),radial-gradient(ellipse_at_100%_100%,rgba(234,245,251,0.95),transparent_48%),radial-gradient(ellipse_at_70%_30%,rgba(39,111,145,0.06),transparent_55%)]"
+        className="pointer-events-none absolute inset-[12%_0] bg-[radial-gradient(ellipse_at_50%_45%,rgba(135,205,236,0.3),transparent_58%),radial-gradient(ellipse_at_85%_60%,rgba(234,245,251,0.85),transparent_52%),radial-gradient(ellipse_at_15%_55%,rgba(39,111,145,0.05),transparent_55%)]"
       />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage:
-            "linear-gradient(to right, rgba(39,111,145,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(39,111,145,0.06) 1px, transparent 1px)",
+            "linear-gradient(to right, rgba(39,111,145,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(39,111,145,0.05) 1px, transparent 1px)",
           backgroundSize: "20px 20px",
-          maskImage: "radial-gradient(ellipse 80% 70% at 100% 0%, #000 15%, transparent 75%)",
+          maskImage: "radial-gradient(ellipse 70% 55% at 85% 40%, #000 10%, transparent 72%)",
         }}
       />
-      <div className="relative mx-auto w-full max-w-[90rem]">
+      <div className="relative z-10 mx-auto w-full max-w-[90rem]">
         <div className="mb-12 max-w-3xl">
           <motion.h2
             id={id}

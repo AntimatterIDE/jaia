@@ -141,13 +141,13 @@ export function Showcase6({
     <section
       id={id}
       aria-labelledby={headingId}
-      className={cn("bg-canvas relative overflow-hidden", className)}
+      className={cn("section-flow relative overflow-hidden", className)}
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_80%_0%,rgba(135,205,236,0.2),transparent_50%),radial-gradient(ellipse_at_10%_100%,rgba(234,245,251,0.75),transparent_45%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_70%_30%,rgba(135,205,236,0.22),transparent_52%),radial-gradient(ellipse_at_15%_75%,rgba(234,245,251,0.8),transparent_48%)]"
       />
-      <div className="relative mx-auto w-full max-w-[90rem] px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
+      <div className="relative z-10 mx-auto w-full max-w-[90rem] px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
         <motion.div
           variants={headerVariants}
           initial="hidden"

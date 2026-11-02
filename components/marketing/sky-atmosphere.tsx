@@ -45,6 +45,9 @@ export function SkyAtmosphere({
         animate={reduce ? undefined : { x: [0, 28, 0], y: [0, -18, 0], opacity: [0.45, 0.8, 0.45] }}
         transition={{ duration: 16, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
       />
+      {strong ? (
+        <div className="absolute inset-x-0 bottom-0 h-[42%] bg-[linear-gradient(to_bottom,transparent_0%,rgba(255,255,255,0.45)_55%,var(--canvas)_100%)]" />
+      ) : null}
     </div>
   );
 }

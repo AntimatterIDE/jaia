@@ -21,7 +21,7 @@ const rise = {
 
 export function Hero14() {
   return (
-    <section className="relative flex min-h-[100svh] w-full items-start overflow-hidden bg-[color-mix(in_srgb,var(--brand-sky-soft)_55%,var(--canvas))] px-5 pt-[calc(var(--header-height)+2.75rem)] pb-16 sm:px-8 lg:items-center lg:pb-20">
+    <section className="section-flow-out bg-canvas relative flex min-h-[100svh] w-full items-start overflow-hidden px-5 pt-[calc(var(--header-height)+2.75rem)] pb-28 sm:px-8 lg:items-center lg:pb-32">
       <SkyAtmosphere tone="hero" />
 
       <div className="relative z-10 mx-auto w-full max-w-[90rem]">
