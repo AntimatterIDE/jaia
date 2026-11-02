@@ -2,99 +2,88 @@
 
 /**
  * React Bits Pro `Hero14`, restyled for JAIA.
- * The demo rating, email capture, and stock photo are not used.
+ * Brand-led home hero: lockup first, one headline, partnership visual.
  */
 
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 
-import { Bento1 } from "@/components/blocks/bento-1";
 import { CtaButton, CtaLink } from "@/components/marketing/cta";
 import { FloatPanel } from "@/components/marketing/float-panel";
+import { HeroPartnershipVisual } from "@/components/marketing/hero-partnership-visual";
 import { SkyAtmosphere } from "@/components/marketing/sky-atmosphere";
+import { JaiaSymbol } from "@/components/jaia-symbol";
 import { getService } from "@/content/services";
 import { capabilityPillars, hero, partnership, siteConfig } from "@/content/site";
 
-const rise = {
-  initial: { opacity: 1, y: 16 },
-  animate: { opacity: 1, y: 0 },
-} as const;
+const ease = [0.22, 1, 0.36, 1] as const;
 
 export function Hero14() {
+  const reduce = useReducedMotion();
+
+  const rise = (delay: number) =>
+    reduce
+      ? {}
+      : {
+          initial: { opacity: 0, y: 18 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.55, delay, ease },
+        };
+
   return (
-    <section className="section-flow-out bg-canvas relative flex min-h-[100svh] w-full items-start overflow-hidden px-5 pt-[calc(var(--header-height)+2.75rem)] pb-28 sm:px-8 lg:items-center lg:pb-32">
+    <section className="section-flow-out bg-canvas relative flex min-h-[100svh] w-full items-start overflow-hidden px-5 pt-[calc(var(--header-height)+2.5rem)] pb-28 sm:px-8 sm:pt-[calc(var(--header-height)+3.25rem)] lg:items-center lg:pb-32">
       <SkyAtmosphere tone="hero" />
+      <JaiaSymbol
+        aria-hidden="true"
+        className="text-brand-sky pointer-events-none absolute -top-8 -left-16 size-[28rem] opacity-[0.07] sm:size-[34rem] lg:-left-10 lg:opacity-[0.09]"
+      />
 
       <div className="relative z-10 mx-auto w-full max-w-[90rem]">
-        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-14 xl:gap-20">
           <div className="flex flex-col">
-            <motion.p
-              {...rise}
-              transition={{ duration: 0.5, delay: 0.02 }}
-              className="font-display text-brand-ink text-sm font-semibold tracking-[0.04em]"
-            >
-              {siteConfig.name}
-            </motion.p>
+            <motion.div {...rise(0.02)} className="flex items-center gap-3.5">
+              <span className="bg-brand-action shadow-soft flex size-12 shrink-0 items-center justify-center rounded-2xl text-[var(--brand-sky)] sm:size-14">
+                <JaiaSymbol className="size-7 sm:size-8" />
+              </span>
+              <p className="font-display text-brand-ink text-[1.5rem] font-semibold tracking-[0.02em] sm:text-[1.75rem]">
+                {siteConfig.name}
+              </p>
+            </motion.div>
 
             <motion.p
-              {...rise}
-              transition={{ duration: 0.5, delay: 0.05 }}
-              className="font-display text-brand-action mt-3 text-[0.8125rem] font-semibold tracking-[0.14em] uppercase"
+              {...rise(0.08)}
+              className="font-display text-brand-action mt-6 max-w-md text-[0.8125rem] font-semibold tracking-[0.16em] uppercase"
             >
               {hero.eyebrow}
             </motion.p>
 
             <motion.h1
-              {...rise}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="font-display text-brand-ink mt-4 text-4xl leading-[1.05] font-medium tracking-[-0.02em] text-balance sm:text-5xl md:text-6xl lg:text-[4rem] xl:text-[4.5rem]"
+              {...rise(0.14)}
+              className="font-display text-brand-ink mt-4 text-[clamp(2.75rem,1.6rem+3.8vw,5.25rem)] leading-[1.02] font-semibold tracking-[-0.03em] text-balance"
             >
               {hero.heading}
             </motion.h1>
 
             <motion.p
-              {...rise}
-              transition={{ duration: 0.5, delay: 0.15 }}
-              className="text-brand-slate mt-5 max-w-[34rem] text-base leading-relaxed sm:mt-6 sm:text-[1.0625rem]"
+              {...rise(0.18)}
+              className="text-brand-slate mt-5 max-w-[34rem] text-base leading-relaxed sm:mt-6 sm:text-lg"
             >
               {hero.body}
             </motion.p>
 
             <motion.div
-              {...rise}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              {...rise(0.24)}
               className="mt-9 flex flex-col items-start gap-4 sm:mt-10 min-[26rem]:flex-row min-[26rem]:items-center"
             >
-              <CtaButton href={hero.primaryCta.href}>
-                {hero.primaryCta.label}
-              </CtaButton>
-              <CtaLink href={hero.secondaryCta.href}>
-                {hero.secondaryCta.label}
-              </CtaLink>
+              <CtaButton href={hero.primaryCta.href}>{hero.primaryCta.label}</CtaButton>
+              <CtaLink href={hero.secondaryCta.href}>{hero.secondaryCta.label}</CtaLink>
             </motion.div>
-
-            <motion.ul
-              {...rise}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="border-brand-mist mt-10 flex flex-wrap gap-x-6 gap-y-3 border-t pt-8 sm:mt-12"
-              aria-label="Capability areas"
-            >
-              {capabilityPillars.map((pillar) => (
-                <li
-                  key={pillar.label}
-                  className="text-brand-ink font-display text-sm font-semibold tracking-[0.04em]"
-                >
-                  {pillar.label}
-                </li>
-              ))}
-            </motion.ul>
           </div>
 
           <FloatPanel className="relative w-full">
-            <Bento1
-              hub="JAIA"
+            <HeroPartnershipVisual
               title="One partnership"
               body={partnership.statement}
-              sources={capabilityPillars.map((pillar) => ({
+              pillars={capabilityPillars.map((pillar) => ({
                 label: pillar.label,
                 icon: pillar.icon,
                 detail: pillar.slugs
