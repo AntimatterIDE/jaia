@@ -132,7 +132,7 @@ export const partnersPage = {
   technology: {
     anchor: "care-management",
     eyebrow: "Program infrastructure",
-    heading: "Insulated module behind APCM and BHI.",
+    heading: "Insulated module behind population health management.",
   },
   finalCta: {
     heading: "Ready to grow with a partner, not another vendor?",

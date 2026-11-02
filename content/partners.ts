@@ -34,8 +34,8 @@ export const servicePartners: Partial<Record<string, ServicePartner>> = {
   "apcm-bhi": {
     name: "Care management module",
     eyebrow: "Program infrastructure",
-    heading: "An insulated module to support APCM and BHI.",
-    body: "JAIA provides an insulated operating module for care management programs — Advanced Primary Care Management and Behavioral Health Integration. Practices use it for enrollment, consent, care-plan work, and a record they can produce, while provider review and sign-off stay with the practice.",
+    heading: "An insulated module behind population health management.",
+    body: "JAIA provides an insulated operating module for care management programs — Advanced Primary Care Management, Behavioral Health Integration, and Principal Care Management. Practices use it for enrollment, consent, care-plan work, and a record they can produce, while provider review and sign-off stay with the practice.",
     points: [
       {
         title: "Enrollment and consent",
