@@ -3,16 +3,14 @@
 /**
  * React Bits `Showcase6`, restyled for JAIA case studies.
  *
- * Kept: staggered header, overlapping tilted polaroid strip, hover that
- * un-tilts and lifts the card. Demo copy, dark-mode variants, invented
- * cities/dates, and `#` links are not used. Cards link to real routes.
+ * Kept: overlapping tilted polaroid strip, hover that un-tilts and lifts
+ * the card. Cards are name-only — no photos, locations, or coming-soon badges.
  */
 
 import Link from "next/link";
 import { motion, useReducedMotion, type Variants } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 
-import { CtaButton } from "@/components/marketing/cta";
 import { cn } from "@/lib/utils";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -22,17 +20,11 @@ export interface Showcase6Card {
   caption: string;
   tilt: number;
   lift: string;
-  comingSoon?: boolean;
 }
 
 export interface Showcase6Props {
   id?: string;
-  headingId: string;
-  headingLead: string;
-  headingAccent: string;
-  body: string;
-  cta: { label: string; href: string };
-  notice?: string;
+  headingId?: string;
   items: readonly Showcase6Card[];
   className?: string;
 }
@@ -49,11 +41,6 @@ function PolaroidFace({ item }: { item: Showcase6Card }) {
         />
         <span className="border-brand-action/35 relative size-16 rounded-full border sm:size-20" aria-hidden="true" />
         <span className="bg-brand-action absolute size-2.5 rounded-full" aria-hidden="true" />
-        {item.comingSoon ? (
-          <span className="bg-brand-ink/80 absolute bottom-3 left-3 rounded-full px-3 py-1 text-xs font-semibold tracking-wide text-white uppercase">
-            Coming soon
-          </span>
-        ) : null}
       </div>
       <div className="flex items-center justify-between gap-3 px-1 pt-4 pb-1.5">
         <span className="font-display text-brand-ink text-[0.8125rem] font-semibold tracking-[0.08em] uppercase">
@@ -70,34 +57,11 @@ function PolaroidFace({ item }: { item: Showcase6Card }) {
 
 export function Showcase6({
   id,
-  headingId,
-  headingLead,
-  headingAccent,
-  body,
-  cta,
-  notice,
+  headingId = "case-studies-heading",
   items,
   className,
 }: Showcase6Props) {
   const prefersReducedMotion = useReducedMotion();
-
-  const headerVariants: Variants = {
-    hidden: {},
-    visible: {
-      transition: { staggerChildren: prefersReducedMotion ? 0 : 0.1 },
-    },
-  };
-
-  const fadeUp: Variants = prefersReducedMotion
-    ? { hidden: { opacity: 1 }, visible: { opacity: 1 } }
-    : {
-        hidden: { opacity: 1, y: 12 },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.6, ease: EASE },
-        },
-      };
 
   const stripVariants: Variants = {
     hidden: {},
@@ -124,54 +88,20 @@ export function Showcase6({
       aria-labelledby={headingId}
       className={cn("section-flow relative overflow-hidden", className)}
     >
+      <h2 id={headingId} className="sr-only">
+        Case studies
+      </h2>
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_70%_30%,rgba(135,205,236,0.22),transparent_52%),radial-gradient(ellipse_at_15%_75%,rgba(234,245,251,0.8),transparent_48%)]"
       />
       <div className="relative z-10 mx-auto w-full max-w-[90rem] px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
         <motion.div
-          variants={headerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16"
-        >
-          <motion.div variants={fadeUp}>
-            <h2
-              id={headingId}
-              className="font-display text-brand-ink text-[clamp(2rem,1.4rem+2.4vw,3.5rem)] leading-[1.05] font-semibold tracking-tight text-balance"
-            >
-              {headingLead}
-              <span className="text-brand-slate">{headingAccent}</span>
-            </h2>
-          </motion.div>
-
-          <motion.div
-            variants={fadeUp}
-            className="lg:max-w-sm lg:justify-self-end lg:pt-2"
-          >
-            <p className="text-brand-slate text-base leading-relaxed text-pretty sm:text-lg">
-              {body}
-            </p>
-            {notice ? (
-              <p className="border-brand-mist text-brand-slate mt-5 border-l-2 pl-4 text-sm italic">
-                {notice}
-              </p>
-            ) : null}
-            <div className="mt-6">
-              <CtaButton href={cta.href} withArrow>
-                {cta.label}
-              </CtaButton>
-            </div>
-          </motion.div>
-        </motion.div>
-
-        <motion.div
           variants={stripVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 sm:gap-10 lg:mt-24 lg:grid-cols-4"
+          className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-10 lg:grid-cols-4"
         >
           {items.map((item) => (
             <MotionLink

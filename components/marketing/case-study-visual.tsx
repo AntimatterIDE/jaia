@@ -19,7 +19,7 @@ export function CaseStudyVisual() {
       body={caseStudySection.body}
       items={caseStudies.slice(0, 3).map((study) => ({
         title: study.name,
-        detail: study.comingSoon ? "Coming soon" : "Case study",
+        detail: "Case study",
         icon: marks[study.slug] ?? Building2,
       }))}
     />

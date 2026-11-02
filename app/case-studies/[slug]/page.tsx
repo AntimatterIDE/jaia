@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -10,7 +9,6 @@ import { RevealItem } from "@/components/marketing/reveal-item";
 import { FinalCta } from "@/components/marketing/final-cta";
 import {
   caseStudies,
-  caseStudyComingSoon,
   caseStudyMeta,
   caseStudyServices,
   caseStudyUrl,
@@ -66,27 +64,22 @@ export default async function CaseStudyPage({
   return (
     <article>
       <Hero1
-        eyebrow={study.comingSoon ? "Coming soon" : study.narrative ? "Case study" : caseStudyMeta(study)}
+        eyebrow={study.narrative ? "Case study" : caseStudyMeta(study)}
         heading={study.name}
         headingId="study-heading"
         body={
-          study.comingSoon
-            ? `${study.intro} ${caseStudyComingSoon.body}`
-            : subtitle
-              ? `${subtitle}. ${study.intro}`
-              : `${studyServices.map((service) => service.shortName).join(" · ")}. ${study.intro}`
+          subtitle
+            ? `${subtitle}. ${study.intro}`
+            : `${studyServices.map((service) => service.shortName).join(" · ")}. ${study.intro}`
         }
         primary={
-          study.comingSoon
-            ? caseStudyComingSoon.cta
-            : study.narrative
-              ? { label: "Read the story", href: "#study-story" }
-              : studyServices.length === 1
-                ? { label: "Read the capability", href: serviceUrl(studyServices[0].slug) }
-                : { label: "See the work", href: "#study-services" }
+          study.narrative
+            ? { label: "Read the story", href: "#study-story" }
+            : studyServices.length === 1
+              ? { label: "Read the capability", href: serviceUrl(studyServices[0].slug) }
+              : { label: "See the work", href: "#study-services" }
         }
         secondary={primaryCta}
-        image={{ src: study.image.src, alt: study.image.alt }}
       />
 
       {study.narrative ? (
@@ -176,28 +169,14 @@ export default async function CaseStudyPage({
               <RevealItem key={item.slug} index={index}>
                 <Link
                   href={caseStudyUrl(item.slug)}
-                  className="lift border-brand-mist group/study flex h-full flex-col overflow-hidden rounded-[1.5rem] border bg-white"
+                  className="lift border-brand-mist group/study flex h-full flex-col rounded-[1.5rem] border bg-white p-5"
                 >
-                  <div className="bg-brand-sky-soft relative aspect-4/3 overflow-hidden">
-                    <Image
-                      src={item.image.src}
-                      alt=""
-                      fill
-                      sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
-                      className="img-tone object-cover transition-transform duration-500 group-hover/study:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover/study:scale-100"
-                    />
-                  </div>
-                  <div className="flex flex-1 flex-col gap-2 p-5">
-                    <p className="text-brand-slate text-xs font-semibold tracking-[0.14em] uppercase">
-                      {item.comingSoon ? "Coming soon" : caseStudyMeta(item)}
-                    </p>
-                    <p className="text-brand-ink text-lg font-semibold text-balance">
-                      {item.name}
-                    </p>
-                    <span className="text-brand-action mt-auto pt-3 text-sm font-semibold">
-                      {item.comingSoon ? "Preview" : "Read the study"}
-                    </span>
-                  </div>
+                  <p className="text-brand-ink text-lg font-semibold text-balance">
+                    {item.name}
+                  </p>
+                  <span className="text-brand-action mt-auto pt-3 text-sm font-semibold">
+                    Read the study
+                  </span>
                 </Link>
               </RevealItem>
             ))}
@@ -206,11 +185,7 @@ export default async function CaseStudyPage({
       </section>
 
       <FinalCta
-        heading={
-          study.comingSoon
-            ? "Talk with JAIA about your practice."
-            : "Want a similar path for your practice?"
-        }
+        heading="Want a similar path for your practice?"
         body="Tell us where you want to grow. JAIA will help you map the right next conversation."
       />
     </article>

@@ -228,8 +228,6 @@ export function caseStudyServices(study: CaseStudyRecord): ServiceRecord[] {
 }
 
 export function caseStudyMeta(study: CaseStudyRecord): string {
-  if (study.comingSoon) return "Coming soon";
-  if (study.location) return study.location;
   const [primary] = caseStudyServices(study);
   return primary.category;
 }
@@ -244,6 +242,5 @@ export function caseStudyShowcaseItem(study: CaseStudyRecord) {
     caption: study.name,
     tilt: study.tilt,
     lift: study.lift,
-    comingSoon: Boolean(study.comingSoon),
   };
 }
