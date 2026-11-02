@@ -38,8 +38,12 @@ export function Bento4({
   const active = reduce ? 0 : index;
 
   return (
-    <article className="border-brand-mist flex h-full w-full flex-col overflow-hidden rounded-3xl border bg-white">
-      <div className="px-6 py-6 sm:px-8 sm:py-8">
+    <article className="border-brand-mist relative flex h-full w-full flex-col overflow-hidden rounded-3xl border bg-white">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_0%_0%,rgba(135,205,236,0.22),transparent_50%)]"
+      />
+      <div className="relative px-6 py-6 sm:px-8 sm:py-8">
         <h2
           id={headingId}
           className={

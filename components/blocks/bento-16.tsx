@@ -35,15 +35,19 @@ export function Bento16({
 
   return (
     <article
-      className="border-brand-mist flex h-full min-h-[420px] w-full flex-col overflow-hidden rounded-3xl border bg-white"
+      className="border-brand-mist relative flex h-full min-h-[420px] w-full flex-col overflow-hidden rounded-3xl border bg-white"
       onPointerEnter={() => setSpread(true)}
       onPointerLeave={() => {
         setSpread(true);
         setHot(null);
       }}
     >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(135,205,236,0.24),transparent_55%)]"
+      />
       <div className="relative min-h-[280px] flex-1 px-6 py-8">
-        <div aria-hidden="true" className="dot-grid absolute inset-0" />
+        <div aria-hidden="true" className="dot-grid absolute inset-0 opacity-70" />
         <div className="relative mx-auto flex max-w-sm flex-col items-stretch gap-3">
           {shown.map((layer, index) => {
             const Icon = layer.icon;

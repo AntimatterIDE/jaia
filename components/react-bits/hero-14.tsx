@@ -10,6 +10,7 @@ import { motion } from "motion/react";
 import { Bento1 } from "@/components/blocks/bento-1";
 import { CtaButton, CtaLink } from "@/components/marketing/cta";
 import { FloatPanel } from "@/components/marketing/float-panel";
+import { SkyAtmosphere } from "@/components/marketing/sky-atmosphere";
 import { getService } from "@/content/services";
 import { capabilityPillars, hero, partnership, siteConfig } from "@/content/site";
 
@@ -20,15 +21,8 @@ const rise = {
 
 export function Hero14() {
   return (
-    <section className="bg-canvas relative flex min-h-[100svh] w-full items-start overflow-hidden px-5 pt-[calc(var(--header-height)+2.75rem)] pb-16 sm:px-8 lg:items-center lg:pb-20">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-[70%] bg-[radial-gradient(ellipse_at_50%_100%,rgba(135,205,236,0.28),transparent_70%)]"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-[50%] bg-[radial-gradient(ellipse_at_30%_100%,rgba(39,111,145,0.08),transparent_60%)]"
-      />
+    <section className="relative flex min-h-[100svh] w-full items-start overflow-hidden bg-[color-mix(in_srgb,var(--brand-sky-soft)_55%,var(--canvas))] px-5 pt-[calc(var(--header-height)+2.75rem)] pb-16 sm:px-8 lg:items-center lg:pb-20">
+      <SkyAtmosphere tone="hero" />
 
       <div className="relative z-10 mx-auto w-full max-w-[90rem]">
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">

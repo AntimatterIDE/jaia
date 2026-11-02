@@ -51,9 +51,13 @@ export function Bento1({
           : "grid-cols-2 sm:grid-cols-4";
 
   return (
-    <article className="border-brand-mist flex h-full min-h-[340px] w-full flex-col overflow-hidden rounded-3xl border bg-white">
+    <article className="border-brand-mist relative flex h-full min-h-[340px] w-full flex-col overflow-hidden rounded-3xl border bg-white">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(135,205,236,0.26),transparent_55%)]"
+      />
       <div className="relative min-h-[220px] flex-1">
-        <div aria-hidden="true" className="dot-grid absolute inset-0" />
+        <div aria-hidden="true" className="dot-grid absolute inset-0 opacity-70" />
         <div className="relative flex h-full flex-col items-center justify-center px-6 py-8">
           <div className={`grid w-full max-w-[420px] gap-2 ${columns}`}>
             {shown.map((source, index) => {

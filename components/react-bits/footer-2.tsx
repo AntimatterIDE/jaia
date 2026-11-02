@@ -3,6 +3,8 @@
 /**
  * React Bits Pro `Footer2`, restyled for JAIA.
  * The stock photograph, studio name, and invented credits are not used.
+ *
+ * Deep blue only — no sky crown or cutouts that compete with the light CTA above.
  */
 
 import Image from "next/image";
@@ -53,182 +55,127 @@ const companyLinks = [
   { href: "/terms", label: "Terms" },
 ] as const;
 
-function Curve({ flip = false }: { flip?: boolean }) {
-  return (
-    <svg
-      viewBox="0 0 614 153"
-      aria-hidden="true"
-      className={`relative top-px h-auto w-[180px] sm:w-[250px] ${flip ? "-scale-x-100" : ""}`}
-    >
-      <path
-        d="M0 0H451.601C467.78 0 483.071 7.75893 491.954 21.2815C558.518 122.612 538.359 153.074 614 153H0V0Z"
-        className="fill-[var(--brand-action-deep)]"
-      />
-    </svg>
-  );
-}
-
-function FooterBackdrop({ reduce }: { reduce: boolean | null }) {
-  return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(135,205,236,0.55),transparent_55%),radial-gradient(ellipse_at_80%_10%,rgba(135,205,236,0.35),transparent_50%),linear-gradient(180deg,var(--brand-action)_0%,var(--brand-action-deep)_58%,#153f54_100%)]" />
-      <div className="absolute inset-0 opacity-[0.18] [background-image:radial-gradient(rgba(255,255,255,0.55)_1px,transparent_1px)] [background-size:22px_22px]" />
-
-      <motion.div
-        className="absolute -top-16 left-[8%] size-[22rem] rounded-full bg-[radial-gradient(circle,rgba(135,205,236,0.55)_0%,transparent_70%)] blur-2xl"
-        animate={reduce ? undefined : { x: [0, 48, 0], y: [0, 28, 0], scale: [1, 1.08, 1] }}
-        transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute top-[18%] right-[4%] size-[18rem] rounded-full bg-[radial-gradient(circle,rgba(234,245,251,0.4)_0%,transparent_68%)] blur-3xl"
-        animate={reduce ? undefined : { x: [0, -36, 0], y: [0, 40, 0], scale: [1, 1.12, 1] }}
-        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
-      />
-      <motion.div
-        className="absolute bottom-[-4rem] left-[35%] size-[24rem] rounded-full bg-[radial-gradient(circle,rgba(135,205,236,0.28)_0%,transparent_70%)] blur-3xl"
-        animate={reduce ? undefined : { x: [0, -24, 0], y: [0, -32, 0] }}
-        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-      />
-      <motion.div
-        className="absolute inset-x-0 top-0 h-40 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent)]"
-        animate={reduce ? undefined : { x: ["-30%", "30%", "-30%"] }}
-        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-      />
-    </div>
-  );
-}
-
 export function Footer2() {
   const year = new Date().getFullYear();
   const reduce = useReducedMotion();
 
   return (
-    <footer className="relative w-full overflow-hidden text-white">
-      <div className="absolute inset-x-0 top-0 h-40 sm:h-52" aria-hidden="true">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--brand-sky)_0%,var(--brand-action)_55%,var(--brand-action-deep)_100%)]" />
+    <footer className="relative w-full overflow-hidden bg-[var(--brand-action-deep)] text-white">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_-20%,rgba(135,205,236,0.28),transparent_42%),linear-gradient(180deg,#1f5f7c_0%,var(--brand-action-deep)_40%,#143848_100%)]" />
+        <div className="absolute inset-0 opacity-[0.12] [background-image:radial-gradient(rgba(255,255,255,0.55)_1px,transparent_1px)] [background-size:22px_22px]" />
         <motion.div
-          className="absolute top-4 left-1/4 size-44 rounded-full bg-white/30 blur-2xl"
-          animate={reduce ? undefined : { x: [0, 28, 0], y: [0, 14, 0] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-24 left-[8%] size-[22rem] rounded-full bg-[radial-gradient(circle,rgba(135,205,236,0.4)_0%,transparent_70%)] blur-2xl"
+          animate={reduce ? undefined : { x: [0, 36, 0], y: [0, 20, 0] }}
+          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute top-10 right-1/4 size-32 rounded-full bg-[rgba(135,205,236,0.55)] blur-2xl"
-          animate={reduce ? undefined : { x: [0, -20, 0], y: [0, 18, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+          className="absolute top-[35%] right-[-2%] size-[18rem] rounded-full bg-[radial-gradient(circle,rgba(234,245,251,0.22)_0%,transparent_68%)] blur-3xl"
+          animate={reduce ? undefined : { x: [0, -28, 0], y: [0, 32, 0] }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
       </div>
 
-      <div className="relative">
-        <div className="h-28 sm:h-36" />
-        <div className="relative bg-[var(--brand-action-deep)]">
-          <FooterBackdrop reduce={reduce} />
+      <div className="relative mx-auto w-full max-w-[1400px] px-5 py-14 sm:px-8 sm:py-16">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.06 } } }}
+          className="flex flex-col items-center gap-8 text-center"
+        >
+          <motion.div variants={rise}>
+            <HomeLink aria-label="JAIA Health — home" className="inline-flex">
+              <Image
+                src="/brand/jaia-logo-stacked.svg"
+                alt="JAIA Health"
+                width={288}
+                height={432}
+                unoptimized
+                className="h-auto w-24 brightness-0 invert"
+              />
+            </HomeLink>
+            <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-white/80">
+              {siteConfig.positioning}
+            </p>
+          </motion.div>
 
-          <div className="absolute top-0 left-0 z-10 -translate-y-full">
-            <Curve />
-          </div>
-          <div className="absolute top-0 right-0 z-10 -translate-y-full">
-            <Curve flip />
-          </div>
-
-          <div className="relative mx-auto w-full max-w-[1400px] px-5 py-14 sm:px-8 sm:py-16">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-80px" }}
-              variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.06 } } }}
-              className="flex flex-col items-center gap-8 text-center"
-            >
-              <motion.div variants={rise}>
-                <HomeLink aria-label="JAIA Health — home" className="inline-flex">
-                  <Image
-                    src="/brand/jaia-logo-stacked.svg"
-                    alt="JAIA Health"
-                    width={288}
-                    height={432}
-                    unoptimized
-                    className="h-auto w-24 brightness-0 invert"
-                  />
-                </HomeLink>
-                <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-white/80">
-                  {siteConfig.positioning}
-                </p>
-              </motion.div>
-
-              <motion.nav
-                aria-label="Services"
-                variants={rise}
-                className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2"
-              >
-                {services.map((service, index) => (
-                  <span key={service.slug} className="inline-flex items-center gap-4">
-                    {index > 0 ? (
-                      <span className="text-white/35" aria-hidden="true">
-                        —
-                      </span>
-                    ) : null}
-                    <Link
-                      href={serviceUrl(service.slug)}
-                      className="text-sm font-semibold tracking-wide text-white uppercase transition-colors duration-200 hover:text-[var(--brand-sky)]"
-                    >
-                      {service.shortName}
-                    </Link>
+          <motion.nav
+            variants={rise}
+            aria-label="Services"
+            className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2"
+          >
+            {services.map((service, index) => (
+              <span key={service.slug} className="inline-flex items-center gap-4">
+                {index > 0 ? (
+                  <span className="text-white/35" aria-hidden="true">
+                    —
                   </span>
-                ))}
-              </motion.nav>
+                ) : null}
+                <Link
+                  href={serviceUrl(service.slug)}
+                  className="text-sm font-semibold tracking-wide text-white uppercase transition-colors duration-200 hover:text-[var(--brand-sky)]"
+                >
+                  {service.shortName}
+                </Link>
+              </span>
+            ))}
+          </motion.nav>
 
-              <motion.nav
-                aria-label="Company"
-                variants={rise}
-                className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2"
+          <motion.nav
+            variants={rise}
+            aria-label="Company"
+            className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-white/70"
+          >
+            {companyLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="transition-colors hover:text-white"
               >
-                {companyLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="text-sm font-medium text-white/75 transition-colors duration-200 hover:text-white"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </motion.nav>
+                {link.label}
+              </Link>
+            ))}
+          </motion.nav>
 
-              <motion.ul variants={rise} className="flex items-center gap-5">
-                {siteConfig.socials.map((social) => {
-                  const Icon = icons[social.network as keyof typeof icons];
-                  if (!Icon) return null;
-                  const glyph = <Icon />;
-                  return (
-                    <li key={social.network}>
-                      {social.href ? (
-                        <a
-                          href={social.href}
-                          aria-label={social.label}
-                          className="text-white/85 transition-colors duration-200 hover:text-[var(--brand-sky)]"
-                        >
-                          {glyph}
-                        </a>
-                      ) : (
-                        <span className="text-white/85" aria-label={social.label}>
-                          {glyph}
-                        </span>
-                      )}
-                    </li>
-                  );
-                })}
-              </motion.ul>
+          <motion.ul variants={rise} className="flex items-center gap-5">
+            {siteConfig.socials.map((social) => {
+              const Icon = icons[social.network as keyof typeof icons];
+              if (!Icon) return null;
+              const glyph = <Icon />;
+              return (
+                <li key={social.network}>
+                  {social.href ? (
+                    <a
+                      href={social.href}
+                      aria-label={social.label}
+                      className="text-white/85 transition-colors duration-200 hover:text-[var(--brand-sky)]"
+                    >
+                      {glyph}
+                    </a>
+                  ) : (
+                    <span className="text-white/85" aria-label={social.label}>
+                      {glyph}
+                    </span>
+                  )}
+                </li>
+              );
+            })}
+          </motion.ul>
 
-              <motion.div variants={rise} className="w-full border-t border-white/15 pt-8">
-                <p className="text-sm text-white/70">
-                  © {year} {siteConfig.name}. All rights reserved.
-                </p>
-                <p className="mx-auto mt-3 max-w-3xl text-sm leading-relaxed text-white/55">
-                  Information on this site is for general business purposes and is not medical, legal
-                  or billing advice.
-                </p>
-              </motion.div>
-            </motion.div>
-          </div>
-        </div>
+          <motion.div
+            variants={rise}
+            className="w-full max-w-2xl border-t border-white/15 pt-6 text-center"
+          >
+            <p className="text-sm text-white/65">
+              © {year} {siteConfig.name}. All rights reserved.
+            </p>
+            <p className="mx-auto mt-2 max-w-xl text-[0.6875rem] leading-relaxed text-white/45">
+              Information on this site is for general business purposes and is not medical, legal or
+              billing advice.
+            </p>
+          </motion.div>
+        </motion.div>
       </div>
     </footer>
   );

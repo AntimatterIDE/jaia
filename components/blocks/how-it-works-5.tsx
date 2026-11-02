@@ -32,8 +32,12 @@ export function HowItWorks5({
   steps = approach.steps.map((step) => ({ title: step.title, description: step.body })),
 }: HowItWorks5Props = {}) {
   return (
-    <section aria-labelledby={id} className="bg-canvas w-full px-5 py-16 sm:px-8 sm:py-24">
-      <div className="mx-auto grid w-full max-w-[90rem] items-start gap-12 lg:grid-cols-2 lg:gap-16">
+    <section aria-labelledby={id} className="bg-canvas relative overflow-hidden px-5 py-16 sm:px-8 sm:py-24">
+      <div
+        aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_100%_0%,rgba(135,205,236,0.38),transparent_48%),radial-gradient(ellipse_at_0%_100%,rgba(234,245,251,0.85),transparent_42%),radial-gradient(ellipse_at_60%_40%,rgba(39,111,145,0.06),transparent_55%)]"
+      />
+      <div className="relative mx-auto grid w-full max-w-[90rem] items-start gap-12 lg:grid-cols-2 lg:gap-16">
         <motion.div
           className="flex flex-col gap-6"
           initial={{ opacity: 0, y: 14 }}

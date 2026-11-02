@@ -30,8 +30,12 @@ export function Faq2({
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section aria-labelledby={id} className="bg-canvas w-full px-5 py-16 sm:px-8 sm:py-24">
-      <div className="mx-auto grid w-full max-w-[90rem] gap-12 lg:grid-cols-[1fr_2fr] lg:gap-16">
+    <section aria-labelledby={id} className="bg-brand-sky-soft/55 relative overflow-hidden px-5 py-16 sm:px-8 sm:py-24">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_0%_40%,rgba(135,205,236,0.42),transparent_52%),radial-gradient(ellipse_at_100%_80%,rgba(39,111,145,0.08),transparent_50%)]"
+      />
+      <div className="relative mx-auto grid w-full max-w-[90rem] gap-12 lg:grid-cols-[1fr_2fr] lg:gap-16">
         <div className="flex flex-col gap-6 lg:sticky lg:top-28 lg:self-start">
           <h2 id={id} className="font-display text-brand-ink text-4xl leading-tight font-semibold tracking-tight sm:text-5xl">
             {heading}

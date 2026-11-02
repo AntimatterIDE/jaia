@@ -31,8 +31,12 @@ interface Features11Props {
 
 export function Features11({ id = "features-heading", heading, body, items }: Features11Props) {
   return (
-    <section aria-labelledby={id} className="bg-canvas w-full px-5 py-16 sm:px-8 sm:py-24">
-      <div className="mx-auto w-full max-w-[90rem]">
+    <section aria-labelledby={id} className="bg-canvas relative overflow-hidden px-5 py-16 sm:px-8 sm:py-24">
+      <div
+        aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_100%_15%,rgba(135,205,236,0.34),transparent_48%),radial-gradient(ellipse_at_0%_85%,rgba(234,245,251,0.95),transparent_45%),radial-gradient(ellipse_at_50%_50%,rgba(39,111,145,0.05),transparent_60%)]"
+      />
+      <div className="relative mx-auto w-full max-w-[90rem]">
         <div className="grid items-end gap-6 lg:grid-cols-[1.4fr_0.6fr] lg:gap-16">
           <motion.h2
             id={id}

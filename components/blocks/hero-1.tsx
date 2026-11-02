@@ -11,6 +11,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 
 import { CtaButton, CtaLink } from "@/components/marketing/cta";
+import { SkyAtmosphere } from "@/components/marketing/sky-atmosphere";
 
 export interface Hero1Action {
   label: string;
@@ -61,15 +62,16 @@ export function Hero1({
       aria-labelledby={headingId}
       className={
         tone === "hero"
-          ? "bg-canvas flex w-full items-center px-5 pt-[calc(var(--header-height)+2.5rem)] pb-16 sm:px-8 sm:pt-[calc(var(--header-height)+4rem)] sm:pb-20 lg:min-h-[100svh] lg:pt-[calc(var(--header-height)+5rem)]"
-          : "bg-canvas w-full px-5 py-16 sm:px-8 sm:py-24"
+          ? "relative flex w-full items-center overflow-hidden bg-[color-mix(in_srgb,var(--brand-sky-soft)_55%,var(--canvas))] px-5 pt-[calc(var(--header-height)+2.5rem)] pb-16 sm:px-8 sm:pt-[calc(var(--header-height)+4rem)] sm:pb-20 lg:min-h-[100svh] lg:pt-[calc(var(--header-height)+5rem)]"
+          : "relative w-full overflow-hidden bg-[color-mix(in_srgb,var(--brand-sky-soft)_28%,var(--canvas))] px-5 py-16 sm:px-8 sm:py-24"
       }
     >
+      <SkyAtmosphere tone={tone === "hero" ? "hero" : "section"} />
       <div
         className={
           visual
-            ? "mx-auto grid w-full max-w-[90rem] items-center gap-10 lg:grid-cols-2 lg:gap-16"
-            : "mx-auto flex w-full max-w-3xl flex-col gap-10"
+            ? "relative z-10 mx-auto grid w-full max-w-[90rem] items-center gap-10 lg:grid-cols-2 lg:gap-16"
+            : "relative z-10 mx-auto flex w-full max-w-3xl flex-col gap-10"
         }
       >
         <div className="flex flex-col gap-6">
