@@ -197,9 +197,9 @@ export const partnerSpotlights: readonly PartnerSpotlight[] = [
         eyebrow: "Arimah Medical",
         label: "Increase in revenue from governmental payers",
         detail:
-          "Specifically, there has been a 100% increase in revenue from average monthly revenue previous to the APCM–PMC RCM partnership.",
+          "Specifically, there has been a 100% increase in revenue from average monthly revenue previous to the JAIA partnership.",
         before: "Average monthly revenue before the partnership",
-        after: "With the APCM–PMC RCM partnership",
+        after: "With the JAIA partnership",
         change: "+100%",
       },
       stats: [
@@ -371,7 +371,7 @@ export const partnerSpotlights: readonly PartnerSpotlight[] = [
               question:
                 "At Arimah Medical specifically, how have the additional revenue and operational improvements affected Dr. Arimah and the long-term health of the practice?",
               answer:
-                "Specifically, there has been a 100% increase in revenue from average monthly revenue previous to the APCM–PMC RCM partnership.",
+                "Specifically, there has been a 100% increase in revenue from average monthly revenue previous to the JAIA partnership.",
             },
           ],
         },
