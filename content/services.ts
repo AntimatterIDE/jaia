@@ -154,7 +154,7 @@ export const services: readonly ServiceRecord[] = [
     },
     page: {
       acronymNote:
-        "APCM stands for Advanced Primary Care Management, and BHI stands for Behavioral Health Integration. Both are Medicare-recognized program structures for care delivered between office visits.",
+        "APCM stands for Advanced Primary Care Management, BHI stands for Behavioral Health Integration, and PCM stands for Principal Care Management. They are Medicare-recognized program structures for care delivered between office visits.",
       intro:
         "These programs give a practice a defined way to support patients between visits and to be recognized for that work. JAIA builds the underlying infrastructure so care coordination and behavioral health access become part of how the practice runs, rather than another initiative the team has to carry on top of everything else.",
       detail: [
@@ -199,9 +199,9 @@ export const services: readonly ServiceRecord[] = [
       ],
       faqs: [
         {
-          question: "What are APCM and BHI?",
+          question: "What are APCM, BHI, and Principal Care Management?",
           answer:
-            "Advanced Primary Care Management and Behavioral Health Integration are Medicare-recognized program structures for care that happens between office visits — coordination, follow-up, and behavioral health support. They give practices a defined way to deliver and document that work.",
+            "Advanced Primary Care Management, Behavioral Health Integration, and Principal Care Management are Medicare-recognized program structures for care that happens between office visits — coordination, follow-up, and behavioral health support. They give practices a defined way to deliver and document that work.",
         },
         {
           question: "Does the practice need to hire staff to run this?",
