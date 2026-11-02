@@ -10,7 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
-import { Building2, Handshake, Menu, NotebookPen, X, type LucideIcon } from "lucide-react";
+import { Building2, Handshake, Menu, X, type LucideIcon } from "lucide-react";
 
 import { HomeLink } from "@/components/marketing/home-link";
 import { pauseLenis, resumeLenis } from "@/components/marketing/smooth-scroll";
@@ -29,15 +29,9 @@ interface MenuEntry {
 
 const companyItems: MenuEntry[] = [
   {
-    icon: NotebookPen,
-    title: "Case studies",
-    description: "How practices put JAIA to work",
-    href: "/case-studies",
-  },
-  {
     icon: Handshake,
-    title: "Partners",
-    description: "Billing, consulting, and technology partners",
+    title: "Case studies & partners",
+    description: "How practices and partners work with JAIA",
     href: "/partners",
   },
   {
@@ -115,8 +109,8 @@ export function Navigation2() {
 
   const linkClass = (href: string) =>
     cn(
-      "rounded-full px-4 py-2 text-sm font-medium text-white/75 hover:text-white",
-      pathname === href && "text-brand-sky",
+      "text-brand-ink/75 hover:text-brand-ink rounded-full px-4 py-2 text-sm font-medium",
+      pathname === href && "text-brand-ink",
     );
 
   return (
@@ -126,7 +120,7 @@ export function Navigation2() {
           className="relative mx-auto hidden w-fit lg:block"
           onMouseLeave={() => setActiveMenu(null)}
         >
-          <div className="rounded-3xl border border-white/10 bg-[var(--brand-action-deep)]/92 shadow-xl backdrop-blur-2xl">
+          <div className="border-brand-sky/40 bg-brand-sky rounded-3xl border shadow-xl">
             <div className="flex items-center gap-2 py-2.5 pr-3 pl-5">
               <HomeLink aria-label="JAIA Health — home" className="mr-4 flex items-center">
                 <Image
@@ -135,7 +129,7 @@ export function Navigation2() {
                   width={128}
                   height={36}
                   priority
-                  className="h-8 w-auto"
+                  className="h-8 w-auto brightness-0"
                 />
               </HomeLink>
 
@@ -149,8 +143,8 @@ export function Navigation2() {
                     onFocus={() => setActiveMenu(key)}
                     onClick={() => setActiveMenu(key)}
                     className={cn(
-                      "rounded-full px-4 py-2 text-sm font-medium text-white/80 transition-colors hover:text-white",
-                      activeMenu === key && "text-brand-sky",
+                      "text-brand-ink/75 hover:text-brand-ink rounded-full px-4 py-2 text-sm font-medium transition-colors",
+                      activeMenu === key && "text-brand-ink",
                     )}
                   >
                     {key}
@@ -161,7 +155,7 @@ export function Navigation2() {
               <Link
                 href={primaryCta.href}
                 onMouseEnter={() => setActiveMenu(null)}
-                className="text-brand-action-deep hover:bg-brand-sky ml-4 rounded-xl bg-white px-5 py-2 text-sm font-semibold transition-colors"
+                className="bg-brand-ink hover:bg-brand-ink/90 ml-4 rounded-xl px-5 py-2 text-sm font-semibold text-white transition-colors"
               >
                 {primaryCta.label}
               </Link>
@@ -186,7 +180,7 @@ export function Navigation2() {
         </div>
 
         <div className="lg:hidden">
-          <div className="overflow-hidden rounded-3xl border border-white/10 bg-[var(--brand-action-deep)]/92 shadow-xl backdrop-blur-2xl">
+          <div className="border-brand-sky/40 bg-brand-sky overflow-hidden rounded-3xl border shadow-xl">
             <div className="flex items-center justify-between py-2.5 pr-2.5 pl-4">
               <HomeLink aria-label="JAIA Health — home" className="flex items-center">
                 <Image
@@ -195,13 +189,13 @@ export function Navigation2() {
                   width={112}
                   height={32}
                   priority
-                  className="h-7 w-auto"
+                  className="h-7 w-auto brightness-0"
                 />
               </HomeLink>
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen((open) => !open)}
-                className="text-brand-action-deep flex size-10 items-center justify-center rounded-lg bg-white transition-colors hover:bg-[var(--brand-sky)]"
+                className="bg-brand-ink flex size-10 items-center justify-center rounded-lg text-white transition-colors hover:bg-brand-ink/90"
                 aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={mobileMenuOpen}
               >
@@ -224,13 +218,13 @@ export function Navigation2() {
                   <div className="max-h-[min(70dvh,32rem)] touch-pan-y space-y-5 overflow-y-auto overscroll-contain px-4 pt-1 pb-4 [overflow-anchor:none]">
                     <Link
                       href={primaryCta.href}
-                      className="text-brand-action-deep hover:bg-brand-sky block rounded-full bg-white px-6 py-2.5 text-center text-sm font-semibold transition-colors"
+                      className="bg-brand-ink hover:bg-brand-ink/90 block rounded-full px-6 py-2.5 text-center text-sm font-semibold text-white transition-colors"
                     >
                       {primaryCta.label}
                     </Link>
                     {(Object.keys(menus) as MenuKey[]).map((key) => (
                       <div key={key}>
-                        <p className="mb-2 px-1 text-sm font-semibold text-white">{key}</p>
+                        <p className="text-brand-ink mb-2 px-1 text-sm font-semibold">{key}</p>
                         <MenuCards items={menus[key]} />
                       </div>
                     ))}

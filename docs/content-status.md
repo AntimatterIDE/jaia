@@ -58,9 +58,9 @@ titles) is draft, pending client review.
 
 ### Case studies
 
-**Files:** `content/case-studies.ts`, homepage `CaseStudiesStrip`, `/case-studies`
+**Files:** `content/case-studies.ts`, homepage `CaseStudiesStrip`, `/partners`
 **Flag:** `CASE_STUDIES_ARE_PLACEHOLDER` (currently `false`)
-**Appears on:** homepage (directly under the hero) and `/case-studies` (index + four studies)
+**Appears on:** homepage (under the hero) and `/partners` (combined with partners); individual studies at `/case-studies/[slug]`
 
 Two studies are named, client-supplied engagements:
 
@@ -103,16 +103,15 @@ multiple diagnostics rather than HRV alone. Deferred for a later content
 pass — do not rename the service slug or rewrite capability copy until
 JAIA supplies the replacement diagnostics list.
 
-### Clinix AI partner (APCM + BHI)
+### Care management module (APCM + BHI)
 
 **File:** `content/partners.ts`  
-**Appears on:** `/services/apcm-bhi` and the technology-partner row on `/partners`
+**Appears on:** `/services/apcm-bhi` and the infrastructure row on `/partners`
 
-Client-confirmed JAIA technology partner. Product copy is taken from
-[Clinix AI](https://www.tryclinixai.com/) (enrollment, consent, care plans,
-provider review/sign-off) plus the client’s description of the relationship.
-Do not add Clinix pricing, HIPAA badges, patient counts, or outcome stats
-unless the client supplies them for this site.
+JAIA’s insulated operating module for Advanced Primary Care Management and
+Behavioral Health Integration (enrollment, consent, care plans, provider
+review/sign-off). Do not name third-party vendors here. Do not invent pricing,
+HIPAA badges, patient counts, or outcome stats unless the client supplies them.
 
 ## Approved — do not materially expand
 

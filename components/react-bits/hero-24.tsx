@@ -5,10 +5,9 @@
  *
  * Kept from the block: left-aligned reading stack, NeuroNoise filament
  * field, staggered Motion entrance, pinging status chip, dual CTAs, and
- * a footer metric/logo row. Video (or a still, where no clip exists)
- * replaces the solid shader canvas; the noise sits as a low-opacity
- * texture. Demo copy, dark-mode flipping, and invented partner names are
- * not used — the logo row only takes confirmed partner lockups.
+ * a footer metric/logo row. Optional video/still can sit under the shader;
+ * with neither, NeuroNoise is the full atmosphere. Demo copy and invented
+ * partner names are not used — the logo row only takes confirmed lockups.
  */
 
 import { useEffect, useRef } from "react";
@@ -164,6 +163,7 @@ export function Hero24({
   const copyY = useTransform(scrollYProgress, [0, 1], [0, -72]);
   const copyOpacity = useTransform(scrollYProgress, [0.2, 0.9], [1, 0]);
   const drift = parallax && motionAllowed;
+  const hasMedia = Boolean(videoSrc || image);
 
   const container: Variants = {
     hidden: {},
@@ -228,32 +228,42 @@ export function Hero24({
             className="img-tone object-cover"
             style={{ objectPosition: image.position ?? "70% center" }}
           />
-        ) : null}
+        ) : (
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_72%_28%,rgba(135,205,236,0.55),transparent_52%),radial-gradient(ellipse_at_18%_78%,rgba(234,245,251,0.95),transparent_48%),linear-gradient(160deg,#eaf5fb_0%,#ffffff_48%,#f7f8f8_100%)]" />
+        )}
       </motion.div>
 
       <NeuroNoise
-        className="pointer-events-none absolute inset-0 h-full w-full opacity-40 mix-blend-soft-light"
+        className={cn(
+          "pointer-events-none absolute inset-0 h-full w-full",
+          hasMedia ? "opacity-40 mix-blend-soft-light" : "opacity-70 mix-blend-multiply",
+        )}
         style={{ width: "100%", height: "100%" }}
         colorBack="#ffffff"
         colorMid="#87cdec"
-        colorFront="#276f91"
-        brightness={0.55}
-        contrast={0.38}
+        colorFront="#2d78a0"
+        brightness={hasMedia ? 0.55 : 0.72}
+        contrast={hasMedia ? 0.38 : 0.48}
         scale={1.15}
         offsetX={0.42}
-        /* Slower shader loop — paired with video, 0.45 felt heavy on desktop */
-        speed={reduceMotion ? 0 : 0.22}
+        speed={reduceMotion ? 0 : hasMedia ? 0.22 : 0.28}
       />
 
       {/* Readability scrims: light left wash for ink type (WCAG AA),
           bottom fade so the next canvas section does not hard-cut. */}
+      {hasMedia ? (
+        <div
+          aria-hidden="true"
+          className="bg-brand-ink/20 pointer-events-none absolute inset-0"
+        />
+      ) : null}
       <div
         aria-hidden="true"
-        className="bg-brand-ink/20 pointer-events-none absolute inset-0"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgb(255_255_255/0.96)_12%,rgb(255_255_255/0.86)_36%,rgb(255_255_255/0.42)_58%,rgb(255_255_255/0)_84%)]"
+        className={
+          hasMedia
+            ? "pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgb(255_255_255/0.96)_12%,rgb(255_255_255/0.86)_36%,rgb(255_255_255/0.42)_58%,rgb(255_255_255/0)_84%)]"
+            : "pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgb(255_255_255/0.92)_8%,rgb(255_255_255/0.72)_34%,rgb(255_255_255/0.28)_58%,rgb(255_255_255/0)_82%)]"
+        }
       />
       <div
         aria-hidden="true"

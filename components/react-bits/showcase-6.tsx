@@ -8,7 +8,6 @@
  * cities/dates, and `#` links are not used. Cards link to real routes.
  */
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion, type Variants } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
@@ -21,16 +20,9 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 export interface Showcase6Card {
   href: string;
   caption: string;
-  meta: string;
-  image: {
-    src: string;
-    alt: string;
-    objectPosition?: string;
-  };
   tilt: number;
   lift: string;
   comingSoon?: boolean;
-  showPhoto?: boolean;
 }
 
 export interface Showcase6Props {
@@ -50,38 +42,27 @@ const MotionLink = motion.create(Link);
 function PolaroidFace({ item }: { item: Showcase6Card }) {
   return (
     <div className="border-brand-mist rounded-2xl border bg-white p-3 shadow-[0_18px_45px_-20px_rgba(50,47,47,0.28)] transition-shadow duration-300 group-hover:shadow-[0_30px_70px_-28px_rgba(50,47,47,0.4)] motion-reduce:transition-none sm:p-3.5">
-      <div className="bg-brand-sky-soft relative aspect-square overflow-hidden rounded-lg">
-        {item.showPhoto === false ? (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="border-brand-action/40 size-24 rounded-full border" aria-hidden="true" />
-            <span className="bg-brand-action absolute size-3 rounded-full" aria-hidden="true" />
-          </div>
-        ) : (
-        <Image
-          src={item.image.src}
-          alt={item.image.alt}
-          fill
-          sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 90vw"
-          className={cn("object-cover", item.image.objectPosition)}
+      <div className="bg-brand-sky-soft relative flex aspect-square flex-col items-center justify-center overflow-hidden rounded-lg px-5">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,rgba(255,255,255,0.85),transparent_55%),radial-gradient(ellipse_at_70%_80%,rgba(135,205,236,0.45),transparent_50%)]"
         />
-        )}
-        {item.comingSoon && item.meta !== "Coming soon" ? (
+        <span className="border-brand-action/35 relative size-16 rounded-full border sm:size-20" aria-hidden="true" />
+        <span className="bg-brand-action absolute size-2.5 rounded-full" aria-hidden="true" />
+        {item.comingSoon ? (
           <span className="bg-brand-ink/80 absolute bottom-3 left-3 rounded-full px-3 py-1 text-xs font-semibold tracking-wide text-white uppercase">
             Coming soon
           </span>
         ) : null}
       </div>
-      <div className="flex items-baseline justify-between gap-3 px-1 pt-4 pb-1.5">
-        <span className="font-display text-brand-ink truncate text-[0.8125rem] font-semibold tracking-[0.08em] uppercase">
+      <div className="flex items-center justify-between gap-3 px-1 pt-4 pb-1.5">
+        <span className="font-display text-brand-ink text-[0.8125rem] font-semibold tracking-[0.08em] uppercase">
           {item.caption}
         </span>
-        <span className="font-display text-brand-slate flex shrink-0 items-center gap-1 text-[0.8125rem] font-medium tracking-[0.04em]">
-          {item.meta}
-          <ArrowUpRight
-            aria-hidden="true"
-            className="size-3.5 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 motion-reduce:opacity-100"
-          />
-        </span>
+        <ArrowUpRight
+          aria-hidden="true"
+          className="text-brand-slate size-3.5 shrink-0 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 motion-reduce:opacity-100"
+        />
       </div>
     </div>
   );

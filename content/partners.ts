@@ -1,7 +1,6 @@
 /**
- * Named technology partners. Only add records the client has confirmed —
- * do not invent logos, URLs, or product claims. Copy below is drawn from
- * the partner’s public site plus the client’s description of the relationship.
+ * Care-management infrastructure shown on APCM + BHI and the partners page.
+ * Do not invent third-party logos, URLs, or product claims.
  */
 
 import { ClipboardCheck, FileStack, History, type LucideIcon } from "lucide-react";
@@ -14,8 +13,9 @@ export interface ServicePartnerPoint {
 
 export interface ServicePartner {
   name: string;
-  href: string;
-  logo: {
+  /** External product URL — omit when there is no public third-party site. */
+  href?: string;
+  logo?: {
     src: string;
     alt: string;
     width: number;
@@ -25,23 +25,17 @@ export interface ServicePartner {
   heading: string;
   body: string;
   points: readonly ServicePartnerPoint[];
-  ctaLabel: string;
+  /** Label for an external link — only used when `href` is set. */
+  ctaLabel?: string;
 }
 
-/** Partners to surface on a given service page (`slug` → partner). */
+/** Partners / modules to surface on a given service page (`slug` → record). */
 export const servicePartners: Partial<Record<string, ServicePartner>> = {
   "apcm-bhi": {
-    name: "Clinix AI",
-    href: "https://www.tryclinixai.com/",
-    logo: {
-      src: "/brand/clinix-ai-logo.png",
-      alt: "Clinix AI",
-      width: 216,
-      height: 79,
-    },
-    eyebrow: "Technology partner",
-    heading: "Clinix AI, for the APCM operating layer.",
-    body: "JAIA partners with Clinix AI — population health software built for Advanced Primary Care Management and Behavioral Health Integration. Practices use it to enroll patients, document consent, keep care plans current, and produce records they can share. Physicians can review and approve care plans instead of carrying the full operating workflow themselves.",
+    name: "Care management module",
+    eyebrow: "Program infrastructure",
+    heading: "An insulated module to support APCM and BHI.",
+    body: "JAIA provides an insulated operating module for care management programs — Advanced Primary Care Management and Behavioral Health Integration. Practices use it for enrollment, consent, care-plan work, and a record they can produce, while provider review and sign-off stay with the practice.",
     points: [
       {
         title: "Enrollment and consent",
@@ -59,6 +53,5 @@ export const servicePartners: Partial<Record<string, ServicePartner>> = {
         icon: History,
       },
     ],
-    ctaLabel: "Visit Clinix AI",
   },
 };

@@ -21,7 +21,7 @@ const SERVICE_ROUTES = [
   "/services/laboratory-coordination",
   "/services/pol-establishment",
 ];
-const ROUTES = ["/", "/case-studies", "/about", "/contact", ...SERVICE_ROUTES];
+const ROUTES = ["/", "/partners", "/about", "/contact", ...SERVICE_ROUTES];
 
 const failures = [];
 const notes = [];
@@ -565,7 +565,7 @@ console.log("\n== Links ==");
 {
   const page = await newPage();
   const hrefs = new Set();
-  for (const route of ["/", "/case-studies", "/about", "/contact", "/services/iv-therapy"]) {
+  for (const route of ["/", "/partners", "/about", "/contact", "/services/iv-therapy"]) {
     await page.goto(BASE + route, { waitUntil: "load" });
     const links = await page.$$eval("a[href^='/']", (els) =>
       els.map((e) => e.getAttribute("href")),

@@ -8,13 +8,18 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/case-studies",
+        destination: "/partners",
+        permanent: true,
+      },
+      {
         source: "/case-studies/apcm-bhi",
-        destination: "/case-studies",
+        destination: "/partners",
         permanent: true,
       },
       {
         source: "/case-studies/wecare",
-        destination: "/case-studies",
+        destination: "/partners",
         permanent: true,
       },
       {
@@ -29,7 +34,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/case-studies/pol-establishment",
-        destination: "/case-studies",
+        destination: "/partners",
         permanent: true,
       },
       {

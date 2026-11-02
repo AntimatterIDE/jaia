@@ -4,7 +4,7 @@
  * React Bits Pro `Footer2`, restyled for JAIA.
  * The stock photograph, studio name, and invented credits are not used.
  *
- * Deep blue only — no sky crown or cutouts that compete with the light CTA above.
+ * Solid brand-ink — matches original JAIA dark sections, with soft sky accents.
  */
 
 import Image from "next/image";
@@ -47,8 +47,7 @@ function InstagramIcon() {
 const icons = { linkedin: LinkedinIcon, instagram: InstagramIcon } as const;
 
 const companyLinks = [
-  { href: "/case-studies", label: "Case studies" },
-  { href: "/partners", label: "Partners" },
+  { href: "/partners", label: "Case studies & partners" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
   { href: "/privacy", label: "Privacy Policy" },
@@ -60,17 +59,17 @@ export function Footer2() {
   const reduce = useReducedMotion();
 
   return (
-    <footer className="relative w-full overflow-hidden bg-[var(--brand-action-deep)] text-white">
+    <footer className="relative w-full overflow-hidden bg-[var(--brand-ink)] text-white">
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_-20%,rgba(135,205,236,0.28),transparent_42%),linear-gradient(180deg,#1f5f7c_0%,var(--brand-action-deep)_40%,#143848_100%)]" />
-        <div className="absolute inset-0 opacity-[0.12] [background-image:radial-gradient(rgba(255,255,255,0.55)_1px,transparent_1px)] [background-size:22px_22px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_-20%,rgba(135,205,236,0.22),transparent_42%),linear-gradient(180deg,#3a3737_0%,var(--brand-ink)_45%,#1f1d1d_100%)]" />
+        <div className="absolute inset-0 opacity-[0.1] [background-image:radial-gradient(rgba(255,255,255,0.55)_1px,transparent_1px)] [background-size:22px_22px]" />
         <motion.div
-          className="absolute -top-24 left-[8%] size-[22rem] rounded-full bg-[radial-gradient(circle,rgba(135,205,236,0.4)_0%,transparent_70%)] blur-2xl"
+          className="absolute -top-24 left-[8%] size-[22rem] rounded-full bg-[radial-gradient(circle,rgba(135,205,236,0.35)_0%,transparent_70%)] blur-2xl"
           animate={reduce ? undefined : { x: [0, 36, 0], y: [0, 20, 0] }}
           transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute top-[35%] right-[-2%] size-[18rem] rounded-full bg-[radial-gradient(circle,rgba(234,245,251,0.22)_0%,transparent_68%)] blur-3xl"
+          className="absolute top-[35%] right-[-2%] size-[18rem] rounded-full bg-[radial-gradient(circle,rgba(234,245,251,0.16)_0%,transparent_68%)] blur-3xl"
           animate={reduce ? undefined : { x: [0, -28, 0], y: [0, 32, 0] }}
           transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />

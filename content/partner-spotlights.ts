@@ -113,10 +113,10 @@ export interface PartnerSpotlight {
 }
 
 export const partnersPage = {
-  eyebrow: "Partner spotlight: Pareja Medical Consultants",
-  heading: "Partners who help practices grow.",
+  eyebrow: "Case studies & partners",
+  heading: "How practices and partners work with JAIA.",
   intro:
-    "JAIA works alongside billing, consulting, and technology partners so independent practices can add ancillary services with the support to sustain them.",
+    "Case studies from practices putting JAIA to work, plus billing, consulting, and care-management partners who help independent practices add and sustain ancillary services.",
   /** Former Billing & RCM still — see docs/image-credits.md */
   heroImage: {
     src: "/images/billing-rcm-workspace.jpg",
@@ -124,10 +124,15 @@ export const partnersPage = {
   },
   spotlightCtaLabel: "Read the PMC spotlight",
   logosLabel: "Featured partners",
+  caseStudies: {
+    anchor: "case-studies",
+    eyebrow: "Case studies",
+    heading: "How practices put JAIA to work.",
+  },
   technology: {
-    anchor: "technology-partners",
-    eyebrow: "Technology partner",
-    heading: "Software behind the programs.",
+    anchor: "care-management",
+    eyebrow: "Program infrastructure",
+    heading: "Insulated module behind APCM and BHI.",
   },
   finalCta: {
     heading: "Ready to grow with a partner, not another vendor?",

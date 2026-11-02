@@ -77,14 +77,15 @@
 }
 
 :root {
-  /* JAIA brand palette */
+  /* JAIA brand palette — sky #87cdec is the signature color from jaiahealth.com */
   --brand-ink: #322f2f;
   --brand-sky: #87cdec;
   --brand-sky-soft: #eaf5fb;
   --brand-slate: #636366;
   --brand-mist: #e9e8e9;
-  --brand-action: #276f91;
-  --brand-action-deep: #1d5570;
+  /* Darker sky (same hue) for text/fills — not the old teal/green cast */
+  --brand-action: #2d78a0;
+  --brand-action-deep: #1f5f82;
   --canvas: #ffffff;
   --canvas-soft: #f7f8f8;
   --header-height: 6.25rem;

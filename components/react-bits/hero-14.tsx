@@ -95,7 +95,7 @@ export function Hero14() {
             <figcaption className="text-brand-slate mt-4 max-w-md text-sm leading-relaxed">
               Built from inside independent practice.{" "}
               <Link
-                href="/case-studies"
+                href="/partners"
                 className="text-brand-action font-semibold underline-offset-4 transition-colors hover:text-brand-action-deep hover:underline"
               >
                 See how practices work with JAIA

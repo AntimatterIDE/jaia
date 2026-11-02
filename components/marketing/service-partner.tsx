@@ -6,14 +6,15 @@ import { motion, useReducedMotion, type Variants } from "motion/react";
 
 import SpotlightCard from "@/components/SpotlightCard";
 import { CtaButton } from "@/components/marketing/cta";
+import { JaiaSymbol } from "@/components/jaia-symbol";
 import { primaryCta } from "@/content/site";
 import { servicePartners } from "@/content/partners";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 /**
- * Named technology partner on a service page. Looks up the record on the
- * client so Lucide icons are not serialized across the RSC boundary.
+ * Care-management module (or named partner) on a service page. Looks up the
+ * record on the client so Lucide icons are not serialized across the RSC boundary.
  */
 export function ServicePartner({ slug }: { slug: string }) {
   const prefersReducedMotion = useReducedMotion();
@@ -68,15 +69,21 @@ export function ServicePartner({ slug }: { slug: string }) {
               <p className="text-eyebrow font-display text-brand-action font-semibold tracking-[0.18em] uppercase">
                 {partner.eyebrow}
               </p>
-              <span className="border-brand-mist inline-flex items-center rounded-full border bg-gradient-to-b from-white to-brand-mist px-5 py-2.5 shadow-soft">
-                <Image
-                  src={partner.logo.src}
-                  alt={partner.logo.alt}
-                  width={partner.logo.width}
-                  height={partner.logo.height}
-                  className="h-8 w-auto"
-                />
-              </span>
+              {partner.logo ? (
+                <span className="border-brand-mist inline-flex items-center rounded-full border bg-gradient-to-b from-white to-brand-mist px-5 py-2.5 shadow-soft">
+                  <Image
+                    src={partner.logo.src}
+                    alt={partner.logo.alt}
+                    width={partner.logo.width}
+                    height={partner.logo.height}
+                    className="h-8 w-auto"
+                  />
+                </span>
+              ) : (
+                <span className="border-brand-mist bg-brand-sky-soft text-brand-action inline-flex size-11 items-center justify-center rounded-full border shadow-soft">
+                  <JaiaSymbol className="size-6" />
+                </span>
+              )}
             </div>
             <h2
               id="partner-heading"
@@ -91,18 +98,20 @@ export function ServicePartner({ slug }: { slug: string }) {
 
           <div className="flex shrink-0 flex-wrap items-center gap-4">
             <CtaButton href={primaryCta.href}>{primaryCta.label}</CtaButton>
-            <a
-              href={partner.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group/ext text-brand-action hover:text-brand-action-deep inline-flex min-h-11 items-center gap-2 rounded-sm text-base font-semibold"
-            >
-              {partner.ctaLabel}
-              <ArrowUpRight
-                aria-hidden="true"
-                className="size-4 transition-transform duration-200 group-hover/ext:translate-x-0.5 group-hover/ext:-translate-y-0.5 motion-reduce:transition-none"
-              />
-            </a>
+            {partner.href && partner.ctaLabel ? (
+              <a
+                href={partner.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group/ext text-brand-action hover:text-brand-action-deep inline-flex min-h-11 items-center gap-2 rounded-sm text-base font-semibold"
+              >
+                {partner.ctaLabel}
+                <ArrowUpRight
+                  aria-hidden="true"
+                  className="size-4 transition-transform duration-200 group-hover/ext:translate-x-0.5 group-hover/ext:-translate-y-0.5 motion-reduce:transition-none"
+                />
+              </a>
+            ) : null}
           </div>
         </motion.div>
 

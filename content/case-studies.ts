@@ -1,5 +1,5 @@
 /**
- * Case studies shown on the homepage strip and `/case-studies`.
+ * Case studies shown on the homepage strip and the combined `/partners` page.
  *
  * Named practices (NOVO Wellness Center, Dr. Mukesh Gandhi) were supplied by
  * the client. Do not invent outcome statistics, quotes, or extra services.
@@ -185,7 +185,7 @@ export const caseStudySection = {
   headingLead: "How practices put JAIA ",
   headingAccent: "to work.",
   body: "Programs, diagnostics, therapies, and operations brought into how a practice already runs — without the team having to invent the operating model themselves.",
-  cta: { label: "Browse case studies", href: "/case-studies" },
+  cta: { label: "Case studies & partners", href: "/partners" },
 } as const;
 
 export const caseStudiesPage = {
@@ -242,13 +242,8 @@ export function caseStudyShowcaseItem(study: CaseStudyRecord) {
   return {
     href: caseStudyUrl(study.slug),
     caption: study.name,
-    meta: study.comingSoon
-      ? (study.location ?? "Coming soon")
-      : caseStudyMeta(study),
-    image: study.image,
     tilt: study.tilt,
     lift: study.lift,
     comingSoon: Boolean(study.comingSoon),
-    showPhoto: !(study.comingSoon && !study.location),
   };
 }

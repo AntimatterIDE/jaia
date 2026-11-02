@@ -4,13 +4,9 @@ import { Hero24 } from "@/components/react-bits/hero-24";
 import { aboutPage, primaryCta } from "@/content/site";
 import { timelineSection } from "@/content/timeline";
 
-/** User-supplied corridor clip, copied into the public tree. */
-const ABOUT_HERO_VIDEO = "/videos/hospital-corridor.mp4";
-
 /**
- * About page first screen — Hero24 layout with JAIA copy and the
- * hospital-corridor video. The page stays a server component; this is
- * the client island.
+ * About page first screen — Hero24 with React Bits NeuroNoise only.
+ * No photography or video.
  */
 export function AboutHero() {
   return (
@@ -25,7 +21,7 @@ export function AboutHero() {
         href: "#timeline",
       }}
       facts={timelineSection.facts}
-      videoSrc={ABOUT_HERO_VIDEO}
+      parallax
     />
   );
 }

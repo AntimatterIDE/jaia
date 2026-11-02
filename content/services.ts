@@ -211,7 +211,7 @@ export const services: readonly ServiceRecord[] = [
         {
           question: "How does this fit with our EHR?",
           answer:
-            "Programs are built around the systems the practice already uses wherever possible. For APCM and BHI, JAIA partners with Clinix AI so enrollment, consent, and care-plan work have a dedicated operating layer — with provider review and sign-off remaining with the practice.",
+            "Programs are built around the systems the practice already uses wherever possible. For APCM and BHI, JAIA provides an insulated operating module so enrollment, consent, and care-plan work have a dedicated layer — with provider review and sign-off remaining with the practice.",
         },
         {
           question: "How do patients get enrolled?",

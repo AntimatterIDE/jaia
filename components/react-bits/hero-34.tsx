@@ -72,8 +72,8 @@ const AREAS: {
   },
 ];
 
-/** JAIA action trough + sky crest */
-const TROUGH = "#276f91";
+/** JAIA action trough + sky crest (same hue as brand-sky) */
+const TROUGH = "#2d78a0";
 const CREST = "#87cdec";
 const WAVES = 14;
 const MAX_RIPPLES = 4;

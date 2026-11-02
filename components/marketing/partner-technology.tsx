@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 
 import AnimatedContent from "@/components/AnimatedContent";
 import SpotlightCard from "@/components/SpotlightCard";
+import { JaiaSymbol } from "@/components/jaia-symbol";
 import { SectionHeading } from "@/components/marketing/section-heading";
 import { partnersPage } from "@/content/partner-spotlights";
 import { servicePartners } from "@/content/partners";
@@ -13,7 +14,7 @@ const technologyPartners = Object.entries(servicePartners).flatMap(
   ([slug, partner]) => (partner ? [{ slug, partner }] : []),
 );
 
-/** Confirmed technology partners, reusing their service-page records. */
+/** Care-management module and confirmed technology partners. */
 export function PartnerTechnology() {
   if (technologyPartners.length === 0) return null;
   const { technology } = partnersPage;
@@ -43,13 +44,22 @@ export function PartnerTechnology() {
                     <div className="relative flex items-center justify-center overflow-hidden bg-gradient-to-br from-brand-sky-soft via-white to-brand-sky-soft px-8 py-14 lg:col-span-5 lg:py-0">
                       <div aria-hidden="true" className="dot-grid absolute inset-0" />
                       <span className="shadow-soft relative inline-flex items-center rounded-2xl border border-white bg-white px-8 py-6">
-                        <Image
-                          src={partner.logo.src}
-                          alt={partner.logo.alt}
-                          width={partner.logo.width}
-                          height={partner.logo.height}
-                          className="h-12 w-auto sm:h-14"
-                        />
+                        {partner.logo ? (
+                          <Image
+                            src={partner.logo.src}
+                            alt={partner.logo.alt}
+                            width={partner.logo.width}
+                            height={partner.logo.height}
+                            className="h-12 w-auto sm:h-14"
+                          />
+                        ) : (
+                          <span className="text-brand-action flex items-center gap-3">
+                            <JaiaSymbol className="size-10" />
+                            <span className="font-display text-brand-ink text-lg font-semibold">
+                              {partner.name}
+                            </span>
+                          </span>
+                        )}
                       </span>
                     </div>
 
@@ -83,19 +93,21 @@ export function PartnerTechnology() {
                       </ul>
 
                       <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-2">
-                        <a
-                          href={partner.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="group/ext text-brand-action hover:text-brand-action-deep inline-flex min-h-11 items-center gap-2 rounded-sm text-base font-semibold"
-                        >
-                          {partner.ctaLabel}
-                          <ArrowUpRight
-                            aria-hidden="true"
-                            className="size-4 transition-transform duration-200 group-hover/ext:translate-x-0.5 group-hover/ext:-translate-y-0.5 motion-reduce:transition-none"
-                          />
-                          <span className="sr-only"> (opens in a new tab)</span>
-                        </a>
+                        {partner.href && partner.ctaLabel ? (
+                          <a
+                            href={partner.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group/ext text-brand-action hover:text-brand-action-deep inline-flex min-h-11 items-center gap-2 rounded-sm text-base font-semibold"
+                          >
+                            {partner.ctaLabel}
+                            <ArrowUpRight
+                              aria-hidden="true"
+                              className="size-4 transition-transform duration-200 group-hover/ext:translate-x-0.5 group-hover/ext:-translate-y-0.5 motion-reduce:transition-none"
+                            />
+                            <span className="sr-only"> (opens in a new tab)</span>
+                          </a>
+                        ) : null}
                         {service ? (
                           <Link
                             href={serviceUrl(service.slug)}

@@ -6,7 +6,6 @@
 | --------------------------------------- | ------------------------ | ------------------------------------- |
 | `public/brand/jaia-logo-horizontal.png` | Site header, mobile menu | Supplied by JAIA                      |
 | `public/brand/jaia-logo-stacked.svg`    | Footer                   | Supplied by JAIA                      |
-| `public/brand/clinix-ai-logo.png`       | APCM + BHI partner section, `/partners` | Supplied Clinix AI lockup (used on ink; name also set in type because “Clinix” is black in the file) |
 | `public/brand/pareja-medical-consultants.png` | `/partners` (hero logo row, spotlight, Q&A) | Pareja Medical Consultants wordmark, supplied by JAIA |
 | `app/icon.svg`                          | Favicon (SVG)            | Derived from the JAIA symbol geometry |
 | `app/favicon.ico`                       | Favicon (16/32/48)       | Same mark; 16px crops to the central diamonds + chevrons |

@@ -44,8 +44,8 @@ const STEPS = [
   },
 ] as const;
 
-const COLORS: [string, string] = ["#276f91", "#87cdec"];
-const LEAK = "#1d5570";
+const COLORS: [string, string] = ["#2d78a0", "#87cdec"];
+const LEAK = "#1f5f82";
 const SAMPLES = 640;
 const TABLE = 1024;
 const SLOTS = 240;
