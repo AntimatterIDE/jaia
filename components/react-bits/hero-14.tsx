@@ -2,18 +2,17 @@
 
 /**
  * React Bits Pro `Hero14`, restyled for JAIA.
- * Brand-led home hero: lockup first, one headline, partnership visual.
+ * Brand-led home hero with a real practice photograph — no diagram chrome.
  */
 
+import Image from "next/image";
+import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 
 import { CtaButton, CtaLink } from "@/components/marketing/cta";
-import { FloatPanel } from "@/components/marketing/float-panel";
-import { HeroPartnershipVisual } from "@/components/marketing/hero-partnership-visual";
 import { SkyAtmosphere } from "@/components/marketing/sky-atmosphere";
 import { JaiaSymbol } from "@/components/jaia-symbol";
-import { getService } from "@/content/services";
-import { capabilityPillars, hero, partnership, siteConfig } from "@/content/site";
+import { hero, siteConfig } from "@/content/site";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -38,7 +37,7 @@ export function Hero14() {
       />
 
       <div className="relative z-10 mx-auto w-full max-w-[90rem]">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-14 xl:gap-20">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-14 xl:gap-16">
           <div className="flex flex-col">
             <motion.div {...rise(0.02)} className="flex items-center gap-3.5">
               <span className="bg-brand-action shadow-soft flex size-12 shrink-0 items-center justify-center rounded-2xl text-[var(--brand-sky)] sm:size-14">
@@ -79,20 +78,31 @@ export function Hero14() {
             </motion.div>
           </div>
 
-          <FloatPanel className="relative w-full">
-            <HeroPartnershipVisual
-              title="One partnership"
-              body={partnership.statement}
-              pillars={capabilityPillars.map((pillar) => ({
-                label: pillar.label,
-                icon: pillar.icon,
-                detail: pillar.slugs
-                  .map((slug) => getService(slug)?.shortName)
-                  .filter((name): name is string => Boolean(name))
-                  .join(" · "),
-              }))}
-            />
-          </FloatPanel>
+          <motion.figure
+            {...rise(0.18)}
+            className="relative w-full"
+          >
+            <div className="photo-card-fade bg-brand-sky-soft relative aspect-[4/5] overflow-hidden rounded-[2rem] sm:aspect-[5/6] lg:aspect-[4/5] xl:min-h-[36rem]">
+              <Image
+                src="/images/hero-practice-clinician.jpg"
+                alt="A clinician working with a patient inside an independent practice"
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 48vw"
+                className="img-tone object-cover object-[center_30%]"
+              />
+            </div>
+            <figcaption className="text-brand-slate mt-4 max-w-md text-sm leading-relaxed">
+              Built from inside independent practice.{" "}
+              <Link
+                href="/case-studies"
+                className="text-brand-action font-semibold underline-offset-4 transition-colors hover:text-brand-action-deep hover:underline"
+              >
+                See how practices work with JAIA
+              </Link>
+              .
+            </figcaption>
+          </motion.figure>
         </div>
       </div>
     </section>
