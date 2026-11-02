@@ -46,7 +46,7 @@ const AREAS: {
     emphasis: "Clarity",
     status: "clear",
     detail:
-      "HRV assessment, laboratory coordination, and physician office lab support—so diagnostics stay connected to care.",
+      "HRV assessment that produces ancillary revenue, plus laboratory coordination and physician office lab support—so diagnostics stay connected to care.",
     href: serviceUrl("hrv-assessment"),
     sea: { height: 0.62, chop: 1.2, speed: 1.15, foam: 1.25 },
   },

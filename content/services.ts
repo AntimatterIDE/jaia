@@ -199,7 +199,7 @@ export const services: readonly ServiceRecord[] = [
       ],
       faqs: [
         {
-          question: "What are APCM, BHI, and Principal Care Management?",
+          question: "What are APCM, BHI, and PCM?",
           answer:
             "Advanced Primary Care Management, Behavioral Health Integration, and Principal Care Management are Medicare-recognized program structures for care that happens between office visits — coordination, follow-up, and behavioral health support. They give practices a defined way to deliver and document that work.",
         },
@@ -228,7 +228,7 @@ export const services: readonly ServiceRecord[] = [
     name: "Heart Rate Variability Assessment",
     category: "Diagnostics",
     summary:
-      "Objective heart rate variability testing that quantifies autonomic nervous system function—informing personalized care plans and tracking patient response over time.",
+      "Objective heart rate variability testing that quantifies autonomic nervous system function—informing personalized care plans, tracking patient response over time, and producing ancillary revenue for the practice.",
     capabilityLabels: [
       "Objective assessment",
       "Care-plan insights",
@@ -236,7 +236,7 @@ export const services: readonly ServiceRecord[] = [
     ],
     icon: Activity,
     metaDescription:
-      "Objective heart rate variability testing that quantifies autonomic nervous system function, informing personalized care plans and longitudinal tracking.",
+      "Objective heart rate variability testing that informs care plans, tracks response over time, and generates ancillary revenue for independent practices.",
     image: {
       src: "/images/stack-hrv-heartbeat-line.jpg",
       alt: "A single glowing heartbeat trace running across a deep blue background",
@@ -247,7 +247,7 @@ export const services: readonly ServiceRecord[] = [
       acronymNote:
         "HRV stands for heart rate variability — the variation in time between consecutive heartbeats, which is used as a measure of autonomic nervous system function.",
       intro:
-        "Heart rate variability testing produces an objective measurement where a practice might otherwise be working from subjective report alone. JAIA helps practices add the assessment as a repeatable in-visit step, so the result can inform a care plan and be compared against the same patient's earlier readings.",
+        "Heart rate variability testing produces an objective measurement where a practice might otherwise be working from subjective report alone. JAIA helps practices add the assessment as a repeatable in-visit step, so the result can inform a care plan, be compared against the same patient's earlier readings, and contribute ancillary revenue as part of how the practice grows.",
       detail: [
         {
           label: "Objective assessment",
@@ -261,7 +261,7 @@ export const services: readonly ServiceRecord[] = [
         },
         {
           label: "Longitudinal tracking",
-          body: "Repeat assessments over time, so change can be observed against that patient's own baseline rather than a general reference.",
+          body: "Repeat assessments over time, so change can be observed against that patient's own baseline rather than a general reference — and so the service remains a sustainable ancillary revenue line.",
           icon: LineChart,
         },
       ],
@@ -277,16 +277,16 @@ export const services: readonly ServiceRecord[] = [
           icon: Stethoscope,
         },
         {
-          title: "Change you can follow",
-          body: "Repeat testing tracks how a patient responds over the course of their care.",
-          icon: LineChart,
+          title: "Ancillary revenue generation",
+          body: "HRV assessment is an in-practice ancillary service that produces revenue while giving clinicians objective data to guide care.",
+          icon: HandCoins,
         },
       ],
       approachBodies: [
-        "We look at where an objective autonomic measurement would actually change a conversation in your practice, and which patients it applies to.",
+        "We look at where an objective autonomic measurement would actually change a conversation in your practice, which patients it applies to, and how it can contribute as an ancillary revenue service.",
         "We design where the assessment sits in the visit, who performs it, and how results reach the care plan.",
         "We coordinate equipment, train the staff performing the assessment, and support the first rounds of testing.",
-        "We stay available as the practice builds a history of repeat assessments and refines how results are used.",
+        "We stay available as the practice builds a history of repeat assessments, refines how results are used, and sustains the revenue the service produces.",
       ],
       faqs: [
         {
@@ -298,6 +298,11 @@ export const services: readonly ServiceRecord[] = [
           question: "How does the assessment fit into a normal appointment?",
           answer:
             "The assessment is designed as a defined step within an existing visit rather than a separate appointment type. Part of the design work is deciding exactly where in the visit it happens and who on the team performs it.",
+        },
+        {
+          question: "Does HRV assessment generate revenue for the practice?",
+          answer:
+            "Yes. HRV assessment is set up as an ancillary service that produces revenue for the practice while remaining a clinical tool — an objective measurement the clinician uses in the care plan. JAIA helps design the workflow so the assessment is both useful and sustainable.",
         },
         {
           question: "What equipment does the practice need?",
