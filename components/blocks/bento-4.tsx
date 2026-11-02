@@ -40,9 +40,18 @@ export function Bento4({
   return (
     <article className="border-brand-mist flex h-full w-full flex-col overflow-hidden rounded-3xl border bg-white">
       <div className="px-6 py-6 sm:px-8 sm:py-8">
-        <h2 id={headingId} className="font-display text-brand-ink text-4xl font-semibold tracking-tight sm:text-5xl">{title}</h2>
+        <h2
+          id={headingId}
+          className={
+            headingId
+              ? "font-display text-brand-ink text-4xl font-semibold tracking-tight sm:text-5xl"
+              : "font-display text-brand-ink text-xl font-semibold tracking-tight sm:text-2xl"
+          }
+        >
+          {title}
+        </h2>
         <p className="text-brand-slate mt-3 max-w-2xl text-base leading-relaxed">{body}</p>
-        <ol className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <ol className="mt-8 grid gap-4 sm:grid-cols-2">
           {steps.map((step, stepIndex) => {
             const on = stepIndex === active;
             return (
@@ -50,18 +59,20 @@ export function Bento4({
                 <button
                   type="button"
                   onClick={() => setIndex(stepIndex)}
-                  className={`h-full w-full rounded-2xl border p-4 text-left ${
+                  className={`h-full w-full rounded-2xl border p-4 text-left transition-[border-color,background-color] duration-200 ${
                     on ? "border-brand-action bg-brand-sky-soft" : "border-brand-mist bg-canvas"
                   }`}
                   aria-current={on ? "step" : undefined}
                 >
-                  <span className="bg-brand-action inline-flex size-8 items-center justify-center rounded-full text-sm font-semibold text-white">
+                  <span className="bg-brand-action relative inline-flex size-8 shrink-0 items-center justify-center rounded-full text-[0.8125rem] font-semibold leading-none text-white tabular-nums">
                     {stepIndex + 1}
                   </span>
                   <span className="font-display text-brand-ink mt-3 block text-lg font-semibold">
                     {step.title}
                   </span>
-                  <span className="text-brand-slate mt-2 block text-sm leading-relaxed">{step.body}</span>
+                  <span className="text-brand-slate mt-2 block text-sm leading-relaxed">
+                    {step.body}
+                  </span>
                 </button>
               </li>
             );

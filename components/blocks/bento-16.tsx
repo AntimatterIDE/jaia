@@ -13,6 +13,7 @@ export interface BentoLayer {
   label: string;
   detail: string;
   icon: LucideIcon;
+  title?: string;
 }
 
 export function Bento16({
@@ -25,25 +26,28 @@ export function Bento16({
   body: string;
 }) {
   const reduce = useReducedMotion();
-  const [spread, setSpread] = useState(false);
+  const [spread, setSpread] = useState(true);
   const [hot, setHot] = useState<number | null>(null);
-  const shown = layers.slice(0, 4);
+  const shown = layers.slice(0, 4).map((layer) => ({
+    ...layer,
+    label: layer.label || layer.title || "",
+  }));
 
   return (
     <article
-      className="border-brand-mist flex h-full min-h-[360px] w-full flex-col overflow-hidden rounded-3xl border bg-white"
+      className="border-brand-mist flex h-full min-h-[420px] w-full flex-col overflow-hidden rounded-3xl border bg-white"
       onPointerEnter={() => setSpread(true)}
       onPointerLeave={() => {
-        setSpread(false);
+        setSpread(true);
         setHot(null);
       }}
     >
-      <div className="relative min-h-[220px] flex-1 px-6 py-8">
+      <div className="relative min-h-[280px] flex-1 px-6 py-8">
         <div aria-hidden="true" className="dot-grid absolute inset-0" />
-        <div className="relative mx-auto flex max-w-sm flex-col items-stretch">
+        <div className="relative mx-auto flex max-w-sm flex-col items-stretch gap-3">
           {shown.map((layer, index) => {
             const Icon = layer.icon;
-            const lit = hot === index || (hot === null && index === shown.length - 1);
+            const lit = hot === index || (hot === null && index === 0);
             return (
               <motion.button
                 key={layer.label}
@@ -51,17 +55,27 @@ export function Bento16({
                 onMouseEnter={() => setHot(index)}
                 onFocus={() => setHot(index)}
                 initial={false}
-                animate={{ y: spread || reduce ? index * 8 : index * -28 }}
-                className={`relative rounded-2xl border px-4 py-3 text-left shadow-sm ${
-                  lit ? "border-brand-action bg-brand-action text-white" : "border-brand-mist bg-white text-brand-ink"
+                animate={{
+                  y: reduce || spread ? 0 : index * -12,
+                  scale: reduce || spread ? 1 : 1 - index * 0.02,
+                }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                className={`relative rounded-2xl border px-4 py-3.5 text-left shadow-sm transition-[border-color,background-color,color] duration-200 ${
+                  lit
+                    ? "border-brand-action bg-brand-action text-white"
+                    : "border-brand-mist bg-white text-brand-ink"
                 }`}
-                style={{ zIndex: shown.length - index, marginTop: index === 0 ? 0 : -36 }}
+                style={{ zIndex: shown.length - index }}
               >
                 <span className="flex items-center gap-2">
                   <Icon className="size-4 shrink-0" strokeWidth={1.75} />
                   <span className="text-sm font-semibold">{layer.label}</span>
                 </span>
-                <span className={`mt-1 block text-xs leading-relaxed ${lit ? "text-white/85" : "text-brand-slate"}`}>
+                <span
+                  className={`mt-1.5 block text-xs leading-relaxed ${
+                    lit ? "text-white/90" : "text-brand-slate"
+                  }`}
+                >
                   {layer.detail}
                 </span>
               </motion.button>

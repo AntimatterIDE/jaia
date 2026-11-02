@@ -7,15 +7,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 
 import { HomeLink } from "@/components/marketing/home-link";
 import { services, serviceUrl } from "@/content/services";
 import { siteConfig } from "@/content/site";
 
 const rise = {
-  hidden: { opacity: 1, y: 12 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.45 } },
+  hidden: { opacity: 0, y: 14 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
 };
 
 function LinkedinIcon() {
@@ -58,29 +58,67 @@ function Curve({ flip = false }: { flip?: boolean }) {
     >
       <path
         d="M0 0H451.601C467.78 0 483.071 7.75893 491.954 21.2815C558.518 122.612 538.359 153.074 614 153H0V0Z"
-        className="fill-canvas"
+        className="fill-[var(--brand-action-deep)]"
       />
     </svg>
   );
 }
 
+function FooterBackdrop({ reduce }: { reduce: boolean | null }) {
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(135,205,236,0.55),transparent_55%),radial-gradient(ellipse_at_80%_10%,rgba(135,205,236,0.35),transparent_50%),linear-gradient(180deg,var(--brand-action)_0%,var(--brand-action-deep)_58%,#153f54_100%)]" />
+      <div className="absolute inset-0 opacity-[0.18] [background-image:radial-gradient(rgba(255,255,255,0.55)_1px,transparent_1px)] [background-size:22px_22px]" />
+
+      <motion.div
+        className="absolute -top-16 left-[8%] size-[22rem] rounded-full bg-[radial-gradient(circle,rgba(135,205,236,0.55)_0%,transparent_70%)] blur-2xl"
+        animate={reduce ? undefined : { x: [0, 48, 0], y: [0, 28, 0], scale: [1, 1.08, 1] }}
+        transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute top-[18%] right-[4%] size-[18rem] rounded-full bg-[radial-gradient(circle,rgba(234,245,251,0.4)_0%,transparent_68%)] blur-3xl"
+        animate={reduce ? undefined : { x: [0, -36, 0], y: [0, 40, 0], scale: [1, 1.12, 1] }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
+      />
+      <motion.div
+        className="absolute bottom-[-4rem] left-[35%] size-[24rem] rounded-full bg-[radial-gradient(circle,rgba(135,205,236,0.28)_0%,transparent_70%)] blur-3xl"
+        animate={reduce ? undefined : { x: [0, -24, 0], y: [0, -32, 0] }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+      />
+      <motion.div
+        className="absolute inset-x-0 top-0 h-40 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent)]"
+        animate={reduce ? undefined : { x: ["-30%", "30%", "-30%"] }}
+        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+      />
+    </div>
+  );
+}
+
 export function Footer2() {
   const year = new Date().getFullYear();
+  const reduce = useReducedMotion();
 
   return (
-    <footer className="relative w-full overflow-hidden">
+    <footer className="relative w-full overflow-hidden text-white">
       <div className="absolute inset-x-0 top-0 h-40 sm:h-52" aria-hidden="true">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--brand-sky)_0%,var(--brand-action)_58%,var(--brand-action-deep)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--brand-sky)_0%,var(--brand-action)_55%,var(--brand-action-deep)_100%)]" />
         <motion.div
-          className="absolute top-6 left-1/4 size-40 rounded-full bg-white/25 blur-2xl"
-          animate={{ x: [0, 24, 0], y: [0, 10, 0] }}
+          className="absolute top-4 left-1/4 size-44 rounded-full bg-white/30 blur-2xl"
+          animate={reduce ? undefined : { x: [0, 28, 0], y: [0, 14, 0] }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute top-10 right-1/4 size-32 rounded-full bg-[rgba(135,205,236,0.55)] blur-2xl"
+          animate={reduce ? undefined : { x: [0, -20, 0], y: [0, 18, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
         />
       </div>
 
       <div className="relative">
         <div className="h-28 sm:h-36" />
-        <div className="bg-canvas relative">
+        <div className="relative bg-[var(--brand-action-deep)]">
+          <FooterBackdrop reduce={reduce} />
+
           <div className="absolute top-0 left-0 z-10 -translate-y-full">
             <Curve />
           </div>
@@ -88,7 +126,7 @@ export function Footer2() {
             <Curve flip />
           </div>
 
-          <div className="mx-auto w-full max-w-[1400px] px-5 py-12 sm:px-8">
+          <div className="relative mx-auto w-full max-w-[1400px] px-5 py-14 sm:px-8 sm:py-16">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -104,28 +142,47 @@ export function Footer2() {
                     width={288}
                     height={432}
                     unoptimized
-                    className="h-auto w-24"
+                    className="h-auto w-24 brightness-0 invert"
                   />
                 </HomeLink>
-                <p className="text-brand-slate mx-auto mt-4 max-w-md text-base leading-relaxed">
+                <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-white/80">
                   {siteConfig.positioning}
                 </p>
               </motion.div>
 
-              <motion.nav aria-label="Services" variants={rise} className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+              <motion.nav
+                aria-label="Services"
+                variants={rise}
+                className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2"
+              >
                 {services.map((service, index) => (
                   <span key={service.slug} className="inline-flex items-center gap-4">
-                    {index > 0 ? <span className="text-brand-mist" aria-hidden="true">—</span> : null}
-                    <Link href={serviceUrl(service.slug)} className="text-brand-ink hover:text-brand-action text-sm font-semibold tracking-wide uppercase">
+                    {index > 0 ? (
+                      <span className="text-white/35" aria-hidden="true">
+                        —
+                      </span>
+                    ) : null}
+                    <Link
+                      href={serviceUrl(service.slug)}
+                      className="text-sm font-semibold tracking-wide text-white uppercase transition-colors duration-200 hover:text-[var(--brand-sky)]"
+                    >
                       {service.shortName}
                     </Link>
                   </span>
                 ))}
               </motion.nav>
 
-              <motion.nav aria-label="Company" variants={rise} className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+              <motion.nav
+                aria-label="Company"
+                variants={rise}
+                className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2"
+              >
                 {companyLinks.map((link) => (
-                  <Link key={link.href} href={link.href} className="text-brand-slate hover:text-brand-ink text-sm font-medium">
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-sm font-medium text-white/75 transition-colors duration-200 hover:text-white"
+                  >
                     {link.label}
                   </Link>
                 ))}
@@ -139,11 +196,15 @@ export function Footer2() {
                   return (
                     <li key={social.network}>
                       {social.href ? (
-                        <a href={social.href} aria-label={social.label} className="text-brand-ink hover:text-brand-action">
+                        <a
+                          href={social.href}
+                          aria-label={social.label}
+                          className="text-white/85 transition-colors duration-200 hover:text-[var(--brand-sky)]"
+                        >
                           {glyph}
                         </a>
                       ) : (
-                        <span className="text-brand-ink" aria-label={social.label}>
+                        <span className="text-white/85" aria-label={social.label}>
                           {glyph}
                         </span>
                       )}
@@ -152,12 +213,13 @@ export function Footer2() {
                 })}
               </motion.ul>
 
-              <motion.div variants={rise} className="border-brand-mist w-full border-t pt-8">
-                <p className="text-brand-slate text-sm">
+              <motion.div variants={rise} className="w-full border-t border-white/15 pt-8">
+                <p className="text-sm text-white/70">
                   © {year} {siteConfig.name}. All rights reserved.
                 </p>
-                <p className="text-brand-slate mx-auto mt-3 max-w-3xl text-sm leading-relaxed">
-                  Information on this site is for general business purposes and is not medical, legal or billing advice.
+                <p className="mx-auto mt-3 max-w-3xl text-sm leading-relaxed text-white/55">
+                  Information on this site is for general business purposes and is not medical, legal
+                  or billing advice.
                 </p>
               </motion.div>
             </motion.div>
