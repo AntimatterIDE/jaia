@@ -168,22 +168,24 @@ function Results({ partner }: { partner: PartnerSpotlight }) {
 
         <ResultsDisclaimer className="mt-8" />
 
-        <AnimatedContent delay={0.1}>
-          <div className="border-brand-sky/50 mt-5 flex flex-col gap-4 rounded-[1.5rem] border border-dashed bg-brand-sky-soft/50 p-6 sm:mt-6 sm:flex-row sm:items-center sm:gap-5">
-            <span
-              aria-hidden="true"
-              className="text-brand-action flex size-11 shrink-0 items-center justify-center rounded-xl bg-white"
-            >
-              <Sprout className="size-5" strokeWidth={1.75} />
-            </span>
-            <p className="text-brand-slate text-[0.9375rem] leading-relaxed">
-              <span className="text-brand-ink font-semibold">
-                {results.note.label}:{" "}
+        {results.note ? (
+          <AnimatedContent delay={0.1}>
+            <div className="border-brand-sky/50 mt-5 flex flex-col gap-4 rounded-[1.5rem] border border-dashed bg-brand-sky-soft/50 p-6 sm:mt-6 sm:flex-row sm:items-center sm:gap-5">
+              <span
+                aria-hidden="true"
+                className="text-brand-action flex size-11 shrink-0 items-center justify-center rounded-xl bg-white"
+              >
+                <Sprout className="size-5" strokeWidth={1.75} />
               </span>
-              {results.note.body}
-            </p>
-          </div>
-        </AnimatedContent>
+              <p className="text-brand-slate text-[0.9375rem] leading-relaxed">
+                <span className="text-brand-ink font-semibold">
+                  {results.note.label}:{" "}
+                </span>
+                {results.note.body}
+              </p>
+            </div>
+          </AnimatedContent>
+        ) : null}
       </div>
     </section>
   );

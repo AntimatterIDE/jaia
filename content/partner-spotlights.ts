@@ -88,7 +88,7 @@ export interface PartnerSpotlight {
     heading: string;
     featured: PartnerFeaturedResult;
     stats: readonly PartnerResultStat[];
-    note: { label: string; body: string };
+    note?: { label: string; body: string };
   };
   claims: {
     eyebrow: string;
@@ -222,10 +222,6 @@ export const partnerSpotlights: readonly PartnerSpotlight[] = [
           label: "Increase in revenue",
         },
       ],
-      note: {
-        label: "Additional patients and services",
-        body: "This varies by practice, but successful programs can start smaller and grow.",
-      },
     },
     claims: {
       eyebrow: "Reimbursement and clean claims",
@@ -267,7 +263,7 @@ export const partnerSpotlights: readonly PartnerSpotlight[] = [
       eyebrow: "The partnership",
       heading: "Not a typical billing relationship.",
       quote:
-        "Strong collaboration between both entities to deliver strong ancillary service revenue that gives primary care providers a strong financial foundation to grow and depend on.",
+        "Strong collaboration between both entities to deliver strong ancillary service revenue that gives providers a strong financial foundation to grow and depend on.",
       columns: [
         {
           title: "Acting as partners",
@@ -395,7 +391,7 @@ export const partnerSpotlights: readonly PartnerSpotlight[] = [
               question:
                 "What makes the partnership between Pareja and JAIA different from a typical relationship between a billing company and an ancillary-services partner?",
               answer:
-                "The difference between PMC & JAIA Health and a typical billing company / ancillary-services partner is the strong collaboration between both entities to deliver strong ancillary service revenue that gives primary care providers a strong financial foundation to grow and depend on. Acting as partners with practices, we have a wealth of knowledge in practice management and increasing revenue through ancillary services and improving operations.",
+                "The difference between PMC & JAIA Health and a typical billing company / ancillary-services partner is the strong collaboration between both entities to deliver strong ancillary service revenue that gives providers a strong financial foundation to grow and depend on. Acting as partners with practices, we have a wealth of knowledge in practice management and increasing revenue through ancillary services and improving operations.",
             },
           ],
         },
