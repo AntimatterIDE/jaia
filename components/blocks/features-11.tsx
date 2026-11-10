@@ -71,13 +71,13 @@ export function Features11({ id = "features-heading", heading, body, items }: Fe
                 whileInView="show"
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.55, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                className="lift border-brand-mist flex min-h-[280px] flex-col rounded-3xl border bg-white p-7 sm:p-8"
+                className="surface-card lift border-brand-mist group flex min-h-[280px] flex-col rounded-3xl border bg-white p-7 sm:p-8"
               >
                 <div className="flex items-start justify-between">
                   <div className="bg-brand-sky-soft text-brand-action flex size-11 items-center justify-center rounded-xl">
                     <Icon className="size-5" />
                   </div>
-                  <span className="text-brand-slate text-xs font-medium tracking-[0.15em]">
+                  <span className="font-display text-brand-action text-sm font-semibold tracking-[0.18em]">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                 </div>
@@ -89,7 +89,7 @@ export function Features11({ id = "features-heading", heading, body, items }: Fe
                     className="text-brand-action mt-6 inline-flex items-center gap-2 text-sm font-medium"
                   >
                     {card.linkLabel}
-                    <ArrowRight className="size-4" />
+                    <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0" />
                   </Link>
                 ) : null}
               </motion.article>

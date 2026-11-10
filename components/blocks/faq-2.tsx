@@ -61,10 +61,10 @@ export function Faq2({
                     type="button"
                     aria-expanded={open}
                     onClick={() => setOpenIndex(open ? null : index)}
-                    className={`flex-1 rounded-full border px-5 py-3.5 text-left text-base transition-colors ${
+                    className={`flex-1 rounded-full border px-5 py-3.5 text-left text-base shadow-soft transition-[background-color,border-color,color,box-shadow] duration-200 ${
                       open
                         ? "border-brand-action/40 bg-brand-sky-soft text-brand-action"
-                        : "border-transparent bg-brand-mist/70 text-brand-ink"
+                        : "border-transparent bg-white text-brand-ink hover:border-brand-sky/70"
                     }`}
                   >
                     {item.question}
@@ -73,7 +73,11 @@ export function Faq2({
                     type="button"
                     aria-label={open ? "Collapse answer" : "Expand answer"}
                     onClick={() => setOpenIndex(open ? null : index)}
-                    className="border-brand-mist mt-3 flex size-7 items-center justify-center rounded-full border"
+                    className={`mt-1 flex size-9 items-center justify-center rounded-full border transition-colors duration-200 ${
+                      open
+                        ? "border-brand-action bg-brand-action text-white"
+                        : "border-brand-mist bg-white text-brand-ink"
+                    }`}
                   >
                     {open ? <Minus className="size-3.5" /> : <Plus className="size-3.5" />}
                   </button>
@@ -86,7 +90,7 @@ export function Faq2({
                       exit={{ height: 0, opacity: 0 }}
                       className="overflow-hidden"
                     >
-                      <p className="bg-brand-action mt-4 ml-auto max-w-[85%] rounded-[1.25rem] px-5 py-4 text-sm leading-relaxed text-white sm:text-base">
+                      <p className="bg-brand-action shadow-lift mt-4 ml-auto max-w-[85%] rounded-[1.25rem] px-5 py-4 text-sm leading-relaxed text-white sm:text-base">
                         {item.answer}
                       </p>
                     </motion.div>

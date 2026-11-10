@@ -6,6 +6,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import type { LucideIcon } from "lucide-react";
 
@@ -131,16 +132,27 @@ export function Features5({
                     />
                   </div>
                 ) : (
-                  <Icon
-                    className="text-brand-action mb-6 size-12 transition-transform duration-300 group-hover:scale-110 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-                    strokeWidth={1.25}
-                  />
+                  <span className="bg-brand-sky-soft text-brand-action mb-6 flex size-14 items-center justify-center rounded-2xl shadow-[inset_0_0_0_1px_rgb(135_205_236/0.55)] transition-transform duration-300 group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100">
+                    <Icon className="size-7" strokeWidth={1.5} />
+                  </span>
                 )}
                 <h3 className="font-display text-brand-ink text-xl font-semibold">{feature.title}</h3>
                 <p className="text-brand-slate mt-3 text-base leading-relaxed">{feature.description}</p>
+                {feature.href ? (
+                  <>
+                    <span className="text-brand-action absolute top-8 right-8 inline-flex opacity-35 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100 motion-reduce:transition-none sm:top-10 sm:right-10">
+                      <ArrowRight className="size-4" />
+                      <span className="sr-only">View {feature.title}</span>
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className="bg-brand-action absolute inset-x-8 bottom-0 h-0.5 origin-left scale-x-0 rounded-full transition-transform duration-300 group-hover:scale-x-100 motion-reduce:transition-none sm:inset-x-10"
+                    />
+                  </>
+                ) : null}
               </>
             );
-            const className = `group bg-canvas block p-8 transition-colors duration-200 sm:p-10 ${
+            const className = `group bg-canvas relative block p-8 transition-colors duration-200 sm:p-10 ${
               index < items.length - 1 ? "border-brand-mist border-b" : ""
             } ${index % 2 === 0 ? "md:border-brand-mist md:border-r" : ""} ${
               (index + 1) % 3 !== 0 ? "lg:border-brand-mist lg:border-r" : "lg:border-r-0"
@@ -150,7 +162,7 @@ export function Features5({
                 key={feature.title}
                 href={feature.href}
                 {...cardMotion(index)}
-                className={`${className} hover:bg-brand-sky-soft/50`}
+                className={`${className} hover:bg-[color-mix(in_srgb,var(--brand-sky-soft)_55%,white)]`}
               >
                 {card}
               </MotionLink>

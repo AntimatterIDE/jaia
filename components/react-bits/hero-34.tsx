@@ -11,6 +11,8 @@ import { motion, useReducedMotion, type Variants } from "motion/react";
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import * as THREE from "three";
 
+import { CtaButton } from "@/components/marketing/cta";
+
 import { primaryCta } from "@/content/site";
 import { serviceUrl } from "@/content/services";
 
@@ -775,7 +777,7 @@ export function Hero34() {
         <div className="max-w-[52rem]">
           <motion.p
             variants={rise}
-            className="font-display text-brand-action text-[0.8125rem] font-semibold tracking-[0.16em] uppercase"
+            className="eyebrow-mark font-display text-brand-action text-[0.8125rem] font-semibold tracking-[0.16em] uppercase"
           >
             A trusted partner for the modern private practice
           </motion.p>
@@ -805,12 +807,9 @@ export function Hero34() {
             {current.detail}
           </motion.p>
           <motion.div variants={rise} className="mt-8 flex flex-row flex-wrap items-center gap-x-6 gap-y-3">
-            <Link
-              href={primaryCta.href}
-              className="bg-brand-ink hover:bg-brand-action-deep focus-visible:outline-brand-ink inline-flex h-12 items-center justify-center rounded-full px-7 text-sm font-semibold text-white transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2"
-            >
+            <CtaButton href={primaryCta.href} className="px-7 text-sm">
               {primaryCta.label}
-            </Link>
+            </CtaButton>
             <Link
               href={current.href}
               className="text-brand-slate hover:text-brand-ink focus-visible:outline-brand-action group inline-flex h-12 items-center gap-2 rounded-full text-sm font-semibold transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2"
@@ -857,6 +856,16 @@ export function Hero34() {
                   }`}
                 >
                   {item.emphasis}
+                </span>
+                <span className="relative mt-2 block h-0.5 w-full">
+                  <span className="bg-brand-mist/80 absolute inset-x-0 top-0 h-px" />
+                  {selected ? (
+                    <motion.span
+                      layoutId={reduceMotion ? undefined : "capability-rail"}
+                      className="bg-brand-action absolute inset-x-0 top-0 h-0.5 rounded-full"
+                      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                    />
+                  ) : null}
                 </span>
                 <span
                   className={`mt-1 text-sm transition-colors duration-300 ${

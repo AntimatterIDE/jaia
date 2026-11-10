@@ -40,8 +40,14 @@ function TestimonialCard({
   return (
     <motion.article
       variants={variants}
-      className="border-brand-mist shadow-soft rounded-[1.5rem] border bg-white p-6 sm:p-7"
+      className="surface-card border-brand-mist relative overflow-hidden rounded-[1.5rem] border bg-white p-6 sm:p-7"
     >
+      <span
+        aria-hidden="true"
+        className="font-serif text-brand-sky mb-3 block text-5xl leading-[0.5] select-none"
+      >
+        &ldquo;
+      </span>
       <p
         className={cn(
           "leading-relaxed",

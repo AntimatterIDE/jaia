@@ -38,7 +38,7 @@ export function Bento4({
   const active = reduce ? 0 : index;
 
   return (
-    <article className="border-brand-mist relative flex h-full w-full flex-col overflow-hidden rounded-3xl border bg-white">
+    <article className="surface-card border-brand-mist relative flex h-full w-full flex-col overflow-hidden rounded-3xl border bg-white">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_0%_0%,rgba(135,205,236,0.22),transparent_50%)]"
@@ -63,8 +63,10 @@ export function Bento4({
                 <button
                   type="button"
                   onClick={() => setIndex(stepIndex)}
-                  className={`h-full w-full rounded-2xl border p-4 text-left transition-[border-color,background-color] duration-200 ${
-                    on ? "border-brand-action bg-brand-sky-soft" : "border-brand-mist bg-canvas"
+                  className={`h-full w-full rounded-2xl border p-4 text-left transition-[border-color,background-color,box-shadow] duration-200 ${
+                    on
+                      ? "border-brand-action bg-brand-sky-soft shadow-soft"
+                      : "border-brand-mist bg-canvas hover:border-brand-sky"
                   }`}
                   aria-current={on ? "step" : undefined}
                 >

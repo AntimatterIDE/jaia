@@ -224,6 +224,77 @@
     user-select: none;
   }
 
+  /*
+   * Editorial eyebrow: a short action-colored rule sits in front of the
+   * tracked label. Inline so long eyebrows still wrap on narrow screens.
+   */
+  .eyebrow-mark::before {
+    content: "";
+    display: inline-block;
+    width: 1.35rem;
+    height: 2px;
+    margin-right: 0.7rem;
+    border-radius: 999px;
+    background: linear-gradient(
+      90deg,
+      var(--brand-sky),
+      var(--brand-action)
+    );
+    vertical-align: 0.16em;
+  }
+
+  /*
+   * Quiet card surface. A short sky wash at the top, then canvas, so panels
+   * feel lit rather than pasted on. Hover only shifts border and shadow.
+   */
+  .surface-card {
+    background-image: linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--brand-sky-soft) 80%, white) 0%,
+      white 6.5rem
+    );
+    box-shadow: var(--shadow-soft);
+    transition:
+      border-color 200ms ease-out,
+      box-shadow 200ms ease-out,
+      transform 650ms
+        linear(
+          0,
+          0.0792,
+          0.2371,
+          0.4044,
+          0.5525,
+          0.6726,
+          0.7652,
+          0.8341,
+          0.8842,
+          0.9199,
+          0.9451,
+          0.9626,
+          0.9747,
+          0.9829,
+          0.9886,
+          0.9924,
+          0.9949,
+          0.9966,
+          0.9978,
+          0.9985,
+          0.999,
+          1
+        );
+  }
+
+  .surface-card:hover {
+    border-color: color-mix(in srgb, var(--brand-sky) 65%, var(--brand-mist));
+    box-shadow: var(--shadow-lift);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .surface-card {
+      transition: none;
+    }
+  }
+
   /* Faint dot lattice behind diagram and logo panels; fades at the edges */
   .dot-grid {
     pointer-events: none;

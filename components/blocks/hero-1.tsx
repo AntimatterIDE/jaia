@@ -79,7 +79,7 @@ export function Hero1({
             <motion.p
               {...rise}
               transition={{ duration: 0.45 }}
-              className="text-eyebrow font-display text-brand-action font-semibold tracking-[0.18em] uppercase"
+              className="eyebrow-mark text-eyebrow font-display text-brand-action font-semibold tracking-[0.18em] uppercase"
             >
               {eyebrow}
             </motion.p>
