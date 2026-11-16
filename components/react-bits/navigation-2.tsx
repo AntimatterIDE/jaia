@@ -172,7 +172,7 @@ function MobileNavDrawer({ onClose }: { onClose: () => void }) {
     if (!el) return;
 
     const update = () => {
-      setCanScrollMore(el.scrollHeight - el.scrollTop - el.clientHeight > 12);
+      setCanScrollMore(el.scrollHeight - el.scrollTop - el.clientHeight > 4);
     };
 
     update();
@@ -186,7 +186,10 @@ function MobileNavDrawer({ onClose }: { onClose: () => void }) {
     };
   }, []);
 
-  const transition = { duration: reduceMotion ? 0 : 0.28, ease: [0.4, 0, 0.2, 1] as const };
+  const transition = {
+    duration: reduceMotion ? 0 : 0.42,
+    ease: [0.22, 1, 0.36, 1] as const,
+  };
 
   return createPortal(
     <>
@@ -194,8 +197,8 @@ function MobileNavDrawer({ onClose }: { onClose: () => void }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: reduceMotion ? 0 : 0.2 }}
-        className="bg-brand-ink/45 fixed inset-0 z-[70]"
+        transition={{ duration: reduceMotion ? 0 : 0.25 }}
+        className="bg-brand-ink/25 fixed inset-0 z-[70]"
         onClick={onClose}
         aria-hidden
       />
@@ -205,13 +208,13 @@ function MobileNavDrawer({ onClose }: { onClose: () => void }) {
         role="dialog"
         aria-modal="true"
         aria-label="Menu"
-        initial={{ x: "100%" }}
-        animate={{ x: 0 }}
-        exit={{ x: "100%" }}
+        initial={{ clipPath: "inset(0% 0% 100% 0% round 1.5rem)" }}
+        animate={{ clipPath: "inset(0% 0% 0% 0% round 1.5rem)" }}
+        exit={{ clipPath: "inset(0% 0% 100% 0% round 1.5rem)" }}
         transition={transition}
-        className="fixed inset-y-0 right-0 z-[80] flex w-[min(100%,24rem)] flex-col bg-white shadow-2xl"
+        className="border-brand-sky/40 fixed top-3 right-4 left-4 z-[80] mx-auto flex max-h-[calc(100dvh-2.25rem-env(safe-area-inset-bottom))] max-w-[1400px] origin-top flex-col overflow-hidden rounded-3xl border bg-white shadow-xl sm:right-6 sm:left-6"
       >
-        <div className="bg-brand-sky flex items-center justify-between px-4 pt-[max(0.75rem,env(safe-area-inset-top))] pb-3">
+        <div className="bg-brand-sky flex shrink-0 items-center justify-between py-2.5 pr-2.5 pl-4">
           <HomeLink aria-label="JAIA Health — home" className="flex items-center">
             <Image
               src="/brand/jaia-logo-horizontal.png"
@@ -232,7 +235,7 @@ function MobileNavDrawer({ onClose }: { onClose: () => void }) {
           </button>
         </div>
 
-        <div className="px-4 pt-4 pb-3">
+        <div className="shrink-0 px-4 pt-4 pb-3">
           <Link
             href={primaryCta.href}
             className="bg-brand-ink hover:bg-brand-ink/90 block rounded-full px-6 py-2.5 text-center text-sm font-semibold text-white transition-colors"
@@ -241,13 +244,13 @@ function MobileNavDrawer({ onClose }: { onClose: () => void }) {
           </Link>
         </div>
 
-        <div className="relative min-h-0 flex-1">
+        <div className="relative min-h-0">
           <div
             ref={scrollerRef}
             data-lenis-prevent
             data-lenis-prevent-wheel
             data-lenis-prevent-touch
-            className="absolute inset-0 touch-pan-y overflow-y-auto overscroll-contain px-3 pb-[max(1.25rem,env(safe-area-inset-bottom))]"
+            className="max-h-[calc(100dvh-2.25rem-env(safe-area-inset-bottom)-10rem)] touch-pan-y overflow-y-auto overscroll-contain px-3 pb-6"
           >
             <div className="space-y-4">
               <div>
@@ -278,7 +281,7 @@ function MobileNavDrawer({ onClose }: { onClose: () => void }) {
           </div>
 
           {canScrollMore ? (
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-center bg-gradient-to-t from-white via-white to-transparent pt-10 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+            <div className="pointer-events-none absolute inset-x-3 bottom-0 flex items-end justify-center rounded-b-3xl bg-gradient-to-t from-white via-white to-transparent pt-10 pb-3">
               <span className="text-brand-ink flex items-center gap-1 text-xs font-semibold">
                 Scroll for more
                 <ChevronDown className="size-4" aria-hidden />
