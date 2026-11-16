@@ -5,12 +5,13 @@
  * The demo product, community, pricing, and login items are not used.
  */
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "motion/react";
-import { Building2, Handshake, Menu, X, type LucideIcon } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { Building2, ChevronDown, Handshake, Mail, Menu, X, type LucideIcon } from "lucide-react";
 
 import { HomeLink } from "@/components/marketing/home-link";
 import { pauseLenis, resumeLenis } from "@/components/marketing/smooth-scroll";
@@ -56,6 +57,16 @@ const menus: Record<MenuKey, MenuEntry[]> = {
   Company: companyItems,
 };
 
+const mobileCompanyItems: MenuEntry[] = [
+  ...companyItems,
+  {
+    icon: Mail,
+    title: "Contact",
+    description: "Start a conversation",
+    href: "/contact",
+  },
+];
+
 function MenuCards({ items }: { items: readonly MenuEntry[] }) {
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -91,10 +102,201 @@ function MenuCards({ items }: { items: readonly MenuEntry[] }) {
   );
 }
 
+function MobileNavLink({ item, pathname }: { item: MenuEntry; pathname: string }) {
+  const Icon = item.icon;
+  const active = pathname === item.href;
+
+  return (
+    <Link
+      href={item.href}
+      aria-current={active ? "page" : undefined}
+      className={cn(
+        "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold",
+        active
+          ? "bg-brand-sky-soft text-brand-ink"
+          : "text-brand-ink hover:bg-brand-sky-soft/70",
+      )}
+    >
+      <span className="bg-brand-sky/40 text-brand-ink shrink-0 rounded-lg p-1.5">
+        <Icon className="size-4" strokeWidth={1.75} />
+      </span>
+      {item.title}
+    </Link>
+  );
+}
+
+function MobileNavDrawer({ onClose }: { onClose: () => void }) {
+  const pathname = usePathname();
+  const reduceMotion = useReducedMotion();
+  const panelRef = useRef<HTMLElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [canScrollMore, setCanScrollMore] = useState(false);
+
+  useEffect(() => {
+    const previouslyFocused = document.activeElement;
+    closeRef.current?.focus();
+
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const panel = panelRef.current;
+      if (!panel) return;
+      const focusable = [
+        ...panel.querySelectorAll<HTMLElement>("a[href], button:not([disabled])"),
+      ];
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      if (previouslyFocused instanceof HTMLElement) previouslyFocused.focus();
+    };
+  }, [onClose]);
+
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+
+    const update = () => {
+      setCanScrollMore(el.scrollHeight - el.scrollTop - el.clientHeight > 12);
+    };
+
+    update();
+    el.addEventListener("scroll", update, { passive: true });
+    const observer = new ResizeObserver(update);
+    observer.observe(el);
+    if (el.firstElementChild) observer.observe(el.firstElementChild);
+    return () => {
+      el.removeEventListener("scroll", update);
+      observer.disconnect();
+    };
+  }, []);
+
+  const transition = { duration: reduceMotion ? 0 : 0.28, ease: [0.4, 0, 0.2, 1] as const };
+
+  return createPortal(
+    <>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: reduceMotion ? 0 : 0.2 }}
+        className="bg-brand-ink/45 fixed inset-0 z-[70]"
+        onClick={onClose}
+        aria-hidden
+      />
+      <motion.aside
+        ref={panelRef}
+        id="mobile-nav"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu"
+        initial={{ x: "100%" }}
+        animate={{ x: 0 }}
+        exit={{ x: "100%" }}
+        transition={transition}
+        className="fixed inset-y-0 right-0 z-[80] flex w-[min(100%,24rem)] flex-col bg-white shadow-2xl"
+      >
+        <div className="bg-brand-sky flex items-center justify-between px-4 pt-[max(0.75rem,env(safe-area-inset-top))] pb-3">
+          <HomeLink aria-label="JAIA Health — home" className="flex items-center">
+            <Image
+              src="/brand/jaia-logo-horizontal.png"
+              alt=""
+              width={112}
+              height={32}
+              className="h-7 w-auto brightness-0"
+            />
+          </HomeLink>
+          <button
+            ref={closeRef}
+            type="button"
+            onClick={onClose}
+            className="bg-brand-ink flex size-10 items-center justify-center rounded-lg text-white transition-colors hover:bg-brand-ink/90"
+            aria-label="Close menu"
+          >
+            <X className="size-5" />
+          </button>
+        </div>
+
+        <div className="px-4 pt-4 pb-3">
+          <Link
+            href={primaryCta.href}
+            className="bg-brand-ink hover:bg-brand-ink/90 block rounded-full px-6 py-2.5 text-center text-sm font-semibold text-white transition-colors"
+          >
+            {primaryCta.label}
+          </Link>
+        </div>
+
+        <div className="relative min-h-0 flex-1">
+          <div
+            ref={scrollerRef}
+            data-lenis-prevent
+            data-lenis-prevent-wheel
+            data-lenis-prevent-touch
+            className="absolute inset-0 touch-pan-y overflow-y-auto overscroll-contain px-3 pb-[max(1.25rem,env(safe-area-inset-bottom))]"
+          >
+            <div className="space-y-4">
+              <div>
+                <p className="text-brand-slate mb-1 px-3 text-xs font-semibold tracking-wide uppercase">
+                  Services
+                </p>
+                <ul>
+                  {menus.Services.map((item) => (
+                    <li key={item.href}>
+                      <MobileNavLink item={item} pathname={pathname} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <p className="text-brand-slate mb-1 px-3 text-xs font-semibold tracking-wide uppercase">
+                  Company
+                </p>
+                <ul>
+                  {mobileCompanyItems.map((item) => (
+                    <li key={item.href}>
+                      <MobileNavLink item={item} pathname={pathname} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {canScrollMore ? (
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-center bg-gradient-to-t from-white via-white to-transparent pt-10 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+              <span className="text-brand-ink flex items-center gap-1 text-xs font-semibold">
+                Scroll for more
+                <ChevronDown className="size-4" aria-hidden />
+              </span>
+            </div>
+          ) : null}
+        </div>
+      </motion.aside>
+    </>,
+    document.body,
+  );
+}
+
 export function Navigation2() {
   const pathname = usePathname();
   const [activeMenu, setActiveMenu] = useState<MenuKey | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const closeMobileMenu = useCallback(() => setMobileMenuOpen(false), []);
 
   useEffect(() => {
     setMobileMenuOpen(false);
@@ -104,14 +306,13 @@ export function Navigation2() {
   useEffect(() => {
     if (!mobileMenuOpen) return;
     pauseLenis();
-    return () => resumeLenis();
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      resumeLenis();
+    };
   }, [mobileMenuOpen]);
-
-  const linkClass = (href: string) =>
-    cn(
-      "text-brand-ink/75 hover:text-brand-ink rounded-full px-4 py-2 text-sm font-medium",
-      pathname === href && "text-brand-ink",
-    );
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-3 sm:px-6 lg:px-8">
@@ -198,45 +399,17 @@ export function Navigation2() {
                 className="bg-brand-ink flex size-10 items-center justify-center rounded-lg text-white transition-colors hover:bg-brand-ink/90"
                 aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-nav"
               >
                 {mobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
               </button>
             </div>
-
-            <AnimatePresence>
-              {mobileMenuOpen ? (
-                <motion.div
-                  initial={{ height: 0, opacity: 1 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 1 }}
-                  transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
-                  data-lenis-prevent
-                  data-lenis-prevent-wheel
-                  data-lenis-prevent-touch
-                  className="overflow-hidden"
-                >
-                  <div className="max-h-[min(70dvh,32rem)] touch-pan-y space-y-5 overflow-y-auto overscroll-contain px-4 pt-1 pb-4 [overflow-anchor:none]">
-                    <Link
-                      href={primaryCta.href}
-                      className="bg-brand-ink hover:bg-brand-ink/90 block rounded-full px-6 py-2.5 text-center text-sm font-semibold text-white transition-colors"
-                    >
-                      {primaryCta.label}
-                    </Link>
-                    {(Object.keys(menus) as MenuKey[]).map((key) => (
-                      <div key={key}>
-                        <p className="text-brand-ink mb-2 px-1 text-sm font-semibold">{key}</p>
-                        <MenuCards items={menus[key]} />
-                      </div>
-                    ))}
-                    <Link href="/contact" className={linkClass("/contact")}>
-                      Contact
-                    </Link>
-                  </div>
-                </motion.div>
-              ) : null}
-            </AnimatePresence>
           </div>
         </div>
+
+        <AnimatePresence>
+          {mobileMenuOpen ? <MobileNavDrawer key="mobile-nav" onClose={closeMobileMenu} /> : null}
+        </AnimatePresence>
       </nav>
     </header>
   );
