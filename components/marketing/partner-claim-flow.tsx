@@ -31,7 +31,10 @@ function ClaimFlow({ partner }: { partner: PartnerSpotlight }) {
   const motionAllowed = useMotionAllowed();
   const flowRef = useRef<HTMLOListElement>(null);
   const [reached, setReached] = useState(-1);
-  const lastIndex = claims.steps.length - 1;
+  const stepCount = claims.steps.length;
+  const lastIndex = stepCount - 1;
+  // Wide rail ends at the first/last column centres: 50/n% from each edge.
+  const railInset = `${50 / stepCount}%`;
 
   const { scrollYProgress } = useScroll({
     target: flowRef,
@@ -75,16 +78,19 @@ function ClaimFlow({ partner }: { partner: PartnerSpotlight }) {
 
             <ol
               ref={flowRef}
-              className="relative lg:grid lg:grid-cols-5 lg:gap-6"
+              className="relative lg:grid lg:gap-6"
+              style={{
+                gridTemplateColumns: `repeat(${stepCount}, minmax(0, 1fr))`,
+              }}
             >
-              {/* Wide: one rail through the marker centres (column centres
-                  sit at 10% and 90% of a five-column track). */}
+              {/* Wide: one rail through the marker centres of an n-column track. */}
               <ScrollRailSegment
                 progress={scrollYProgress}
                 range={[0, 1]}
                 animate={motionAllowed}
                 axis="x"
-                className="top-[27px] right-[10%] left-[10%] hidden h-0.5 rounded-full lg:block"
+                className="top-[27px] hidden h-0.5 rounded-full lg:block"
+                style={{ left: railInset, right: railInset }}
               />
 
               {claims.steps.map((step, index) => {

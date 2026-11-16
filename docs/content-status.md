@@ -23,10 +23,12 @@ Set `avatarSrc` only to a consented photograph of the person named.
 The section framing copy (`socialProof` heading and body) is draft, pending
 client review.
 
-### Pareja Medical Consultants partner spotlight
+### Partner spotlights (Pareja Medical Consultants; Superior Billing Solutions)
 
 **File:** `content/partner-spotlights.ts`  
 **Appears on:** `/partners`
+
+#### Pareja Medical Consultants
 
 Built from the client-supplied “JAIA Health Partner Spotlight: Pareja Medical
 Consulting (Consultants) – aka PMC” questionnaire, answered by David at PMC.
@@ -50,6 +52,30 @@ The logo is client-supplied (`public/brand/pareja-medical-consultants.png`).
 PMC has no website URL on file — `href` stays empty and no external link
 renders until the client supplies one. Do not add further practices,
 percentages, or claims.
+
+#### Superior Billing Solutions / Nexum
+
+Built from the client-supplied SBS/Nexum partner questionnaire, answered by
+Dakota White (Founder & CEO per the approved testimonial attribution). The
+Q&A publishes the supplied questions and answers as written, grouped under
+the questionnaire’s five sections. Hyphens in “10%–20%” were normalized to
+en dashes. Q7’s unfinished bracket prompts (EHR transition detail; one
+operational-issue example) were dropped rather than invented — the published
+answer keeps only the completed sentences. There is no Q6 in this
+questionnaire.
+
+Derived spotlight sections restate those answers only:
+
+- Result figures: 10%–20% approximate monthly revenue/collections increase
+  (Q4a); 99% average clean claim rate (Q4b); Q5 as the results note.
+- The four oversight steps come from Q3 (setup → submit/track → denials →
+  report by service line).
+- The pull quote is an excerpt of Q8, attributed to Dakota White, Superior
+  Billing Solutions.
+
+No client logo or named practices are on file yet — the spotlight uses a
+text mark (`SBS` / full name) and omits the practices list until supplied.
+`href` stays empty. Do not add further practices, percentages, or claims.
 
 The page framing copy (`partnersPage`, section eyebrows and headings, step
 titles) is draft, pending client review.
@@ -125,6 +151,9 @@ on first use on each full service page.
 
 - Named practices and photography for the remaining IV Therapy and Laboratory Coordination studies
 - Any client-approved case-study narrative for Gandhi (Novo has a condensed story from the v2 document)
+- Superior Billing Solutions lockup for `/partners` (text mark until then)
+- SBS Q7 specifics: which practice’s EHR transition, and one operational issue resolved
+- Named practices for the SBS spotlight, if any should be listed publicly
 - Consented headshots of the six testimonial authors, only if photos are wanted later (initials are shown until then)
 - Photography of actual JAIA and partner practice settings for remaining service-page stills (see
   `docs/image-credits.md`)

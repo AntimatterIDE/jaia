@@ -38,10 +38,13 @@ export interface Hero24Cta {
 }
 
 export interface Hero24Logo {
-  src: string;
+  /** Client-supplied lockup; omit to show `label` as a text mark */
+  src?: string;
   alt: string;
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
+  /** Text mark when no `src` (e.g. partner short name pending a lockup) */
+  label?: string;
   /** In-page anchor or route for the logo chip */
   href?: string;
 }
@@ -332,19 +335,23 @@ export function Hero24({
             </p>
             <ul className="flex flex-wrap items-center gap-2.5 sm:gap-3">
               {logos.items.map((logo) => {
-                const mark = (
+                const mark = logo.src ? (
                   <Image
                     src={logo.src}
                     alt={logo.alt}
-                    width={logo.width}
-                    height={logo.height}
+                    width={logo.width ?? 120}
+                    height={logo.height ?? 32}
                     className="h-6 w-auto sm:h-7"
                   />
+                ) : (
+                  <span className="font-display text-brand-ink text-sm font-semibold tracking-tight">
+                    {logo.label ?? logo.alt}
+                  </span>
                 );
                 const chip =
                   "border-brand-mist/80 inline-flex h-12 items-center rounded-full border bg-white/80 px-4 shadow-sm backdrop-blur-md sm:px-5 [@media(max-height:44rem)]:h-10 [@media(max-height:44rem)]:px-3.5";
                 return (
-                  <li key={logo.src}>
+                  <li key={logo.src ?? logo.label ?? logo.alt}>
                     {logo.href ? (
                       <a
                         href={logo.href}
