@@ -25,12 +25,10 @@ import {
 export const siteConfig = {
   name: "JAIA Health",
   /**
-   * Canonical origin for this Next.js app. jaiahealth.com currently still
-   * serves a separate Netlify site, so Open Graph tags must not use it —
-   * crawlers were fetching a 404 and keeping an old share preview.
-   * Switch this to https://jaiahealth.com only after that domain points here.
+   * Canonical origin. Apex jaiahealth.com 308s to www, so share tags,
+   * sitemap, and schema must use the host that actually returns 200.
    */
-  url: "https://jaia-health.vercel.app",
+  url: "https://www.jaiahealth.com",
   positioning: "A trusted partner for the modern private practice.",
   tagline:
     "Advancing HealthCare Together: Expertise from Our Clinics to Yours.",
