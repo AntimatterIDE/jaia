@@ -56,7 +56,9 @@ export function PartnerInterview({ slug }: { slug: string }) {
             <p className="text-brand-slate text-sm leading-snug">
               Answered by
               <span className="text-brand-ink mt-0.5 block text-[0.9375rem] font-semibold">
-                {respondent.name}, {respondent.organization}
+                {respondent.title
+                  ? `${respondent.name}, ${respondent.title} ${respondent.organization}`
+                  : `${respondent.name}, ${respondent.organization}`}
               </span>
             </p>
           </div>

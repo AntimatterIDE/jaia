@@ -74,7 +74,7 @@ export interface PartnerSpotlight {
     height: number;
   };
   /** Questionnaire respondent, used for quote attribution */
-  respondent: { name: string; organization: string };
+  respondent: { name: string; title?: string; organization: string };
   profile: {
     eyebrow: string;
     heading: string;
@@ -415,10 +415,17 @@ export const partnerSpotlights: readonly PartnerSpotlight[] = [
     anchor: "sbs-spotlight",
     name: "Superior Billing Solutions",
     shortName: "SBS",
-    href: "",
+    href: "https://superiorbillingsolutions.com/",
+    logo: {
+      src: "/brand/superior-billing-solutions.png",
+      alt: "Superior Billing Solutions",
+      width: 932,
+      height: 576,
+    },
     respondent: {
       name: "Dakota White",
-      organization: "Superior Billing Solutions",
+      title: "CEO",
+      organization: "Superior Billing",
     },
     profile: {
       eyebrow: "Partner spotlight",
@@ -458,15 +465,15 @@ export const partnerSpotlights: readonly PartnerSpotlight[] = [
       eyebrow: "Measurable results",
       heading: "What practices have seen with SBS and JAIA.",
       featured: {
-        value: 10,
-        suffix: "%–20%",
+        value: 40,
+        suffix: "%",
         eyebrow: "Monthly revenue or collections",
         label: "Approximate increase since the partnership began",
         detail:
-          "Approximate increase in monthly revenue or collections: 10%–20%.",
+          "Approximate increase in monthly revenue or collections: 40%.",
         before: "Before the partnership",
         after: "With the JAIA partnership",
-        change: "+10–20%",
+        change: "+40%",
       },
       stats: [
         {
@@ -531,7 +538,7 @@ export const partnerSpotlights: readonly PartnerSpotlight[] = [
     qa: {
       eyebrow: "Partner spotlight Q&A",
       heading: "In SBS’s own words.",
-      body: "Questions about working with JAIA Health, answered by Dakota White at Superior Billing Solutions.",
+      body: "Questions about working with JAIA Health, answered by Dakota White, CEO Superior Billing.",
       sections: [
         {
           title: "About Superior Billing Solutions and Nexum",
@@ -574,7 +581,7 @@ export const partnerSpotlights: readonly PartnerSpotlight[] = [
                 {
                   label:
                     "Approximate increase in monthly revenue or collections",
-                  answer: "10%–20%",
+                  answer: "40%",
                 },
                 {
                   label:

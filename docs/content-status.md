@@ -56,26 +56,27 @@ percentages, or claims.
 #### Superior Billing Solutions / Nexum
 
 Built from the client-supplied SBS/Nexum partner questionnaire, answered by
-Dakota White (Founder & CEO per the approved testimonial attribution). The
-Q&A publishes the supplied questions and answers as written, grouped under
-the questionnaire’s five sections. Hyphens in “10%–20%” were normalized to
-en dashes. Q7’s unfinished bracket prompts (EHR transition detail; one
-operational-issue example) were dropped rather than invented — the published
-answer keeps only the completed sentences. There is no Q6 in this
-questionnaire.
+Dakota White (CEO Superior Billing). The Q&A publishes the supplied questions
+and answers as written, grouped under the questionnaire’s five sections.
+Q7’s unfinished bracket prompts (EHR transition detail; one operational-issue
+example) were dropped rather than invented — the published answer keeps only
+the completed sentences. There is no Q6 in this questionnaire. Monthly
+revenue/collections was updated from the questionnaire’s 10%–20% to 40% per
+client direction.
 
 Derived spotlight sections restate those answers only:
 
-- Result figures: 10%–20% approximate monthly revenue/collections increase
-  (Q4a); 99% average clean claim rate (Q4b); Q5 as the results note.
+- Result figures: 40% approximate monthly revenue/collections increase
+  (Q4a, updated); 99% average clean claim rate (Q4b); Q5 as the results note.
 - The four oversight steps come from Q3 (setup → submit/track → denials →
   report by service line).
-- The pull quote is an excerpt of Q8, attributed to Dakota White, Superior
-  Billing Solutions.
+- The pull quote is an excerpt of Q8, attributed to Dakota White, CEO
+  Superior Billing.
 
-No client logo or named practices are on file yet — the spotlight uses a
-text mark (`SBS` / full name) and omits the practices list until supplied.
-`href` stays empty. Do not add further practices, percentages, or claims.
+Logo: `public/brand/superior-billing-solutions.png` (from
+superiorbillingsolutions.com). Site URL is set on `href`. No named practices
+are on file yet — the practices list stays empty. Do not add further
+practices, percentages, or claims.
 
 The page framing copy (`partnersPage`, section eyebrows and headings, step
 titles) is draft, pending client review.

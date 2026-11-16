@@ -121,7 +121,9 @@ function Statement({ partner }: { partner: PartnerSpotlight }) {
                 </span>
                 <span aria-hidden="true"> · </span>
                 <span className="sr-only">, </span>
-                {respondent.organization}
+                {respondent.title
+                  ? `${respondent.title} ${respondent.organization}`
+                  : respondent.organization}
               </span>
             </figcaption>
           </figure>
