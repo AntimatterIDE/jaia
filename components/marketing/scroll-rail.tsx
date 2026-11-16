@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { motion, useTransform, type MotionValue } from "motion/react";
 
 import { cn } from "@/lib/utils";
@@ -14,6 +15,8 @@ interface ScrollRailSegmentProps {
   axis?: "x" | "y";
   /** Position and thickness, shared by the track and its fill */
   className: string;
+  /** Extra layout (e.g. dynamic left/right for an n-column rail) */
+  style?: CSSProperties;
 }
 
 /**
@@ -28,13 +31,20 @@ export function ScrollRailSegment({
   animate,
   axis = "y",
   className,
+  style,
 }: ScrollRailSegmentProps) {
   const fill = useTransform(progress, range, [0, 1]);
+  const fillStyle = animate
+    ? axis === "y"
+      ? { ...style, scaleY: fill }
+      : { ...style, scaleX: fill }
+    : style;
   return (
     <>
       <span
         aria-hidden="true"
         className={cn("bg-brand-mist pointer-events-none absolute", className)}
+        style={style}
       />
       <motion.span
         aria-hidden="true"
@@ -43,9 +53,7 @@ export function ScrollRailSegment({
           axis === "y" ? "origin-top" : "origin-left",
           className,
         )}
-        style={
-          animate ? (axis === "y" ? { scaleY: fill } : { scaleX: fill }) : undefined
-        }
+        style={fillStyle}
       />
     </>
   );

@@ -22,10 +22,15 @@ export const metadata: Metadata = {
   },
 };
 
-const featuredLogos: Hero24Logo[] = partnerSpotlights.map((partner) => ({
-  ...partner.logo,
-  href: `#${partner.anchor}`,
-}));
+const featuredLogos: Hero24Logo[] = partnerSpotlights.map((partner) =>
+  partner.logo
+    ? { ...partner.logo, href: `#${partner.anchor}` }
+    : {
+        alt: partner.name,
+        label: partner.shortName,
+        href: `#${partner.anchor}`,
+      },
+);
 
 export default function PartnersPage() {
   const [lead] = partnerSpotlights;

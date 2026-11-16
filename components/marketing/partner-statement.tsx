@@ -101,13 +101,19 @@ function Statement({ partner }: { partner: PartnerSpotlight }) {
             </blockquote>
             <figcaption className="mt-8 flex flex-wrap items-center gap-4 sm:mt-10">
               <span className="border-brand-mist inline-flex h-12 items-center rounded-full border bg-white px-4 shadow-sm">
-                <Image
-                  src={partner.logo.src}
-                  alt=""
-                  width={partner.logo.width}
-                  height={partner.logo.height}
-                  className="h-6 w-auto"
-                />
+                {partner.logo ? (
+                  <Image
+                    src={partner.logo.src}
+                    alt=""
+                    width={partner.logo.width}
+                    height={partner.logo.height}
+                    className="h-6 w-auto"
+                  />
+                ) : (
+                  <span className="font-display text-brand-ink text-sm font-semibold tracking-tight">
+                    {partner.shortName}
+                  </span>
+                )}
               </span>
               <span className="text-brand-slate text-[0.9375rem]">
                 <span className="text-brand-ink font-semibold">

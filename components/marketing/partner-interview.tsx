@@ -39,13 +39,19 @@ export function PartnerInterview({ slug }: { slug: string }) {
           />
           <div className="shadow-soft mt-8 flex items-center gap-4 rounded-2xl border border-white bg-white/85 p-4 pr-6">
             <span className="border-brand-mist flex h-14 shrink-0 items-center rounded-xl border bg-white px-3">
-              <Image
-                src={partner.logo.src}
-                alt=""
-                width={partner.logo.width}
-                height={partner.logo.height}
-                className="h-7 w-auto"
-              />
+              {partner.logo ? (
+                <Image
+                  src={partner.logo.src}
+                  alt=""
+                  width={partner.logo.width}
+                  height={partner.logo.height}
+                  className="h-7 w-auto"
+                />
+              ) : (
+                <span className="font-display text-brand-ink text-sm font-semibold tracking-tight">
+                  {partner.shortName}
+                </span>
+              )}
             </span>
             <p className="text-brand-slate text-sm leading-snug">
               Answered by

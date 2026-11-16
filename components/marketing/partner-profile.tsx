@@ -95,13 +95,19 @@ function Profile({ partner }: { partner: PartnerSpotlight }) {
           <div className="shadow-soft rounded-[1.75rem] border border-white bg-white/85 p-5 backdrop-blur-xs sm:p-7">
             <div className="border-brand-mist relative flex items-center justify-center overflow-hidden rounded-[1.25rem] border bg-gradient-to-b from-white to-brand-sky-soft px-6 py-10 sm:py-12">
               <div aria-hidden="true" className="dot-grid absolute inset-0" />
-              <Image
-                src={partner.logo.src}
-                alt={partner.logo.alt}
-                width={partner.logo.width}
-                height={partner.logo.height}
-                className="relative h-12 w-auto sm:h-14"
-              />
+              {partner.logo ? (
+                <Image
+                  src={partner.logo.src}
+                  alt={partner.logo.alt}
+                  width={partner.logo.width}
+                  height={partner.logo.height}
+                  className="relative h-12 w-auto sm:h-14"
+                />
+              ) : (
+                <p className="font-display text-brand-ink relative text-center text-xl font-semibold tracking-tight sm:text-2xl">
+                  {partner.name}
+                </p>
+              )}
             </div>
 
             <div className="mt-6 flex flex-wrap items-center gap-2.5 px-1">
@@ -147,24 +153,29 @@ function Profile({ partner }: { partner: PartnerSpotlight }) {
                   </ul>
                 </dd>
               </div>
-              <div className="py-4">
-                <dt className="text-brand-slate text-xs font-semibold tracking-[0.14em] uppercase">
-                  {profile.practicesLabel}
-                </dt>
-                <dd className="mt-2">
-                  <ul className="text-brand-ink space-y-1.5 text-[0.9375rem] font-medium">
-                    {profile.practices.map((practice) => (
-                      <li key={practice} className="flex items-center gap-2.5">
-                        <span
-                          aria-hidden="true"
-                          className="bg-brand-sky size-1.5 shrink-0 rounded-full"
-                        />
-                        {practice}
-                      </li>
-                    ))}
-                  </ul>
-                </dd>
-              </div>
+              {profile.practices.length > 0 ? (
+                <div className="py-4">
+                  <dt className="text-brand-slate text-xs font-semibold tracking-[0.14em] uppercase">
+                    {profile.practicesLabel}
+                  </dt>
+                  <dd className="mt-2">
+                    <ul className="text-brand-ink space-y-1.5 text-[0.9375rem] font-medium">
+                      {profile.practices.map((practice) => (
+                        <li
+                          key={practice}
+                          className="flex items-center gap-2.5"
+                        >
+                          <span
+                            aria-hidden="true"
+                            className="bg-brand-sky size-1.5 shrink-0 rounded-full"
+                          />
+                          {practice}
+                        </li>
+                      ))}
+                    </ul>
+                  </dd>
+                </div>
+              ) : null}
             </dl>
 
             <div className="border-brand-mist border-t px-1 pt-3">
